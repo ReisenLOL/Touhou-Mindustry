@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a09db854235a73d49875b8923556209f, type: 3}
+  m_Name: GM Explosion
+  m_EditorClassIdentifier: 
+  SoundName: Game Maker Explosion
+  soundVolume: 0.16
+  audioMixerOverride: {fileID: 4947940112376965473, guid: 34215ea08f295ea4f9e78bbe991ca3df, type: 2}
+  <soundClips>k__BackingField:
+  - clip: {fileID: 8300000, guid: 409fa8f771be2b14c9e6fa72ef32e65d, type: 3}
+    PitchVariancePercent: 0
+    PitchOrigin: 1
+    Volume: 1
+    Muted: 0
+  <singleChannel>k__BackingField: 0
+  <Is3D>k__BackingField: 1
