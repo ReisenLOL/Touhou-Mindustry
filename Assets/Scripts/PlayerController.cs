@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] float speed;
+    [SerializeField] float fireRate;
     public float health = 100;
     private Rigidbody2D rb;
     private Vector2 moveInput;
@@ -17,6 +18,8 @@ public class PlayerController : MonoBehaviour
     // eh ill figure it out later
     private GameObject core;
     public string coreType;
+    private float fireRateTime;
+    public bool canShoot = true;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -29,10 +32,14 @@ public class PlayerController : MonoBehaviour
         moveInput.x = Input.GetAxisRaw("Horizontal");
         moveInput.y = Input.GetAxisRaw("Vertical");
         moveInput.Normalize();
-        if (Input.GetMouseButtonDown(0))
+        fireRateTime += Time.deltaTime;
+        if ((Input.GetMouseButtonDown(0) || Input.GetMouseButton(0)) && canShoot)
         {
-            // that was too much effort really
-            Instantiate(projectile, transform.position, projectile.transform.rotation);
+            if (fireRateTime >= fireRate)
+            {
+                fireRateTime = 0;
+                Instantiate(projectile, transform.position, projectile.transform.rotation);
+            }
         }
     }
 
