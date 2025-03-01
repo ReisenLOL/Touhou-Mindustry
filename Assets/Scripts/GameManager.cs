@@ -5,7 +5,6 @@ using UnityEngine.EventSystems;
 public class GameManager : MonoBehaviour
 {
     private bool isBuilding = false;
-    private string foundResource;
     private GameObject player;
     private PlayerController playerController;
     private Grid buildingGrid;
@@ -14,11 +13,17 @@ public class GameManager : MonoBehaviour
     public GameObject placeholderObject;
     public int resources = 10;
     [SerializeField] TextMeshProUGUI resourceText;
+    private GameObject[] buildList;
     void Start()
     {
         player = GameObject.Find("Player");
         playerController = player.GetComponent<PlayerController>();
         buildingGrid = GameObject.Find("BuildingGrid").GetComponent<Grid>();
+        buildList = GameObject.Find("BuildContainer").GetComponent<BuildUIManager>().buildableObjects;
+        for (int i = 0; i < buildList.Length; i++)
+        {
+            Debug.Log(buildList[i].name);
+        }
     }
     void Update()
     {
@@ -83,6 +88,19 @@ public class GameManager : MonoBehaviour
         else
         {
             return "go ahead";
+        }
+    }
+    public void SetSelection(string selectedObject)
+    {
+        for (int i = 0; i < buildList.Length; i++)
+        {
+            if (buildList[i].name == selectedObject)
+            {
+                selection = buildList[i];
+                Destroy(placeholderObject);
+                showPlaceholder = true;
+                break;
+            }
         }
     }
 }
