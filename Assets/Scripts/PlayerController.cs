@@ -1,6 +1,7 @@
 using Unity.Mathematics;
 using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour
 {
@@ -33,7 +34,7 @@ public class PlayerController : MonoBehaviour
         moveInput.y = Input.GetAxisRaw("Vertical");
         moveInput.Normalize();
         fireRateTime += Time.deltaTime;
-        if ((Input.GetMouseButtonDown(0) || Input.GetMouseButton(0)) && canShoot)
+        if ((Input.GetMouseButtonDown(0) || Input.GetMouseButton(0)) && canShoot && !EventSystem.current.IsPointerOverGameObject())
         {
             if (fireRateTime >= fireRate)
             {

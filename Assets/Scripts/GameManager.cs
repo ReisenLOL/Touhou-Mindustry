@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class GameManager : MonoBehaviour
 {
@@ -41,7 +42,7 @@ public class GameManager : MonoBehaviour
                 showPlaceholder = false;
             }
             placeholderObject.transform.position = buildingGridCenterCell;
-            if (Input.GetMouseButtonDown(0) && resources >= selection.GetComponent<ObjectStats>().cost && CanPlaceThere() != "Building")
+            if (Input.GetMouseButtonDown(0) && resources >= selection.GetComponent<ObjectStats>().cost && CanPlaceThere() != "Building" && !EventSystem.current.IsPointerOverGameObject())
             {
                 resources -= selection.GetComponent<ObjectStats>().cost;
                 Instantiate(selection, buildingGridCenterCell, selection.transform.rotation);

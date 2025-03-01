@@ -163,6 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d2b75f42a6d709468d6557e87ccc876, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resourceCheck: {fileID: 8725868830820503001}
   minedResource: 
   miningSpeed: 4
 --- !u!1 &3324610262788126772
