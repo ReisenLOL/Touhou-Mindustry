@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 3177871031322621166}
   - component: {fileID: -962086635741498573}
   - component: {fileID: 7389464835557864479}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Conveyor
   m_TagString: Building
   m_Icon: {fileID: 0}
@@ -199,8 +199,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
+  movementSpeed: 0
   nextConveyorCheck: {fileID: 8528670537141161651}
   resourceCheck: {fileID: 8593487523627816490}
+  resourceObjectLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  conveyorLayer:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &4182924409074541941
 GameObject:
   m_ObjectHideFlags: 0

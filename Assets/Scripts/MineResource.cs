@@ -6,6 +6,8 @@ public class MineResource : MonoBehaviour
     [SerializeField] GameObject resourceObject;
     [SerializeField] Transform[] conveyorChecks;
     public string minedResource;
+    [SerializeField] LayerMask resourceLayer;
+    [SerializeField] LayerMask conveyorLayer;
 
     private GameManager gameManager;
     private float _time;
@@ -13,8 +15,10 @@ public class MineResource : MonoBehaviour
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        if (FindResources().CompareTag("ResourceVein"))
+        Collider2D foundResource = FindResources();
+        if (foundResource.CompareTag("ResourceVein"))
         {
+            Debug.Log("a");
             minedResource = FindResources().gameObject.GetComponent<ResourceType>().resourceType;
         }
     }
@@ -31,17 +35,18 @@ public class MineResource : MonoBehaviour
                 if (detectedConveyor.gameObject.GetComponent<Conveyor>())
                 {
                     _time -= miningSpeed;
-                    Instantiate(resourceObject, detectedConveyor.transform.position + new Vector3(0, 0, -1), resourceObject.transform.rotation);
+                    GameObject ProduceResource = Instantiate(resourceObject, detectedConveyor.transform.position + new Vector3(0, 0, -1), resourceObject.transform.rotation);
+                    ProduceResource.GetComponent<MinedResourceType>().type = minedResource;
                 }
             }
         }
     }
     private Collider2D FindResources()
     {
-        return Physics2D.OverlapCircle(this.resourceCheck.position, 0.05f);
+        return Physics2D.OverlapCircle(this.resourceCheck.position, 0.05f, resourceLayer);
     }
     private Collider2D DetectConveyors(int index)
     {
-        return Physics2D.OverlapCircle(this.conveyorChecks[index].position, 0.05f);
+        return Physics2D.OverlapCircle(this.conveyorChecks[index].position, 0.05f, conveyorLayer);
     }
 }
