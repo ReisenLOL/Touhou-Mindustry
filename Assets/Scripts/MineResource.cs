@@ -3,14 +3,17 @@ using UnityEngine;
 public class MineResource : MonoBehaviour
 {
     [SerializeField] Transform resourceCheck;
+    [SerializeField] GameObject resourceObject;
+    [SerializeField] Transform[] conveyorChecks;
     public string minedResource;
+
     private GameManager gameManager;
     private float _time;
     public float miningSpeed;
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        if (FindResources().CompareTag("Resource"))
+        if (FindResources().CompareTag("ResourceVein"))
         {
             minedResource = FindResources().gameObject.GetComponent<ResourceType>().resourceType;
         }
@@ -22,15 +25,23 @@ public class MineResource : MonoBehaviour
         _time += Time.deltaTime;
         if (_time >= miningSpeed)
         {
-            if (minedResource == "Resource")
+            Collider2D detectedConveyor = DetectConveyors(Random.Range(0, conveyorChecks.Length));
+            if (detectedConveyor != null)
             {
-                gameManager.resources++;
-                _time -= miningSpeed;
+                if (detectedConveyor.gameObject.GetComponent<Conveyor>())
+                {
+                    _time -= miningSpeed;
+                    Instantiate(resourceObject, detectedConveyor.transform.position + new Vector3(0, 0, -1), resourceObject.transform.rotation);
+                }
             }
         }
     }
     private Collider2D FindResources()
     {
         return Physics2D.OverlapCircle(this.resourceCheck.position, 0.05f);
+    }
+    private Collider2D DetectConveyors(int index)
+    {
+        return Physics2D.OverlapCircle(this.conveyorChecks[index].position, 0.05f);
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine.EventSystems;
 
 public class GameManager : MonoBehaviour
 {
+    private Vector3 rotationAmount = new Vector3 (0, 0, 0);
     private bool isBuilding = false;
     private GameObject player;
     private PlayerController playerController;
@@ -11,7 +12,7 @@ public class GameManager : MonoBehaviour
     public GameObject selection;
     private bool showPlaceholder;
     public GameObject placeholderObject;
-    public int resources = 10;
+    public int resources = 100;
     [SerializeField] TextMeshProUGUI resourceText;
     private GameObject[] buildList;
     void Start()
@@ -20,10 +21,6 @@ public class GameManager : MonoBehaviour
         playerController = player.GetComponent<PlayerController>();
         buildingGrid = GameObject.Find("BuildingGrid").GetComponent<Grid>();
         buildList = GameObject.Find("BuildContainer").GetComponent<BuildUIManager>().buildableObjects;
-        for (int i = 0; i < buildList.Length; i++)
-        {
-            Debug.Log(buildList[i].name);
-        }
     }
     void Update()
     {
@@ -47,12 +44,21 @@ public class GameManager : MonoBehaviour
                 showPlaceholder = false;
             }
             placeholderObject.transform.position = buildingGridCenterCell;
+            placeholderObject.transform.rotation = Quaternion.Euler(rotationAmount);
             if (Input.GetMouseButtonDown(0) && resources >= selection.GetComponent<ObjectStats>().cost && CanPlaceThere() != "Building" && !EventSystem.current.IsPointerOverGameObject())
             {
                 resources -= selection.GetComponent<ObjectStats>().cost;
-                Instantiate(selection, buildingGridCenterCell, selection.transform.rotation);
+                Instantiate(selection, buildingGridCenterCell, Quaternion.Euler(rotationAmount));
                 Destroy(placeholderObject);
                 showPlaceholder = true;
+            }
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                if (rotationAmount.z >= 360)
+                {
+                    rotationAmount.z = 0;
+                }
+                rotationAmount.z += 90;
             }
             // im cooking, no tutorials needed!
             // but how do i get it to not spam the instantiation....
@@ -83,6 +89,7 @@ public class GameManager : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
         if (hit.collider != null)
         {
+            Debug.Log(hit.collider.gameObject.name);
             return hit.collider.gameObject.tag;
         }
         else
