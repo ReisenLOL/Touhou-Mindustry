@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MinedResourceType : MonoBehaviour
+public class MinedResourceType : ResourceType
 {
     public string type;
 }

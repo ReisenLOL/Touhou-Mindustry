@@ -18,7 +18,6 @@ public class MineResource : MonoBehaviour
         Collider2D foundResource = FindResources();
         if (foundResource.CompareTag("ResourceVein"))
         {
-            Debug.Log("a");
             minedResource = FindResources().gameObject.GetComponent<ResourceType>().resourceType;
         }
     }
@@ -35,7 +34,7 @@ public class MineResource : MonoBehaviour
                 if (detectedConveyor.gameObject.GetComponent<Conveyor>())
                 {
                     _time -= miningSpeed;
-                    GameObject ProduceResource = Instantiate(resourceObject, detectedConveyor.transform.position + new Vector3(0, 0, -1), resourceObject.transform.rotation);
+                    GameObject ProduceResource = Instantiate(resourceObject, detectedConveyor.transform.position, resourceObject.transform.rotation);
                     ProduceResource.GetComponent<MinedResourceType>().type = minedResource;
                 }
             }

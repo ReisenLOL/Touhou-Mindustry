@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -12,11 +13,50 @@ public class GameManager : MonoBehaviour
     public GameObject selection;
     private bool showPlaceholder;
     public GameObject placeholderObject;
-    public int resources = 100;
     [SerializeField] TextMeshProUGUI resourceText;
     private GameObject[] buildList;
+    Dictionary<string, int> currentResources = new();
+    public void AddResource(string resource, int value)
+    {
+        int resourceValue = 0;
+        if (!currentResources.ContainsKey(resource))
+        {
+            currentResources[resource] = 0;
+        }
+        if (currentResources.TryGetValue(resource, out resourceValue))
+        {
+            resourceValue += value;
+            currentResources[resource] = resourceValue;
+            Debug.Log("Added Resource: " + value + " " + resource);
+        }
+    }
+    public bool SubtractResource(string resource, int value)
+    {
+        int resourceValue = 0;
+        if (!currentResources.ContainsKey(resource))
+        {
+            currentResources[resource] = 0;
+        }
+        if (currentResources.TryGetValue(resource, out resourceValue))
+        {
+            resourceValue -= value;
+            currentResources[resource] = resourceValue;
+            Debug.Log("Subtracted Resource: " + value + " " + resource);
+            return true;
+        }
+        return false;
+    }
+    public int CheckResourceValue(string resource)
+    {
+        if (!currentResources.ContainsKey(resource))
+        {
+            return 0;
+        }
+        return currentResources[resource];
+    }
     void Start()
     {
+        AddResource("Resource", 100);
         player = GameObject.Find("Player");
         playerController = player.GetComponent<PlayerController>();
         buildingGrid = GameObject.Find("BuildingGrid").GetComponent<Grid>();
@@ -24,9 +64,11 @@ public class GameManager : MonoBehaviour
     }
     void Update()
     {
-        resourceText.text = ("Placeholder Resources: " + resources);
+        resourceText.text = ("Placeholder Resources: " + CheckResourceValue("Resource"));
         if (isBuilding)
         {
+            string resourceToSubtract = selection.gameObject.GetComponent<ObjectStats>().resourceType;
+            int cost = selection.gameObject.GetComponent<ObjectStats>().cost;
             Vector3 mousePos = Input.mousePosition;
             mousePos.z = Camera.main.nearClipPlane + 10;
             Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
@@ -45,12 +87,15 @@ public class GameManager : MonoBehaviour
             }
             placeholderObject.transform.position = buildingGridCenterCell;
             placeholderObject.transform.rotation = Quaternion.Euler(rotationAmount);
-            if (Input.GetMouseButtonDown(0) && resources >= selection.GetComponent<ObjectStats>().cost && CanPlaceThere() != "Building" && !EventSystem.current.IsPointerOverGameObject())
+            if (Input.GetMouseButtonDown(0) && CanPlaceThere() != "Building" && !EventSystem.current.IsPointerOverGameObject())
             {
-                resources -= selection.GetComponent<ObjectStats>().cost;
-                Instantiate(selection, buildingGridCenterCell, Quaternion.Euler(rotationAmount));
-                Destroy(placeholderObject);
-                showPlaceholder = true;
+                bool success = SubtractResource(resourceToSubtract, cost);
+                if (success)
+                {
+                    Instantiate(selection, buildingGridCenterCell, Quaternion.Euler(rotationAmount));
+                    Destroy(placeholderObject);
+                    showPlaceholder = true;
+                }
             }
             if (Input.GetKeyDown(KeyCode.R))
             {

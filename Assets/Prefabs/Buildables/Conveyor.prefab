@@ -186,6 +186,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 0
   cost: 1
+  resourceType: Resource
 --- !u!114 &7389464835557864479
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,8 +199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25f750bc588590d47bc0694edc9f9f52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
-  movementSpeed: 0
+  movementSpeed: 4
   nextConveyorCheck: {fileID: 8528670537141161651}
   resourceCheck: {fileID: 8593487523627816490}
   resourceObjectLayer:

@@ -155,6 +155,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 0
   cost: 1
+  resourceType: Resource
 --- !u!114 &-7860420566395527653
 MonoBehaviour:
   m_ObjectHideFlags: 0

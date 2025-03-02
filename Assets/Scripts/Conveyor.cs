@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class Conveyor : MonoBehaviour
 {
-    [SerializeField] float speed = 4;
     [SerializeField] float movementSpeed;
     [SerializeField] Transform nextConveyorCheck;
     [SerializeField] Transform resourceCheck;
@@ -25,14 +24,11 @@ public class Conveyor : MonoBehaviour
         if (resourceObject != null && FindNextConveyor() != null && resourceObject.gameObject.CompareTag("ResourceObject") && (nextConveyor.gameObject.GetComponent<Conveyor>() || nextConveyor.gameObject.GetComponent<CoreController>()))
         {
             _time = 0;
-            if (nextConveyor.gameObject.GetComponent<Conveyor>())
-            {
-                resourceObject.gameObject.GetComponent<Rigidbody2D>().AddForce(nextConveyor.gameObject.transform.position * movementSpeed);
-            }
-            else if (nextConveyor.GetComponent<CoreController>())
-            {
-                
-            }
+            resourceObject.gameObject.GetComponent<Rigidbody2D>().linearVelocity = ((nextConveyor.gameObject.transform.position - transform.position) * movementSpeed);
+        }
+        else if (resourceObject != null && nextConveyor == null)
+        {
+            resourceObject.gameObject.GetComponent<Rigidbody2D>().linearVelocity = Vector3.zero;
         }
     }
     private Collider2D CheckForResources()
