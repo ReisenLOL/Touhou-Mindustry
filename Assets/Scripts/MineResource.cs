@@ -16,7 +16,7 @@ public class MineResource : MonoBehaviour
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         Collider2D foundResource = FindResources();
-        if (foundResource.CompareTag("ResourceVein"))
+        if (foundResource != null && foundResource.CompareTag("ResourceVein"))
         {
             minedResource = FindResources().gameObject.GetComponent<ResourceType>().resourceType;
         }

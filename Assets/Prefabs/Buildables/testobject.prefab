@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 8856143608452811646}
   - component: {fileID: -7406726600156066926}
   - component: {fileID: 5816189635458446929}
-  - component: {fileID: -995991443662675547}
   m_Layer: 0
   m_Name: testobject
   m_TagString: Building
@@ -151,18 +150,3 @@ MonoBehaviour:
   health: 100
   maxHealth: 100
   price: {fileID: 11400000, guid: f00990a80dc7974449b724ce13895d19, type: 2}
---- !u!114 &-995991443662675547
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3090783532505855684}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76908d71dcba18243a6075750b1fe113, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 0
-  maxHealth: 0
-  price: {fileID: 0}

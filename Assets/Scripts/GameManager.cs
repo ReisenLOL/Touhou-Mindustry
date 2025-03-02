@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using static UnityEngine.GraphicsBuffer;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,6 +15,7 @@ public class GameManager : MonoBehaviour
     public GameObject placeholderObject;
     [SerializeField] TextMeshProUGUI resourceText;
     private GameObject[] buildList;
+    public GameObject objectStatText;
     Dictionary<string, int> currentResources = new();
     public void AddResource(string resource, int value)
     {
@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
     }
     void Update()
     {
-        resourceText.text = ("Fairy Compound: " + CheckResourceValue("Fairy Compound"));
+        resourceText.text = ("Fairy Compound: " + CheckResourceValue("Fairy Compound") + "\nLunarian Metal: " + CheckResourceValue("Lunarian Metal"));
         if (isBuilding)
         {
             string resourceToSubtract = selection.gameObject.GetComponent<ObjectStats>().price.GetResourceName();
@@ -89,7 +89,7 @@ public class GameManager : MonoBehaviour
             }
             placeholderObject.transform.position = buildingGridCenterCell;
             placeholderObject.transform.rotation = Quaternion.Euler(rotationAmount);
-            if (Input.GetMouseButtonDown(0) && CanPlaceThere() != "Building" && !EventSystem.current.IsPointerOverGameObject())
+            if (Input.GetMouseButtonDown(0) && CanPlaceThere(true) != "Building" && !EventSystem.current.IsPointerOverGameObject())
             {
                 bool success = SubtractResource(resourceToSubtract, cost);
                 if (success)
@@ -114,6 +114,14 @@ public class GameManager : MonoBehaviour
             // ok well i have to get whatever is on that location and stop it from being allowed to build there but that seems simple enough
             // nice
         }
+        //if (Input.GetMouseButtonDown(1) && CanPlaceThere(true) == "Building" && CanPlaceThere(false) == "Core" && !EventSystem.current.IsPointerOverGameObject())
+        //{
+        //    RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+        //    GameObject refundedObject = GetObjectFromName(CanPlaceThere(false));
+        //    string resourceToRefund = refundedObject.gameObject.GetComponent<ObjectStats>().price.GetResourceName();
+        //    int refundAmount = refundedObject.gameObject.GetComponent<ObjectStats>().price.GetAmount();
+        //    Destroy(hit.collider.gameObject);
+        //}
     }
     public void EnterBuildMode()
     {
@@ -123,6 +131,7 @@ public class GameManager : MonoBehaviour
     }
     public void ExitBuildMode()
     {
+        objectStatText.SetActive(false);
         showPlaceholder = false;
         if (placeholderObject)
         {
@@ -131,13 +140,19 @@ public class GameManager : MonoBehaviour
         isBuilding = false;
         playerController.canShoot = true;
     }
-    string CanPlaceThere()
+    string CanPlaceThere(bool returnTag)
     {
         RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
         if (hit.collider != null)
         {
-            Debug.Log(hit.collider.gameObject.name);
-            return hit.collider.gameObject.tag;
+            if (returnTag)
+            {
+                return hit.collider.gameObject.tag;
+            }
+            else
+            {
+                return hit.collider.gameObject.name;
+            }
         }
         else
         {
@@ -156,5 +171,18 @@ public class GameManager : MonoBehaviour
                 break;
             }
         }
+        objectStatText.SetActive(true);
+        objectStatText.GetComponentInChildren<TextMeshProUGUI>().text = (selection.name +"\n" + selection.gameObject.GetComponent<ObjectStats>().price.GetResourceName() + ": " + selection.gameObject.GetComponent<ObjectStats>().price.GetAmount());
+    }
+    public GameObject GetObjectFromName(string objectName)
+    {
+        for (int i = 0; i < buildList.Length; i++)
+        {
+            if (buildList[i].name == CanPlaceThere(false))
+            {
+                return buildList[i];
+            }
+        }
+        return null;
     }
 }

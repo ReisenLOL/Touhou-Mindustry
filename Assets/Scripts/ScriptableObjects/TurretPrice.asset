@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: TurretPrice
   m_EditorClassIdentifier: 
   price:
-    resourceName: 
-    amount: 0
+    resourceName: Fairy Compound
+    amount: 10

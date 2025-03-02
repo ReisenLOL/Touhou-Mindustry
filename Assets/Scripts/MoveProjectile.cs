@@ -4,7 +4,7 @@ using Core.Extensions;
 public class MoveProjectile : MonoBehaviour
 {
     [SerializeField] float speed;
-    [SerializeField] float damage;
+    public float damage;
     public GameObject firedFrom;
     void Update()
     {
@@ -20,16 +20,11 @@ public class MoveProjectile : MonoBehaviour
         if (collision.CompareTag("Enemy"))
         {
             collision.gameObject.GetComponent<EnemyController>().TakeDamage(damage);
-        }
-        if (!collision.CompareTag("Building") || !collision.CompareTag("Player"))
-        {
             Destroy(gameObject);
         }
     }
     public void RotateToTarget(Vector2 direction)
     {
-        transform.Lookat2D(direction.Rotate2D(45f));
-        Debug.Log(direction);
+        transform.Lookat2D(direction);
     }
-
 }

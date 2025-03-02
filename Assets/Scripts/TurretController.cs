@@ -8,11 +8,11 @@ public class TurretController : MonoBehaviour
     private Collider2D[] enemyList;
     private GameObject closestEnemy;
     private float fireRateTime;
-    private float fireRate;
+    public float fireRate;
+    public float damageDealt;
     [SerializeField] MoveProjectile projectile;
     void Start()
     {
-        closestEnemy = this.gameObject;
     }
 
     // Update is called once per frame
@@ -23,13 +23,20 @@ public class TurretController : MonoBehaviour
         {
             closestEnemy = this.gameObject;
         }
-        float distanceToClosestEnemy = Vector3.Distance(transform.position, closestEnemy.transform.position);
+        float distanceToClosestEnemy = 1000000f;
+        Collider2D iteration = null;
         for (int i = 0; i < enemyList.Length; i++)
         {
-            float distanceToTurret = Vector3.Distance(transform.position, enemyList[i].transform.position);
-            if (distanceToTurret < distanceToClosestEnemy)
+            iteration = enemyList[i];
+            if (iteration == null)
             {
-                closestEnemy = enemyList[i].gameObject;
+                continue;
+            }
+            float sqrDistance = Vector3.SqrMagnitude(transform.position - iteration.transform.position);
+            if (sqrDistance < distanceToClosestEnemy && iteration.gameObject != gameObject)
+            {
+                closestEnemy = iteration.gameObject;
+                distanceToClosestEnemy = sqrDistance;
             }
         }
         fireRateTime += Time.deltaTime;
@@ -37,9 +44,10 @@ public class TurretController : MonoBehaviour
         {
             ammoAmount--;
             fireRateTime -= fireRateTime;
-            MoveProjectile newProjectile = Instantiate(projectile, transform.position, Quaternion.Euler(transform.right));
+            MoveProjectile newProjectile = Instantiate(projectile, transform.position, projectile.transform.rotation);
             newProjectile.firedFrom = gameObject;
-            newProjectile.RotateToTarget(closestEnemy.transform.position - transform.position);
+            newProjectile.damage = damageDealt;
+            newProjectile.RotateToTarget(closestEnemy.transform.position);
         }
     }
     private Collider2D[] DetectEnemies()

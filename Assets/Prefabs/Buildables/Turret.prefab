@@ -196,4 +196,6 @@ MonoBehaviour:
   UnitLayer:
     serializedVersion: 2
     m_Bits: 512
+  fireRate: 0.5
+  damageDealt: 40
   projectile: {fileID: 5023491507495876721, guid: af692c3c78ae95644b68e0c0477a015a, type: 3}
