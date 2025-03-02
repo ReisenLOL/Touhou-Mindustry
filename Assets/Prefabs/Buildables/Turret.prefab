@@ -193,6 +193,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ammoType: Fairy Compound
   ammoAmount: 0
+  ammoCapacity: 10
   UnitLayer:
     serializedVersion: 2
     m_Bits: 512

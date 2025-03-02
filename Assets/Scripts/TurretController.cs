@@ -4,6 +4,7 @@ public class TurretController : MonoBehaviour
 {
     [SerializeField] string ammoType;
     [SerializeField] int ammoAmount;
+    [SerializeField] int ammoCapacity;
     [SerializeField] LayerMask UnitLayer;
     private Collider2D[] enemyList;
     private GameObject closestEnemy;
@@ -58,7 +59,7 @@ public class TurretController : MonoBehaviour
     {
         if (collision.transform.TryGetComponent(out MinedResourceType r))
         {
-            if (r.type == ammoType)
+            if (r.type == ammoType && ammoAmount < ammoCapacity)
             {
                 ammoAmount++;
             }

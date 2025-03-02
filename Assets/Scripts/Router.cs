@@ -8,18 +8,18 @@ public class Router : MonoBehaviour
     [SerializeField] Transform resourceCheck;
     [SerializeField] LayerMask resourceObjectLayer;
     [SerializeField] LayerMask conveyorLayer;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
     void Update()
     {
         Collider2D resourceObject = CheckForResources();
         Collider2D detectedConveyor = DetectConveyors(Random.Range(0, conveyorChecks.Length));
-        Debug.Log(detectedConveyor.name);
+        if (detectedConveyor != null)
+        {
+            Debug.Log(detectedConveyor.gameObject.name);
+        }
+        if (resourceObject != null)
+        {
+            Debug.Log(resourceObject.gameObject.name);
+        }
         if (resourceObject != null && detectedConveyor != null)
         {
             resourceObject.gameObject.GetComponent<Rigidbody2D>().linearVelocity = ((detectedConveyor.gameObject.transform.position - transform.position) * movementSpeed);

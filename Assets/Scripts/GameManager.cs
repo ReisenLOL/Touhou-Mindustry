@@ -82,6 +82,8 @@ public class GameManager : MonoBehaviour
                 {
                     Destroy((MonoBehaviour)gameObjectComponent);
                 }
+                placeholderObject.gameObject.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.7f);
+                placeholderObject.gameObject.GetComponent<SpriteRenderer>().sortingOrder = 1;
                 placeholderObject.gameObject.GetComponent<BoxCollider2D>().isTrigger = true;
                 placeholderObject.layer = LayerMask.NameToLayer("Ignore Raycast");
                 placeholderObject.tag = "Building";
@@ -125,6 +127,10 @@ public class GameManager : MonoBehaviour
     }
     public void EnterBuildMode()
     {
+        if (placeholderObject)
+        {
+            Destroy(placeholderObject);
+        }
         showPlaceholder = true;
         isBuilding = true;
         playerController.canShoot = false;
