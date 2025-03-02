@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 7879073014922721126}
   - component: {fileID: 8856143608452811646}
   - component: {fileID: -7406726600156066926}
-  - component: {fileID: -6085839387605102226}
   - component: {fileID: -7860420566395527653}
+  - component: {fileID: 4942890777097733748}
   m_Layer: 0
   m_Name: Mine
   m_TagString: Building
@@ -141,21 +141,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &-6085839387605102226
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3090783532505855684}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bbf8aa54294dd64c82b3efffb710c0d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 0
-  cost: 1
-  resourceType: Resource
 --- !u!114 &-7860420566395527653
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,6 +168,21 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   miningSpeed: 4
+--- !u!114 &4942890777097733748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3090783532505855684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76908d71dcba18243a6075750b1fe113, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  maxHealth: 100
+  price: {fileID: 11400000, guid: f00990a80dc7974449b724ce13895d19, type: 2}
 --- !u!1 &3324610262788126772
 GameObject:
   m_ObjectHideFlags: 0

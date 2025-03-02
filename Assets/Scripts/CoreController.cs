@@ -21,8 +21,6 @@ public class CoreController : MonoBehaviour
         {
             gameManager.AddResource(r.type, 1);
             Destroy(collision.gameObject);
-            Debug.Log(collision.gameObject);
         }
-        Debug.Log(collision.gameObject);
     }
 }

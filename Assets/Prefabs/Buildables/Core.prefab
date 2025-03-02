@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 83649053722343416}
   - component: {fileID: 834538264957880728}
   - component: {fileID: 1157938816860314430}
+  - component: {fileID: 1303981554866787471}
   m_Layer: 8
   m_Name: Core
   m_TagString: Building
@@ -211,3 +212,18 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   resourceCheck: {fileID: 8089807455656415053}
+  gameManager: {fileID: 0}
+--- !u!114 &1303981554866787471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3745208454977569036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76908d71dcba18243a6075750b1fe113, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+  maxHealth: 0

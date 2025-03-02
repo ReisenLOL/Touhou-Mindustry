@@ -196,7 +196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca0fa743b149c6a459e80e8b2727be5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resourceType: Resource
+  resourceType: Fairy Compound
 --- !u!212 &60049842
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1098,7 +1098,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca0fa743b149c6a459e80e8b2727be5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resourceType: Resource
+  resourceType: Fairy Compound
 --- !u!212 &1038880445
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1914,7 +1914,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca0fa743b149c6a459e80e8b2727be5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resourceType: Resource
+  resourceType: Fairy Compound
 --- !u!212 &1363089530
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2062,7 +2062,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca0fa743b149c6a459e80e8b2727be5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resourceType: Resource
+  resourceType: Fairy Compound
 --- !u!212 &1477019901
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2434,7 +2434,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selection: {fileID: 3090783532505855684, guid: f68ebd24612a805429486cdf496b48ee, type: 3}
   placeholderObject: {fileID: 0}
-  resources: 100
   resourceText: {fileID: 1152934487}
 --- !u!4 &2008672073
 Transform:
@@ -2458,7 +2457,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2008672071}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aa58d96a928fc6e4a87c5fdc112bac9f, type: 3}
   m_Name: 
@@ -2599,6 +2598,7 @@ MonoBehaviour:
   buildableObjects:
   - {fileID: 3090783532505855684, guid: f68ebd24612a805429486cdf496b48ee, type: 3}
   - {fileID: 2780307407043551660, guid: e87a4c7465a72914bba48a7f67ddd6a9, type: 3}
+  - {fileID: 6946665105900138293, guid: 3b883a016a38ac34ca7469a3b439991d, type: 3}
   - {fileID: 3090783532505855684, guid: 9b306259f2ea06b4e82d3efc1181a4b5, type: 3}
   templateButton: {fileID: 1596148317520973887, guid: 336e3cde3b8834b419484ac296d9e1fc, type: 3}
 --- !u!1001 &2400712802663612051
@@ -2609,6 +2609,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1303981554866787471, guid: a723257f378e1574ea4c8b02f1de3ca6, type: 3}
+      propertyPath: health
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1303981554866787471, guid: a723257f378e1574ea4c8b02f1de3ca6, type: 3}
+      propertyPath: maxHealth
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 1810122812157781773, guid: a723257f378e1574ea4c8b02f1de3ca6, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.5

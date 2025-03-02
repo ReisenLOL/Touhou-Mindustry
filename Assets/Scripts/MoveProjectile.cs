@@ -5,21 +5,12 @@ public class MoveProjectile : MonoBehaviour
 {
     [SerializeField] float speed;
     [SerializeField] float damage;
-    [SerializeField] GameObject player;
-    private Vector3 lookDirection;
-    private void Start()
-    {
-        player = GameObject.Find("Player");
-        Vector3 mousePos = Input.mousePosition;
-        mousePos.z = Camera.main.nearClipPlane + 10;
-        Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
-        transform.Lookat2D(worldPos);
-    }
+    public GameObject firedFrom;
     void Update()
     {
-        transform.Translate(Vector3.right * Time.deltaTime * speed);
-        float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
-        if (distanceToPlayer > 100)
+        transform.Translate(Vector2.right * Time.deltaTime * speed);
+        float distanceToTurret = Vector3.Distance(transform.position, firedFrom.transform.position);
+        if (distanceToTurret > 100)
         {
             Destroy(gameObject);
         }
@@ -30,9 +21,15 @@ public class MoveProjectile : MonoBehaviour
         {
             collision.gameObject.GetComponent<EnemyController>().TakeDamage(damage);
         }
-        if (!collision.CompareTag("Player"))
+        if (!collision.CompareTag("Building") || !collision.CompareTag("Player"))
         {
             Destroy(gameObject);
         }
     }
+    public void RotateToTarget(Vector2 direction)
+    {
+        transform.Lookat2D(direction.Rotate2D(45f));
+        Debug.Log(direction);
+    }
+
 }

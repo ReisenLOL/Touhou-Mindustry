@@ -42,8 +42,9 @@ GameObject:
   - component: {fileID: 4318730903257860593}
   - component: {fileID: 8225595427974650396}
   - component: {fileID: 3177871031322621166}
-  - component: {fileID: -962086635741498573}
   - component: {fileID: 7389464835557864479}
+  - component: {fileID: -6937510080034483198}
+  - component: {fileID: 8753386997870490582}
   m_Layer: 8
   m_Name: Conveyor
   m_TagString: Building
@@ -172,21 +173,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &-962086635741498573
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2780307407043551660}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bbf8aa54294dd64c82b3efffb710c0d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 0
-  cost: 1
-  resourceType: Resource
 --- !u!114 &7389464835557864479
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,6 +194,36 @@ MonoBehaviour:
   conveyorLayer:
     serializedVersion: 2
     m_Bits: 256
+--- !u!114 &-6937510080034483198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2780307407043551660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76908d71dcba18243a6075750b1fe113, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  maxHealth: 100
+  price: {fileID: 11400000, guid: f00990a80dc7974449b724ce13895d19, type: 2}
+--- !u!114 &8753386997870490582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2780307407043551660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76908d71dcba18243a6075750b1fe113, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+  maxHealth: 0
+  price: {fileID: 11400000, guid: 653b3fb97501a9447a47412fb01e9b54, type: 2}
 --- !u!1 &4182924409074541941
 GameObject:
   m_ObjectHideFlags: 0

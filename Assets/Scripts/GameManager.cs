@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using static UnityEngine.GraphicsBuffer;
 
 public class GameManager : MonoBehaviour
 {
@@ -56,7 +57,7 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        AddResource("Resource", 100);
+        AddResource("Fairy Compound", 100);
         player = GameObject.Find("Player");
         playerController = player.GetComponent<PlayerController>();
         buildingGrid = GameObject.Find("BuildingGrid").GetComponent<Grid>();
@@ -64,11 +65,11 @@ public class GameManager : MonoBehaviour
     }
     void Update()
     {
-        resourceText.text = ("Placeholder Resources: " + CheckResourceValue("Resource"));
+        resourceText.text = ("Fairy Compound: " + CheckResourceValue("Fairy Compound"));
         if (isBuilding)
         {
-            string resourceToSubtract = selection.gameObject.GetComponent<ObjectStats>().resourceType;
-            int cost = selection.gameObject.GetComponent<ObjectStats>().cost;
+            string resourceToSubtract = selection.gameObject.GetComponent<ObjectStats>().price.GetResourceName();
+            int cost = selection.gameObject.GetComponent<ObjectStats>().price.GetAmount();
             Vector3 mousePos = Input.mousePosition;
             mousePos.z = Camera.main.nearClipPlane + 10;
             Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
@@ -76,13 +77,14 @@ public class GameManager : MonoBehaviour
             if (showPlaceholder)
             {
                 placeholderObject = Instantiate(selection, buildingGridCenterCell, selection.transform.rotation);
-                if (selection.GetComponent<MineResource>())
+                Component[] allComponents = placeholderObject.GetComponentsInChildren(typeof(MonoBehaviour));
+                foreach (Component gameObjectComponent in allComponents)
                 {
-                    Destroy(placeholderObject.GetComponent<MineResource>());
+                    Destroy((MonoBehaviour)gameObjectComponent);
                 }
                 placeholderObject.gameObject.GetComponent<BoxCollider2D>().isTrigger = true;
                 placeholderObject.layer = LayerMask.NameToLayer("Ignore Raycast");
-                placeholderObject.tag = "Placeholder";
+                placeholderObject.tag = "Building";
                 showPlaceholder = false;
             }
             placeholderObject.transform.position = buildingGridCenterCell;
