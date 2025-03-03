@@ -1,4 +1,5 @@
 using Core.Extensions;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Router : MonoBehaviour
@@ -8,33 +9,54 @@ public class Router : MonoBehaviour
     [SerializeField] Transform resourceCheck;
     [SerializeField] LayerMask resourceObjectLayer;
     [SerializeField] LayerMask conveyorLayer;
+    private Transform nextConveyorCheck = null;
+    private HashSet<MoveResource> moveResource = new();
     void Update()
     {
-        Collider2D resourceObject = CheckForResources();
-        Collider2D detectedConveyor = DetectConveyors(Random.Range(0, conveyorChecks.Length));
-        if (detectedConveyor != null)
+        int randomIndex = Random.Range(0, conveyorChecks.Length);
+        Collider2D conveyor = null;
+        if (DetectConveyors(randomIndex) is not null and Collider2D c)
         {
-            Debug.Log(detectedConveyor.gameObject.name);
+            Debug.Log("1");
+            conveyor = c;
         }
-        if (resourceObject != null)
+        if (conveyor == null)
         {
-            Debug.Log(resourceObject.gameObject.name);
+            Debug.Log("2");
+            return;
         }
-        if (resourceObject != null && detectedConveyor != null)
+        nextConveyorCheck = conveyor.transform;
+        foreach (var item in moveResource)
         {
-            resourceObject.gameObject.GetComponent<Rigidbody2D>().linearVelocity = ((detectedConveyor.gameObject.transform.position - transform.position) * movementSpeed);
+            Debug.Log("3");
+            if (item == null)
+            {
+                Debug.Log("4");
+                continue;
+            }
+            item.MoveToNextConveyor(nextConveyorCheck, movementSpeed);
         }
-        else if (resourceObject != null && detectedConveyor == null)
+        Debug.Log(moveResource.Count);
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.transform != null && collision.transform.TryGetComponent(out MoveResource output))
         {
-            resourceObject.gameObject.GetComponent<Rigidbody2D>().linearVelocity = Vector3.zero;
+            Debug.Log("5");
+            moveResource.Add(output);
         }
     }
-    private Collider2D CheckForResources()
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        return Physics2D.OverlapCircle(resourceCheck.position, 0.05f, resourceObjectLayer);
+        if (collision.transform != null && collision.transform.TryGetComponent(out MoveResource output))
+        {
+            Debug.Log("6");
+            moveResource.Remove(output);
+        }
     }
     private Collider2D DetectConveyors(int index)
     {
+        Debug.Log("7");
         return Physics2D.OverlapCircle(this.conveyorChecks[index].position, 0.05f, conveyorLayer);
     }
 }

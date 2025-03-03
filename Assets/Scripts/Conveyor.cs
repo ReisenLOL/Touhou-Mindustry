@@ -1,4 +1,5 @@
 using Core.Extensions;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Conveyor : MonoBehaviour
@@ -8,6 +9,8 @@ public class Conveyor : MonoBehaviour
     [SerializeField] Transform resourceCheck;
     [SerializeField] LayerMask resourceObjectLayer;
     [SerializeField] LayerMask conveyorLayer;
+    private GameObject resourceObject;
+    private HashSet<MoveResource> moveResource = new();
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -17,21 +20,36 @@ public class Conveyor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Collider2D resourceObject = CheckForResources();
-        Collider2D nextConveyor = FindNextConveyor();
-        if (resourceObject != null && FindNextConveyor() != null && resourceObject.gameObject.CompareTag("ResourceObject") && (nextConveyor.gameObject.GetComponent<Conveyor>() || nextConveyor.gameObject.GetComponent<CoreController>()))
+        if (FindNextConveyor() is not null and Collider2D c)
         {
-            resourceObject.gameObject.GetComponent<Rigidbody2D>().linearVelocity = ((nextConveyor.gameObject.transform.position - transform.position) * movementSpeed);
-            Debug.Log(nextConveyor.gameObject.transform.position - transform.position);
+            nextConveyorCheck = FindNextConveyor().transform;
         }
-        else if (resourceObject != null && nextConveyor == null)
+        if (nextConveyorCheck == null)
         {
-            resourceObject.gameObject.GetComponent<Rigidbody2D>().linearVelocity = Vector3.zero;
+            return;
+        }
+        foreach (var item in moveResource)
+        {
+            if (item == null)
+            {
+                continue;
+            }
+            item.MoveToNextConveyor(nextConveyorCheck, movementSpeed);
         }
     }
-    private Collider2D CheckForResources()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        return Physics2D.OverlapCircle(resourceCheck.position, 0.05f, resourceObjectLayer);
+        if (collision.transform != null && collision.transform.TryGetComponent(out MoveResource output))
+        {
+            moveResource.Add(output);
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.transform != null && collision.transform.TryGetComponent(out MoveResource output))
+        {
+            moveResource.Remove(output);
+        }
     }
     private Collider2D FindNextConveyor()
     {

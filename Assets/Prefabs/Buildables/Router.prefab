@@ -321,7 +321,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 133add7218e6a8d4dba6fc4923d01068, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 0
+  movementSpeed: 4
   conveyorChecks:
   - {fileID: 4581237843940487333}
   - {fileID: 4903449006913352534}
