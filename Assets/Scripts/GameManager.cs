@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     private GameObject[] buildList;
     public GameObject objectStatText;
     Dictionary<string, int> currentResources = new();
+    private LayerMask resourceVeinLayer;
     public void AddResource(string resource, int value)
     {
         int resourceValue = 0;
@@ -118,14 +119,14 @@ public class GameManager : MonoBehaviour
             // ok well i have to get whatever is on that location and stop it from being allowed to build there but that seems simple enough
             // nice
         }
-        //if (Input.GetMouseButtonDown(1) && CanPlaceThere(true) == "Building" && CanPlaceThere(false) == "Core" && !EventSystem.current.IsPointerOverGameObject())
-        //{
-        //    RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-        //    GameObject refundedObject = GetObjectFromName(CanPlaceThere(false));
-        //    string resourceToRefund = refundedObject.gameObject.GetComponent<ObjectStats>().price.GetResourceName();
-        //    int refundAmount = refundedObject.gameObject.GetComponent<ObjectStats>().price.GetAmount();
-        //    Destroy(hit.collider.gameObject);
-        //}
+        if (Input.GetMouseButtonDown(1) && CanPlaceThere(true) == "Building" && CanPlaceThere(false) != "Core" && !EventSystem.current.IsPointerOverGameObject())
+        {
+            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+            string resourceToRefund = hit.collider.gameObject.GetComponent<ObjectStats>().price.GetResourceName();
+            int refundAmount = hit.collider.gameObject.GetComponent<ObjectStats>().price.GetAmount();
+            AddResource(resourceToRefund, refundAmount);
+            Destroy(hit.collider.gameObject);
+        }
     }
     public void EnterBuildMode()
     {
@@ -150,7 +151,7 @@ public class GameManager : MonoBehaviour
     }
     string CanPlaceThere(bool returnTag)
     {
-        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+        RaycastHit2D hit = Physics2D.CircleCast(Camera.main.ScreenToWorldPoint(Input.mousePosition), 0.25f, Vector2.zero, 0);
         if (hit.collider != null)
         {
             if (returnTag)

@@ -14,6 +14,7 @@ public class EnemyController : MonoBehaviour
     public float fireRate;
     public float damageDealt;
     [SerializeField] MoveProjectile projectile;
+    [SerializeField] LayerMask unitLayer;
     void Start()
     {
         core = GameObject.Find("Core");
@@ -39,7 +40,7 @@ public class EnemyController : MonoBehaviour
         {
             closestTarget = this.gameObject;
         }
-        float distanceToClosestTarget = 1000000f;
+        /*float distanceToClosestTarget = 1000000f;
         Collider2D iteration = null;
         for (int i = 0; i < targetList.Length; i++)
         {
@@ -63,7 +64,7 @@ public class EnemyController : MonoBehaviour
             newProjectile.firedFrom = gameObject;
             newProjectile.damage = damageDealt;
             newProjectile.RotateToTarget(closestTarget.transform.position);
-        }
+        }*/
     }
     private void FixedUpdate()
     {
@@ -71,7 +72,7 @@ public class EnemyController : MonoBehaviour
     }
     private Collider2D[] DetectTargets()
     {
-        return Physics2D.OverlapCircleAll(transform.position, 50f);
+        return Physics2D.OverlapCircleAll(transform.position, 50f, ~unitLayer);
     }
     public void TakeDamage(float damage)
     {

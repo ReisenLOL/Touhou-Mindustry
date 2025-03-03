@@ -104,12 +104,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   speed: 4
-  UnitLayer:
-    serializedVersion: 2
-    m_Bits: 0
   fireRate: 4
   damageDealt: 10
   projectile: {fileID: 5023491507495876721, guid: af692c3c78ae95644b68e0c0477a015a, type: 3}
+  unitLayer:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!61 &998033607910942043
 BoxCollider2D:
   m_ObjectHideFlags: 0
