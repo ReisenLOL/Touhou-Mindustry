@@ -24,7 +24,7 @@ public class Conveyor : MonoBehaviour
         {
             nextConveyorCheck = FindNextConveyor().transform;
         }
-        if (nextConveyorCheck == null)
+        if (nextConveyorCheck == null || nextConveyorCheck.transform.TryGetComponent(out ObjectStats objectStats) && objectStats.acceptingResources == false)
         {
             return;
         }
@@ -34,6 +34,7 @@ public class Conveyor : MonoBehaviour
             {
                 continue;
             }
+            item.previousConveyor = gameObject.transform;
             item.MoveToNextConveyor(nextConveyorCheck, movementSpeed);
         }
     }

@@ -1,3 +1,4 @@
+using Core.Extensions;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -96,7 +97,8 @@ public class GameManager : MonoBehaviour
                 bool success = SubtractResource(resourceToSubtract, cost);
                 if (success)
                 {
-                    Instantiate(selection, buildingGridCenterCell, Quaternion.Euler(rotationAmount));
+                    GameObject newObject = Instantiate(selection, buildingGridCenterCell, Quaternion.Euler(rotationAmount));
+                    newObject.GetComponent<ObjectStats>().gridLocation = new (buildingGridCenterCell.x, buildingGridCenterCell.y);
                     Destroy(placeholderObject);
                     showPlaceholder = true;
                 }
@@ -192,3 +194,4 @@ public class GameManager : MonoBehaviour
         return null;
     }
 }
+

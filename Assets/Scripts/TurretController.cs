@@ -12,8 +12,10 @@ public class TurretController : MonoBehaviour
     public float fireRate;
     public float damageDealt;
     [SerializeField] MoveProjectile projectile;
+    private ObjectStats buildingStats;
     void Start()
     {
+        buildingStats = GetComponent<ObjectStats>();
     }
 
     // Update is called once per frame
@@ -41,7 +43,7 @@ public class TurretController : MonoBehaviour
             }
         }
         fireRateTime += Time.deltaTime;
-        if (fireRateTime >= fireRate && ammoAmount > 0)
+        if (fireRateTime >= fireRate && ammoAmount > 0 && enemyList.Length > 0)
         {
             ammoAmount--;
             fireRateTime -= fireRateTime;
@@ -49,6 +51,7 @@ public class TurretController : MonoBehaviour
             newProjectile.firedFrom = gameObject;
             newProjectile.damage = damageDealt;
             newProjectile.RotateToTarget(closestEnemy.transform.position);
+            buildingStats.acceptingResources = true;
         }
     }
     private Collider2D[] DetectEnemies()
@@ -62,6 +65,10 @@ public class TurretController : MonoBehaviour
             if (r.type == ammoType && ammoAmount < ammoCapacity)
             {
                 ammoAmount++;
+                if (ammoAmount == ammoCapacity)
+                {
+                    buildingStats.acceptingResources = false;
+                }
             }
         }
         Destroy(collision.gameObject);

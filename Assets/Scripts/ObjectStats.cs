@@ -5,6 +5,7 @@ public class ObjectStats : MonoBehaviour
     public float health;
     public float maxHealth;
     public ObjectPrice price;
+    public bool acceptingResources = true;
     public void TakeDamage(int damage)
     {
         health -= damage;

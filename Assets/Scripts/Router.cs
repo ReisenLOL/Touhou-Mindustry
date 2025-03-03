@@ -16,19 +16,24 @@ public class Router : MonoBehaviour
         int randomIndex = Random.Range(0, conveyorChecks.Length);
         Conveyor c = null;
         Collider2D col = DetectConveyors(randomIndex);
-        Debug.Log(col);
-        if (col != null && col != this && col.transform != null && col.transform.TryGetComponent(out c))
+        if (col != null && col.transform != null && col.transform.TryGetComponent(out c))
         {
-            nextConveyorCheck = c.transform;
-            foreach (var item in moveResource)
+            if (col.transform.TryGetComponent(out ObjectStats objectStats) && objectStats.acceptingResources)
             {
-                if (item == null)
+                nextConveyorCheck = c.transform;
+                foreach (var item in moveResource)
                 {
-                    continue;
+                    if (item == null)
+                    {
+                        continue;
+                    }
+                    if (item.previousConveyor == nextConveyorCheck)
+                    {
+                        continue;
+                    }
+                    item.MoveToNextConveyor(nextConveyorCheck, movementSpeed);
                 }
-                item.MoveToNextConveyor(nextConveyorCheck, movementSpeed);
             }
-            Debug.Log(moveResource.Count);
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -47,6 +52,6 @@ public class Router : MonoBehaviour
     }
     private Collider2D DetectConveyors(int index)
     {
-        return Physics2D.OverlapCircle(this.conveyorChecks[index].position, 5f, conveyorLayer);
+        return Physics2D.OverlapCircle(this.conveyorChecks[index].position, 10f, conveyorLayer);
     }
 }

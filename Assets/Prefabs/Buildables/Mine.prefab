@@ -183,6 +183,8 @@ MonoBehaviour:
   health: 100
   maxHealth: 100
   price: {fileID: 11400000, guid: f00990a80dc7974449b724ce13895d19, type: 2}
+  acceptingResources: 0
+  gridLocation: {x: 0, y: 0}
 --- !u!1 &3324610262788126772
 GameObject:
   m_ObjectHideFlags: 0
