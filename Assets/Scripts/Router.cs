@@ -1,6 +1,7 @@
 using Core.Extensions;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Scripting.APIUpdating;
 
 public class Router : MonoBehaviour
 {
@@ -9,38 +10,62 @@ public class Router : MonoBehaviour
     [SerializeField] Transform resourceCheck;
     [SerializeField] LayerMask resourceObjectLayer;
     [SerializeField] LayerMask conveyorLayer;
+    [SerializeField] float routerCooldown = 0.1f;
     private Transform nextConveyorCheck = null;
     private HashSet<MoveResource> moveResource = new();
+    private Dictionary<MoveResource, Transform> activeResource = new();
+    private int conveyorIndex = 0;
+    public float cooldownTimer = 0f;
+    private int capacity = 2;
+    private int resourceCount;
+    private ObjectStats routerObjectStats;
+    private void Start()
+    {
+        routerObjectStats = gameObject.GetComponent<ObjectStats>();
+    }
     void Update()
     {
-        int randomIndex = Random.Range(0, conveyorChecks.Length);
-        Collider2D conveyor = null;
-        if (DetectConveyors(randomIndex) is not null and Collider2D c)
-        {
-            conveyor = c;
-        }
-        if (conveyor == null)
+        cooldownTimer -= Time.deltaTime;
+        if (cooldownTimer > 0)
         {
             return;
         }
+        Collider2D conveyor = DetectConveyors(conveyorIndex);
+        if (conveyor == null)
+        {
+            CycleConveyorIndex();
+            return;
+        }
         nextConveyorCheck = conveyor.transform;
+        GameObject.Find("Arrow").transform.position = nextConveyorCheck.position;
+
         foreach (var item in moveResource)
         {
-            if (item == null)
+            if (item == null || activeResource.ContainsKey(item))
             {
                 continue;
             }
-            if (item.previousConveyor == nextConveyorCheck)
+            if (item.previousConveyor == nextConveyorCheck || nextConveyorCheck.GetComponent<ObjectStats>().acceptingResources == false)
             {
+                CycleConveyorIndex();
                 continue;
             }
             item.MoveToNextConveyor(nextConveyorCheck, movementSpeed);
+            activeResource[item] = nextConveyorCheck;
+            cooldownTimer = routerCooldown;
+            CycleConveyorIndex();
+            return;
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.transform != null && collision.transform.TryGetComponent(out MoveResource output))
         {
+            resourceCount++;
+            if (resourceCount >= capacity)
+            {
+                //routerObjectStats.acceptingResources = false;
+            }
             moveResource.Add(output);
         }
     }
@@ -48,12 +73,23 @@ public class Router : MonoBehaviour
     {
         if (collision.transform != null && collision.transform.TryGetComponent(out MoveResource output))
         {
+            resourceCount--;
+            //routerObjectStats.acceptingResources = true;
             moveResource.Remove(output);
+            activeResource.Remove(output);
         }
     }
     private Collider2D DetectConveyors(int index)
     {
         return Physics2D.OverlapCircle(this.conveyorChecks[index].position, 0.05f, conveyorLayer);
+    }
+    private void CycleConveyorIndex()
+    {
+        conveyorIndex++;
+        if (conveyorIndex >= conveyorChecks.Length)
+        {
+            conveyorIndex = 0;
+        }
     }
 }
 /*using Core.Extensions;

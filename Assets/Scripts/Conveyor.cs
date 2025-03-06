@@ -11,10 +11,12 @@ public class Conveyor : MonoBehaviour
     [SerializeField] LayerMask conveyorLayer;
     private GameObject resourceObject;
     private HashSet<MoveResource> moveResource = new();
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private int capacity = 2;
+    private int resourceCount;
+    private ObjectStats conveyorObjectStats;
     void Start()
     {
-        
+        conveyorObjectStats = gameObject.GetComponent<ObjectStats>();
     }
 
     // Update is called once per frame
@@ -42,6 +44,11 @@ public class Conveyor : MonoBehaviour
     {
         if (collision.transform != null && collision.transform.TryGetComponent(out MoveResource output))
         {
+            resourceCount++;
+            if (resourceCount >= capacity)
+            {
+                conveyorObjectStats.acceptingResources = false;
+            }
             moveResource.Add(output);
         }
     }
@@ -50,6 +57,8 @@ public class Conveyor : MonoBehaviour
         if (collision.transform != null && collision.transform.TryGetComponent(out MoveResource output))
         {
             moveResource.Remove(output);
+            resourceCount--;
+            conveyorObjectStats.acceptingResources = true;
         }
     }
     private Collider2D FindNextConveyor()

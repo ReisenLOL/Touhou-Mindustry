@@ -47,13 +47,4 @@ public class PlayerController : MonoBehaviour
     {
         rb.linearVelocity = moveInput * speed;
     }
-
-    public void TakeDamage(float damage)
-    {
-        health -= damage;
-        if (health <= 0)
-        {
-            transform.position = core.transform.position;
-        }
-    }
 }

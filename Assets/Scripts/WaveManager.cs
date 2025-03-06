@@ -6,15 +6,17 @@ public class WaveManager : MonoBehaviour
     [SerializeField] Transform spawnPoint;
     private int enemyCount;
     private int waveNumber = 1;
+    private GameObject enemyFolder;
     void Start()
     {
+        enemyFolder = GameObject.Find("EnemyFolder");
         SpawnEnemyWave(enemyCount);
     }
 
     // Update is called once per frame
     void Update()
     {
-        enemyCount = FindObjectsByType<EnemyController>(FindObjectsSortMode.None).Length;
+        enemyCount = enemyFolder.transform.childCount;
         if (enemyCount == 0)
         {
             waveNumber++;
@@ -26,7 +28,9 @@ public class WaveManager : MonoBehaviour
         for (int i = 0; i < enemyCount; i++)
         {
             int enemyIndex = Random.Range(0, enemyTypes.Length);
-            Instantiate(enemyTypes[enemyIndex], spawnPoint.position, enemyTypes[enemyIndex].transform.rotation);
+            GameObject newEnemy = Instantiate(enemyTypes[enemyIndex], spawnPoint.position, enemyTypes[enemyIndex].transform.rotation);
+            newEnemy.transform.SetParent(enemyFolder.transform);
+            newEnemy.GetComponent<UnitStats>().isEnemy = true;
         }
     }
 }

@@ -17,9 +17,16 @@ public class MoveProjectile : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Enemy"))
+        if (collision.gameObject.tag != firedFrom.tag)
         {
-            collision.gameObject.GetComponent<EnemyController>().TakeDamage(damage);
+            if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Enemy"))
+            {
+                collision.gameObject.GetComponent<UnitStats>().TakeDamage(damage);
+            }
+            else if (collision.gameObject.CompareTag("Building"))
+            {
+                collision.gameObject.GetComponent<ObjectStats>().TakeDamage(damage);
+            }
             Destroy(gameObject);
         }
     }

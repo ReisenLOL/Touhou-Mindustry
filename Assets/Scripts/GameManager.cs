@@ -15,8 +15,9 @@ public class GameManager : MonoBehaviour
     private bool showPlaceholder;
     public GameObject placeholderObject;
     [SerializeField] TextMeshProUGUI resourceText;
-    private GameObject[] buildList;
+    public GameObject[] buildList;
     public GameObject objectStatText;
+    private GameObject buildingFolder;
     Dictionary<string, int> currentResources = new();
     private LayerMask resourceVeinLayer;
     public void AddResource(string resource, int value)
@@ -59,11 +60,11 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
+        buildingFolder = GameObject.Find("BuildingFolder");
         AddResource("Fairy Compound", 100);
         player = GameObject.Find("Player");
         playerController = player.GetComponent<PlayerController>();
         buildingGrid = GameObject.Find("BuildingGrid").GetComponent<Grid>();
-        buildList = GameObject.Find("BuildContainer").GetComponent<BuildUIManager>().buildableObjects;
     }
     void Update()
     {
@@ -100,6 +101,7 @@ public class GameManager : MonoBehaviour
                 {
                     GameObject newObject = Instantiate(selection, buildingGridCenterCell, Quaternion.Euler(rotationAmount));
                     newObject.GetComponent<ObjectStats>().gridLocation = new (buildingGridCenterCell.x, buildingGridCenterCell.y);
+                    newObject.transform.SetParent(buildingFolder.transform);
                     Destroy(placeholderObject);
                     showPlaceholder = true;
                 }
@@ -118,6 +120,7 @@ public class GameManager : MonoBehaviour
             // I COOKED!!!
             // ok well i have to get whatever is on that location and stop it from being allowed to build there but that seems simple enough
             // nice
+            // do i keep these yapping ass comments actually why not they're getting archived here forever
         }
         if (Input.GetMouseButtonDown(1) && CanPlaceThere(true) == "Building" && CanPlaceThere(false) != "Core" && !EventSystem.current.IsPointerOverGameObject())
         {
@@ -151,7 +154,7 @@ public class GameManager : MonoBehaviour
     }
     string CanPlaceThere(bool returnTag)
     {
-        RaycastHit2D hit = Physics2D.CircleCast(Camera.main.ScreenToWorldPoint(Input.mousePosition), 0.25f, Vector2.zero, 0);
+        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, 0);
         if (hit.collider != null)
         {
             if (returnTag)

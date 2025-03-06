@@ -9,11 +9,13 @@ public class MineResource : MonoBehaviour
     [SerializeField] LayerMask resourceLayer;
     [SerializeField] LayerMask conveyorLayer;
 
+    private GameObject resourceFolder;
     private GameManager gameManager;
     private float _time;
     public float miningSpeed;
     void Start()
     {
+        resourceFolder = GameObject.Find("ResourceFolder");
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         Collider2D foundResource = FindResources();
         if (foundResource != null && foundResource.CompareTag("ResourceVein"))
@@ -31,11 +33,12 @@ public class MineResource : MonoBehaviour
             Collider2D detectedConveyor = DetectConveyors(Random.Range(0, conveyorChecks.Length));
             if (detectedConveyor != null)
             {
-                if (detectedConveyor.gameObject.GetComponent<Conveyor>())
+                if (detectedConveyor.gameObject.GetComponent<Conveyor>() && detectedConveyor.gameObject.GetComponent<ObjectStats>().acceptingResources == true)
                 {
                     _time -= miningSpeed;
                     GameObject ProduceResource = Instantiate(resourceObject, detectedConveyor.transform.position, resourceObject.transform.rotation);
                     ProduceResource.GetComponent<MinedResourceType>().type = minedResource;
+                    ProduceResource.transform.SetParent(resourceFolder.transform);
                 }
             }
         }

@@ -4,12 +4,13 @@ using UnityEngine.UI;
 
 public class BuildUIManager : MonoBehaviour
 {
-    public GameObject[] buildableObjects;
+    private GameObject[] buildableObjects;
     private GameManager gameManager;
     [SerializeField] GameObject templateButton;
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        buildableObjects = gameManager.GetComponent<GameManager>().buildList;
         for (int i = 0; i < buildableObjects.Length; i++)
         {
             GameObject newButton = Instantiate(templateButton);

@@ -31,7 +31,7 @@ public class TurretController : MonoBehaviour
         for (int i = 0; i < enemyList.Length; i++)
         {
             iteration = enemyList[i];
-            if (iteration == null)
+            if (iteration == null || enemyList[i].gameObject.GetComponent<UnitStats>().isEnemy == false)
             {
                 continue;
             }

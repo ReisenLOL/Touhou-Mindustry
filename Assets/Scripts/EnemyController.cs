@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    public float health = 100;
     [SerializeField] float speed;
     private GameObject core;
     private GameObject player;
@@ -40,7 +39,7 @@ public class EnemyController : MonoBehaviour
         {
             closestTarget = this.gameObject;
         }
-        /*float distanceToClosestTarget = 1000000f;
+        float distanceToClosestTarget = 1000000f;
         Collider2D iteration = null;
         for (int i = 0; i < targetList.Length; i++)
         {
@@ -59,12 +58,13 @@ public class EnemyController : MonoBehaviour
         fireRateTime += Time.deltaTime;
         if (fireRateTime >= fireRate)
         {
+            Debug.Log(closestTarget.name);
             fireRateTime -= fireRateTime;
             MoveProjectile newProjectile = Instantiate(projectile, transform.position, projectile.transform.rotation);
             newProjectile.firedFrom = gameObject;
             newProjectile.damage = damageDealt;
             newProjectile.RotateToTarget(closestTarget.transform.position);
-        }*/
+        }
     }
     private void FixedUpdate()
     {
@@ -73,13 +73,5 @@ public class EnemyController : MonoBehaviour
     private Collider2D[] DetectTargets()
     {
         return Physics2D.OverlapCircleAll(transform.position, 50f, ~unitLayer);
-    }
-    public void TakeDamage(float damage)
-    {
-        health -= damage;
-        if (health <= 0)
-        {
-            Destroy(gameObject);
-        }
     }
 }

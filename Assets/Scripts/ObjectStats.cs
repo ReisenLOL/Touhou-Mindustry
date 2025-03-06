@@ -7,7 +7,7 @@ public class ObjectStats : MonoBehaviour
     public ObjectPrice price;
     public bool acceptingResources = true;
     public Vector2 gridLocation;
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         health -= damage;
         if (health <= 0)

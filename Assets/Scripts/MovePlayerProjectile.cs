@@ -28,7 +28,7 @@ public class MovePlayerProjectile : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
-            collision.gameObject.GetComponent<EnemyController>().TakeDamage(damage);
+            collision.gameObject.GetComponent<UnitStats>().TakeDamage(damage);
         }
         if (!collision.CompareTag("Player"))
         {
