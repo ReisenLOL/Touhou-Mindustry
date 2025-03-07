@@ -26,7 +26,7 @@ public class MovePlayerProjectile : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Enemy"))
+        if (collision.CompareTag("Unit") && collision.GetComponent<UnitStats>().isEnemy)
         {
             collision.gameObject.GetComponent<UnitStats>().TakeDamage(damage);
         }

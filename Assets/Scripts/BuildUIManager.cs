@@ -17,6 +17,7 @@ public class BuildUIManager : MonoBehaviour
             newButton.SetActive(true);
             newButton.transform.SetParent(this.gameObject.transform);
             newButton.GetComponentInChildren<TextMeshProUGUI>().text = buildableObjects[i].name;
+            newButton.GetComponent<Button>().onClick.AddListener(() => gameManager.SetBuildMode(newButton.GetComponentInChildren<TextMeshProUGUI>().text));
             newButton.GetComponent<Button>().onClick.AddListener(() => gameManager.SetSelection(newButton.GetComponentInChildren<TextMeshProUGUI>().text));
         }
     }

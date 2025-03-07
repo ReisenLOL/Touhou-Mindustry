@@ -130,27 +130,40 @@ public class GameManager : MonoBehaviour
             AddResource(resourceToRefund, refundAmount);
             Destroy(hit.collider.gameObject);
         }
-    }
-    public void EnterBuildMode()
-    {
-        if (placeholderObject)
+        else if (Input.GetMouseButtonDown(1) && isBuilding)
         {
-            Destroy(placeholderObject);
+            SetBuildMode(selection.name);
         }
-        showPlaceholder = true;
-        isBuilding = true;
-        playerController.canShoot = false;
     }
-    public void ExitBuildMode()
+    public void SetBuildMode(string selectedObject)
     {
-        objectStatText.SetActive(false);
-        showPlaceholder = false;
-        if (placeholderObject)
+        if (selectedObject == selection.name && isBuilding)
         {
-            Destroy(placeholderObject);
+            isBuilding = false;
         }
-        isBuilding = false;
-        playerController.canShoot = true;
+        else
+        {
+            isBuilding = true;
+        }
+        if (isBuilding)
+        {
+            if (placeholderObject)
+            {
+                Destroy(placeholderObject);
+            }
+            showPlaceholder = true;
+            playerController.canShoot = false;
+        }
+        else
+        {
+            objectStatText.SetActive(false);
+            showPlaceholder = false;
+            if (placeholderObject)
+            {
+                Destroy(placeholderObject);
+            }
+            playerController.canShoot = true;
+        }
     }
     string CanPlaceThere(bool returnTag)
     {

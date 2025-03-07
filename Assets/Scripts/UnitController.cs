@@ -9,10 +9,12 @@ public class UnitController : MonoBehaviour
     private float fireRateTime;
     public float fireRate;
     public float damageDealt;
+    private UnitStats unitStats;
     [SerializeField] MoveProjectile projectile;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        unitStats = GetComponent<UnitStats>();
     }
 
     void Update()
@@ -25,6 +27,7 @@ public class UnitController : MonoBehaviour
             newProjectile.firedFrom = gameObject;
             newProjectile.damage = damageDealt;
             newProjectile.RotateToTarget(closestTarget.transform.position);
+            newProjectile.isEnemyBullet = unitStats.isEnemy;
         }
     }
     private void FixedUpdate()

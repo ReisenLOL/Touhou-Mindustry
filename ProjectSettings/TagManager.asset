@@ -4,11 +4,11 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - Enemy
   - Building
   - Placeholder
   - ResourceObject
   - ResourceVein
+  - Unit
   layers:
   - Default
   - TransparentFX
