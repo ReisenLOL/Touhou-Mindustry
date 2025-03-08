@@ -11,8 +11,11 @@ public class UnitController : MonoBehaviour
     public float damageDealt;
     private UnitStats unitStats;
     [SerializeField] MoveProjectile projectile;
+    private SpriteRenderer unitSpriteRenderer;
+    private bool isFacingRight = true;
     void Start()
     {
+        unitSpriteRenderer = base.GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         unitStats = GetComponent<UnitStats>();
     }
@@ -28,6 +31,16 @@ public class UnitController : MonoBehaviour
             newProjectile.damage = damageDealt;
             newProjectile.RotateToTarget(closestTarget.transform.position);
             newProjectile.isEnemyBullet = unitStats.isEnemy;
+        }
+        if (lookDirection.x > 0f && this.isFacingRight)
+        {
+            unitSpriteRenderer.flipX = true;
+            this.isFacingRight = !this.isFacingRight;
+        }
+        else if (lookDirection.x < 0f && !this.isFacingRight)
+        {
+            unitSpriteRenderer.flipX = false;
+            this.isFacingRight = !this.isFacingRight;
         }
     }
     private void FixedUpdate()

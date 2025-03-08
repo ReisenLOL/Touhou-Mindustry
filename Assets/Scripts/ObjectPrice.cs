@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Object Price", menuName = "Scripts/ScriptableObjects")]
+[CreateAssetMenu(fileName = "New Object Price", menuName = "Scripts/ObjectPrice")]
 public class ObjectPrice : ScriptableObject
 {
     [SerializeField] cost price;

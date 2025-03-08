@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Tilemaps;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class GameManager : MonoBehaviour
     public GameObject[] buildList;
     public GameObject objectStatText;
     private GameObject buildingFolder;
+    private Tilemap terrainTiles;
     Dictionary<string, int> currentResources = new();
     private LayerMask resourceVeinLayer;
     public void AddResource(string resource, int value)
@@ -65,6 +67,7 @@ public class GameManager : MonoBehaviour
         player = GameObject.Find("Player");
         playerController = player.GetComponent<PlayerController>();
         buildingGrid = GameObject.Find("BuildingGrid").GetComponent<Grid>();
+        terrainTiles = GameObject.Find("TerrainTilemap").GetComponent<Tilemap>();
     }
     void Update()
     {
@@ -94,7 +97,7 @@ public class GameManager : MonoBehaviour
             }
             placeholderObject.transform.position = buildingGridCenterCell;
             placeholderObject.transform.rotation = Quaternion.Euler(rotationAmount);
-            if (Input.GetMouseButtonDown(0) && CanPlaceThere(true) != "Building" && !EventSystem.current.IsPointerOverGameObject())
+            if (Input.GetMouseButtonDown(0) && CanPlaceThere(true) != "Building" && !EventSystem.current.IsPointerOverGameObject() && terrainTiles.GetTile(buildingGrid.WorldToCell(worldPos)).name != "deepwater")
             {
                 bool success = SubtractResource(resourceToSubtract, cost);
                 if (success)

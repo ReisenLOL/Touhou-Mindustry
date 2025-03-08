@@ -19,9 +19,13 @@ public class PlayerController : MonoBehaviour
     public string coreType;
     private float fireRateTime;
     public bool canShoot = true;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private Camera playerCam;
+    private bool isFacingRight = true;
+    private SpriteRenderer playerSpriteRenderer;
     void Start()
     {
+        playerSpriteRenderer = base.GetComponent<SpriteRenderer>();
+        playerCam = GameObject.Find("Camera").GetComponent<Camera>();
         core = GameObject.Find(coreType);
         rb = GetComponent<Rigidbody2D>();
     }
@@ -39,6 +43,20 @@ public class PlayerController : MonoBehaviour
                 fireRateTime = 0;
                 Instantiate(projectile, transform.position, projectile.transform.rotation);
             }
+        }
+        if (playerCam.orthographicSize > 1f || playerCam.orthographicSize > 0f && Input.mouseScrollDelta.y < 0)
+        {
+            playerCam.orthographicSize -= Input.mouseScrollDelta.y / 2;
+        }
+        if (this.moveInput.x > 0f && this.isFacingRight)
+        {
+            playerSpriteRenderer.flipX = true;
+            this.isFacingRight = !this.isFacingRight;
+        }
+        else if (this.moveInput.x < 0f && !this.isFacingRight)
+        {
+            playerSpriteRenderer.flipX = false;
+            this.isFacingRight = !this.isFacingRight;
         }
     }
 

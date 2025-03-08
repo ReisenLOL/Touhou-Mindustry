@@ -225,5 +225,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76908d71dcba18243a6075750b1fe113, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
-  maxHealth: 0
+  health: 100
+  maxHealth: 100
+  price: {fileID: 0}
+  acceptingResources: 1
+  gridLocation: {x: 0, y: 0}

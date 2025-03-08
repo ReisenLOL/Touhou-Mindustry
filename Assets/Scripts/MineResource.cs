@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class MineResource : MonoBehaviour
 {
@@ -6,21 +7,30 @@ public class MineResource : MonoBehaviour
     [SerializeField] GameObject resourceObject;
     [SerializeField] Transform[] conveyorChecks;
     public string minedResource;
-    [SerializeField] LayerMask resourceLayer;
     [SerializeField] LayerMask conveyorLayer;
-
+    [SerializeField] ResourceList resourceList;
     private GameObject resourceFolder;
     private GameManager gameManager;
     private float _time;
     public float miningSpeed;
+    private Grid buildingGrid;
+    private Tilemap terrainTiles;
     void Start()
     {
+        buildingGrid = GameObject.Find("BuildingGrid").GetComponent<Grid>();
+        terrainTiles = GameObject.Find("TerrainTilemap").GetComponent<Tilemap>();
         resourceFolder = GameObject.Find("ResourceFolder");
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        Collider2D foundResource = FindResources();
-        if (foundResource != null && foundResource.CompareTag("ResourceVein"))
+        string tileName = terrainTiles.GetTile(buildingGrid.WorldToCell(transform.position)).name;
+        Debug.Log(tileName);
+        for (int i = 0; i < resourceList.resourceType.Length; i++)
         {
-            minedResource = FindResources().gameObject.GetComponent<ResourceType>().resourceType;
+            if (tileName == resourceList.GetResourceType(i))
+            {
+                minedResource = resourceList.GetResourceType(i);
+                break;
+            }
+            minedResource = null;
         }
     }
 
@@ -33,7 +43,7 @@ public class MineResource : MonoBehaviour
             Collider2D detectedConveyor = DetectConveyors(Random.Range(0, conveyorChecks.Length));
             if (detectedConveyor != null)
             {
-                if (detectedConveyor.gameObject.GetComponent<Conveyor>() && detectedConveyor.gameObject.GetComponent<ObjectStats>().acceptingResources == true)
+                if (detectedConveyor.gameObject.GetComponent<Conveyor>() && detectedConveyor.gameObject.GetComponent<ObjectStats>().acceptingResources == true && minedResource != null)
                 {
                     _time -= miningSpeed;
                     GameObject ProduceResource = Instantiate(resourceObject, detectedConveyor.transform.position, resourceObject.transform.rotation);
@@ -42,10 +52,6 @@ public class MineResource : MonoBehaviour
                 }
             }
         }
-    }
-    private Collider2D FindResources()
-    {
-        return Physics2D.OverlapCircle(this.resourceCheck.position, 0.05f, resourceLayer);
     }
     private Collider2D DetectConveyors(int index)
     {

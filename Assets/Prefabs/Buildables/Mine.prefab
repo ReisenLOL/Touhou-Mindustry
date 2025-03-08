@@ -161,12 +161,10 @@ MonoBehaviour:
   - {fileID: 4058120686258122801}
   - {fileID: 774330939834314382}
   minedResource: 
-  resourceLayer:
-    serializedVersion: 2
-    m_Bits: 64
   conveyorLayer:
     serializedVersion: 2
     m_Bits: 256
+  resourceList: {fileID: 11400000, guid: ecee9d4edbfc6924caa743785bf10551, type: 2}
   miningSpeed: 4
 --- !u!114 &4942890777097733748
 MonoBehaviour:
