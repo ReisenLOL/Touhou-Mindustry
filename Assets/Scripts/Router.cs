@@ -47,9 +47,11 @@ public class Router : MonoBehaviour
             }
             if (item.previousConveyor == nextConveyorCheck || nextConveyorCheck.GetComponent<ObjectStats>().acceptingResources == false)
             {
+                item.isMoving = false;
                 CycleConveyorIndex();
                 continue;
             }
+            item.usingConveyorLogic = false;
             item.MoveToNextConveyor(nextConveyorCheck, movementSpeed);
             activeResource[item] = nextConveyorCheck;
             cooldownTimer = routerCooldown;

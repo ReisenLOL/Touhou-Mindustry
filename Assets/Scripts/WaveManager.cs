@@ -1,27 +1,32 @@
+using TMPro;
 using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
     [SerializeField] GameObject[] enemyTypes;
     [SerializeField] Transform spawnPoint;
-    private int enemyCount;
-    private int waveNumber = 1;
+    [SerializeField] TextMeshProUGUI waveText;
+    private int waveNumber = 0;
     private GameObject enemyFolder;
+    private float waveDuration = 60;
+    private float _time;
     void Start()
     {
+        _time = waveDuration;
         enemyFolder = GameObject.Find("EnemyFolder");
-        SpawnEnemyWave(enemyCount);
     }
 
     // Update is called once per frame
     void Update()
     {
-        enemyCount = enemyFolder.transform.childCount;
-        if (enemyCount == 0)
+        _time -= Time.deltaTime;
+        if (_time <= 0)
         {
+            _time = waveDuration;
             waveNumber++;
             SpawnEnemyWave(waveNumber);
         }
+        waveText.text = ("Wave: " + waveNumber + "\nNext wave in: " + (int)_time);
     }
     private void SpawnEnemyWave(int enemyCount)
     {

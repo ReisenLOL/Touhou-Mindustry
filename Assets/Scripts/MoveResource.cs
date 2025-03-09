@@ -4,25 +4,45 @@ using UnityEngine;
 public class MoveResource : MonoBehaviour
 {
     private Rigidbody2D rb;
-    private bool movedLastFrame = false;
+    public bool isMoving = false;
     public Transform previousConveyor;
+    private Vector2 moveDirection = Vector2.zero;
+    private float moveSpeed = 0f;
+    public bool usingConveyorLogic;
+    private bool movedLastFrame;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (!movedLastFrame)
+        if (isMoving && !usingConveyorLogic || (usingConveyorLogic && movedLastFrame))
+        {
+            rb.VelocityTowards(moveDirection * moveSpeed, 100f);
+            if (usingConveyorLogic)
+            {
+                movedLastFrame = false;
+            }
+        }
+        else
         {
             rb.VelocityTowards(Vector2.zero, 100f);
         }
-        movedLastFrame = false;
     }
+
     public void MoveToNextConveyor(Transform nextConveyor, float speed)
     {
-        rb.VelocityTowards((nextConveyor.gameObject.transform.position - transform.position).normalized * speed, 100f);
-        movedLastFrame = true;
+        if (nextConveyor == null)
+        {
+            return;
+        }
+        moveDirection = (nextConveyor.position - transform.position).normalized;
+        moveSpeed = speed;
+        isMoving = true;
+        if (usingConveyorLogic)
+        {
+            movedLastFrame = true;
+        }
     }
 }

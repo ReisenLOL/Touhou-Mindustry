@@ -37,6 +37,7 @@ public class Conveyor : MonoBehaviour
                 continue;
             }
             item.previousConveyor = gameObject.transform;
+            item.usingConveyorLogic = true;
             item.MoveToNextConveyor(nextConveyorCheck, movementSpeed);
         }
     }

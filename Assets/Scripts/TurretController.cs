@@ -43,7 +43,7 @@ public class TurretController : MonoBehaviour
             }
         }
         fireRateTime += Time.deltaTime;
-        if (fireRateTime >= fireRate && ammoAmount > 0 && enemyList.Length > 0)
+        if (fireRateTime >= fireRate && ammoAmount > 0 && closestEnemy != gameObject)
         {
             ammoAmount--;
             fireRateTime -= fireRateTime;
