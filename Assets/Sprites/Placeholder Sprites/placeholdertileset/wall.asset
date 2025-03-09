@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: wall
   m_EditorClassIdentifier: 
   m_Sprite: {fileID: -29062930, guid: 7c41c78e569109745a48224c6df8d110, type: 3}
-  m_Color: {r: 0.15723258, g: 0.15723258, b: 0.15723258, a: 1}
+  m_Color: {r: 0.088050246, g: 0.088050246, b: 0.088050246, a: 1}
   m_Transform:
     e00: 1
     e01: 0
@@ -33,4 +33,4 @@ MonoBehaviour:
     e33: 1
   m_InstancedGameObject: {fileID: 0}
   m_Flags: 1
-  m_ColliderType: 1
+  m_ColliderType: 0

@@ -13,6 +13,7 @@ public class UnitFactory : MonoBehaviour
     private float productionTimer;
     private bool isProducing = false;
     [SerializeField] float requiredManufacturingTime;
+    [SerializeField] Transform progressBar;
     void Start()
     {
         unitFolder = GameObject.Find("UnitFolder");
@@ -23,6 +24,7 @@ public class UnitFactory : MonoBehaviour
         if (isProducing)
         {
             productionTimer += Time.deltaTime;
+            progressBar.localScale = new Vector3(productionTimer/requiredManufacturingTime, progressBar.localScale.y, progressBar.localScale.z);
             if (productionTimer >= requiredManufacturingTime)
             {
                 isProducing = false;
@@ -31,7 +33,7 @@ public class UnitFactory : MonoBehaviour
                 newUnit.transform.SetParent(unitFolder.transform);
             }
         }
-        if (storedResources >= requiredAmount)
+        if (storedResources >= requiredAmount && !isProducing)
         {
             isProducing = true;
             storedResources -= requiredAmount;

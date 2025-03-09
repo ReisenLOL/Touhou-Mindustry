@@ -97,7 +97,7 @@ public class GameManager : MonoBehaviour
             }
             placeholderObject.transform.position = buildingGridCenterCell;
             placeholderObject.transform.rotation = Quaternion.Euler(rotationAmount);
-            if (Input.GetMouseButtonDown(0) && CanPlaceThere(true) != "Building" && !EventSystem.current.IsPointerOverGameObject() && terrainTiles.GetTile(buildingGrid.WorldToCell(worldPos)).name != "deepwater")
+            if (Input.GetMouseButtonDown(0) && CanPlaceThere(true) != "Building" && !EventSystem.current.IsPointerOverGameObject() && terrainTiles.GetTile(buildingGrid.WorldToCell(worldPos)).name != "deepwater" && terrainTiles.GetTile(buildingGrid.WorldToCell(worldPos)).name != "wall")
             {
                 bool success = SubtractResource(resourceToSubtract, cost);
                 if (success)

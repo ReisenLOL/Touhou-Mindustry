@@ -56,7 +56,7 @@ public class MapGenerator : MonoBehaviour
                     if (oreValue > 0.75f)
                     {
                         int randomOre = Random.Range(0, oreTiles.Length);
-                        // ill figure out a real solution later, for now itll just be multi ore lol
+                        // so i guess its time to figure out HOW THE FUCK DO I GENERATE ORE VEINS!!!
                         tileMap.SetTile(tilePosition, oreTiles[randomOre]);
                     }
                 }
@@ -71,7 +71,7 @@ public class MapGenerator : MonoBehaviour
                 if (tileMap.GetTile(tilePosition) == groundTile)
                 {
                     float wallValue = Mathf.PerlinNoise(x / wallScale, y / wallScale);
-                    if (wallValue > 0.75f)
+                    if (wallValue > 0.55f)
                     {
                         tileMap.SetTile(tilePosition, walltile);
                     }
