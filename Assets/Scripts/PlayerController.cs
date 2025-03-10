@@ -48,6 +48,10 @@ public class PlayerController : MonoBehaviour
         {
             playerCam.orthographicSize -= Input.mouseScrollDelta.y / 2;
         }
+        else if (playerCam.orthographicSize < 0f)
+        {
+            playerCam.orthographicSize = 5f;
+        }
         if (this.moveInput.x > 0f && this.isFacingRight)
         {
             playerSpriteRenderer.flipX = true;

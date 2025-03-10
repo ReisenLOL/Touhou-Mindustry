@@ -44,6 +44,7 @@ public class UnitTargetter : MonoBehaviour
         else
         {
             lookDirection = (closestTarget.transform.position - transform.position).normalized;
+            unitController.lookDirection = lookDirection;
         }
 
         targetList = DetectTargets();
@@ -76,6 +77,6 @@ public class UnitTargetter : MonoBehaviour
         {
             return Physics2D.OverlapCircleAll(transform.position, 50f, ~unitLayer);
         }
-        return Physics2D.OverlapCircleAll(transform.position, 50f, playerLayer);
+        return Physics2D.OverlapCircleAll(transform.position, 100f, playerLayer);
     }
 }

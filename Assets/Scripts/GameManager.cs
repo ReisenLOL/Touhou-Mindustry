@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 
 public class GameManager : MonoBehaviour
@@ -22,6 +23,8 @@ public class GameManager : MonoBehaviour
     private Tilemap terrainTiles;
     Dictionary<string, int> currentResources = new();
     private LayerMask resourceVeinLayer;
+    private float selectionSize;
+    [SerializeField] GameObject gameOverUI;
     public void AddResource(string resource, int value)
     {
         int resourceValue = 0;
@@ -79,10 +82,19 @@ public class GameManager : MonoBehaviour
             Vector3 mousePos = Input.mousePosition;
             mousePos.z = Camera.main.nearClipPlane + 10;
             Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
+            Vector3 buildingGridEvenCell = buildingGrid.WorldToCell(worldPos);
             Vector3 buildingGridCenterCell = buildingGrid.GetCellCenterWorld(buildingGrid.WorldToCell(worldPos));
             if (showPlaceholder)
             {
-                placeholderObject = Instantiate(selection, buildingGridCenterCell, selection.transform.rotation);
+                selectionSize = selection.GetComponent<BoxCollider2D>().size.x;
+                if (selectionSize % 2 == 0)
+                {
+                    placeholderObject = Instantiate(selection, buildingGridEvenCell, selection.transform.rotation);
+                }
+                else
+                {
+                    placeholderObject = Instantiate(selection, buildingGridCenterCell, selection.transform.rotation);
+                }
                 Component[] allComponents = placeholderObject.GetComponentsInChildren(typeof(MonoBehaviour));
                 foreach (Component gameObjectComponent in allComponents)
                 {
@@ -95,15 +107,32 @@ public class GameManager : MonoBehaviour
                 placeholderObject.tag = "Building";
                 showPlaceholder = false;
             }
-            placeholderObject.transform.position = buildingGridCenterCell;
+            if (selectionSize % 2 == 0)
+            {
+                placeholderObject.transform.position = buildingGridEvenCell;
+            }
+            else 
+            {
+                placeholderObject.transform.position = buildingGridCenterCell;
+            }
             placeholderObject.transform.rotation = Quaternion.Euler(rotationAmount);
             if (Input.GetMouseButtonDown(0) && CanPlaceThere(true) != "Building" && !EventSystem.current.IsPointerOverGameObject() && terrainTiles.GetTile(buildingGrid.WorldToCell(worldPos)).name != "deepwater" && terrainTiles.GetTile(buildingGrid.WorldToCell(worldPos)).name != "wall")
             {
-                bool success = SubtractResource(resourceToSubtract, cost);
+                bool success = CheckResourceValue(resourceToSubtract) >= cost;
                 if (success)
                 {
-                    GameObject newObject = Instantiate(selection, buildingGridCenterCell, Quaternion.Euler(rotationAmount));
-                    newObject.GetComponent<ObjectStats>().gridLocation = new (buildingGridCenterCell.x, buildingGridCenterCell.y);
+                    SubtractResource(resourceToSubtract, cost);
+                    GameObject newObject;
+                    if (selectionSize % 2 == 0)
+                    {
+                        newObject = Instantiate(selection, buildingGridEvenCell, Quaternion.Euler(rotationAmount));
+                        newObject.GetComponent<ObjectStats>().gridLocation = new(buildingGridEvenCell.x, buildingGridEvenCell.y);
+                    }
+                    else
+                    {
+                        newObject = Instantiate(selection, buildingGridCenterCell, Quaternion.Euler(rotationAmount));
+                        newObject.GetComponent<ObjectStats>().gridLocation = new(buildingGridCenterCell.x, buildingGridCenterCell.y);
+                    }
                     newObject.transform.SetParent(buildingFolder.transform);
                     Destroy(placeholderObject);
                     showPlaceholder = true;
@@ -212,6 +241,21 @@ public class GameManager : MonoBehaviour
             }
         }
         return null;
+    }
+    /*private void OnDrawGizmos()
+    {
+        if (isBuilding)
+        {
+            Gizmos.DrawSphere(placeholderObject.transform.position, 1);
+        }
+    }*/
+    public void GameOver()
+    {
+        gameOverUI.SetActive(true);
+    }
+    public void ResetGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
 

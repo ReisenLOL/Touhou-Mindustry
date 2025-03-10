@@ -22,7 +22,6 @@ public class MineResource : MonoBehaviour
         resourceFolder = GameObject.Find("ResourceFolder");
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         string tileName = terrainTiles.GetTile(buildingGrid.WorldToCell(transform.position)).name;
-        Debug.Log(tileName);
         for (int i = 0; i < resourceList.resourceType.Length; i++)
         {
             if (tileName == resourceList.GetResourceType(i))
@@ -34,7 +33,6 @@ public class MineResource : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         _time += Time.deltaTime;

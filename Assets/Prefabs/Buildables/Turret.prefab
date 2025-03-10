@@ -80,7 +80,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 9181246561390569501, guid: 042a64429e76c1244a9cc980bc7ce9e7, type: 3}
+  m_Sprite: {fileID: 2323917800338813707, guid: a5c2a15cb46279645bf45eb7c4a23c1d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -106,6 +106,8 @@ MonoBehaviour:
   health: 100
   maxHealth: 100
   price: {fileID: 11400000, guid: d947b76acae401843a6b0f7d612ed3b8, type: 2}
+  acceptingResources: 1
+  gridLocation: {x: 0, y: 0}
 --- !u!61 &7094906701382087823
 BoxCollider2D:
   m_ObjectHideFlags: 0

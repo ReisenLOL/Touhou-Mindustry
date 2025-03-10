@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -15,6 +16,8 @@ public class MapGenerator : MonoBehaviour
     public TileBase deepWaterTile;
     public TileBase[] oreTiles;
     public TileBase walltile;
+    private bool[,] oreMap; // Stores where ore should be placed
+    private bool[,] visited; // Keeps track of visited tiles
 
     void Start()
     {
@@ -23,6 +26,8 @@ public class MapGenerator : MonoBehaviour
 
     void GenerateMap()
     {
+        oreMap = new bool[width, height];
+        visited = new bool[width, height];
         // land or water
         for (int x = 0; x < width; x++)
         {
@@ -30,7 +35,7 @@ public class MapGenerator : MonoBehaviour
             {
                 float terrainValue = Mathf.PerlinNoise(x / terrainScale, y / terrainScale);
                 Vector3Int tilePosition = new Vector3Int(x, y, 0);
-                if (terrainValue > 0.25f)
+                if (terrainValue > 0.2f)
                 {
                     tileMap.SetTile(tilePosition, groundTile);
                 }
@@ -55,10 +60,20 @@ public class MapGenerator : MonoBehaviour
                     float oreValue = Mathf.PerlinNoise(x / oreScale, y / oreScale);
                     if (oreValue > 0.75f)
                     {
-                        int randomOre = Random.Range(0, oreTiles.Length);
-                        // so i guess its time to figure out HOW THE FUCK DO I GENERATE ORE VEINS!!!
-                        tileMap.SetTile(tilePosition, oreTiles[randomOre]);
+                        oreMap[x, y] = true; // Mark as potential ore location
                     }
+                }
+            }
+        }
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                if (oreMap[x, y] && !visited[x, y])
+                {
+                    // Found an unprocessed ore patch, assign it a random ore type
+                    TileBase oreType = oreTiles[Random.Range(0, oreTiles.Length)];
+                    FloodFillOrePatch(x, y, oreType);
                 }
             }
         }
@@ -71,10 +86,41 @@ public class MapGenerator : MonoBehaviour
                 if (tileMap.GetTile(tilePosition) == groundTile)
                 {
                     float wallValue = Mathf.PerlinNoise(x / wallScale, y / wallScale);
-                    if (wallValue > 0.55f)
+                    if (wallValue > 0.7f)
                     {
                         tileMap.SetTile(tilePosition, walltile);
                     }
+                }
+            }
+        }
+    }
+    void FloodFillOrePatch(int startX, int startY, TileBase oreType)
+    {
+        Queue<Vector2Int> queue = new Queue<Vector2Int>();
+        queue.Enqueue(new Vector2Int(startX, startY));
+        visited[startX, startY] = true;
+
+        while (queue.Count > 0)
+        {
+            Vector2Int pos = queue.Dequeue();
+            int x = pos.x;
+            int y = pos.y;
+
+            tileMap.SetTile(new Vector3Int(x, y, 0), oreType); // Assign ore
+
+            // Check 4 adjacent tiles (up, down, left, right)
+            // i literally just copied this code.... i guess i can still just read it and i'll learn.
+            Vector2Int[] neighbors = { new Vector2Int(x + 1, y), new Vector2Int(x - 1, y), new Vector2Int(x, y + 1), new Vector2Int(x, y - 1) };
+
+            foreach (Vector2Int neighbor in neighbors)
+            {
+                int nx = neighbor.x;
+                int ny = neighbor.y;
+
+                if (nx >= 0 && nx < width && ny >= 0 && ny < height && !visited[nx, ny] && oreMap[nx, ny])
+                {
+                    visited[nx, ny] = true;
+                    queue.Enqueue(neighbor);
                 }
             }
         }
