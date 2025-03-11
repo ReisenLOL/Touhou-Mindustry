@@ -2098,6 +2098,8 @@ MonoBehaviour:
   oreTiles:
   - {fileID: 11400000, guid: 1fdca3be7e452aa49b03a860b80241d0, type: 2}
   - {fileID: 11400000, guid: fa1ded61284546341a38262109a98468, type: 2}
+  - {fileID: 11400000, guid: 01999645ffc0dfb46b52a2369a07afdd, type: 2}
+  - {fileID: 11400000, guid: 44572f6ca97ec0943a9fd5499c9199a7, type: 2}
   walltile: {fileID: 11400000, guid: 3a68c500f86bc5a4eaff79cf7276cc87, type: 2}
 --- !u!1 &2038252614
 GameObject:
