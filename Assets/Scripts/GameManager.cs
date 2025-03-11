@@ -168,6 +168,19 @@ public class GameManager : MonoBehaviour
         {
             SetBuildMode(selection.name);
         }
+        if (!isBuilding)
+        {
+            string selectedTile = terrainTiles.GetTile(buildingGrid.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition))).name;
+            if (selectedTile != null)
+            {
+                objectStatText.SetActive(true);
+                objectStatText.GetComponentInChildren<TextMeshProUGUI>().text = (selectedTile);
+            }
+            else
+            {
+                objectStatText.SetActive(false);
+            }
+        }
     }
     public void SetBuildMode(string selectedObject)
     {

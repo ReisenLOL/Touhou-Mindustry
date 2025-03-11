@@ -2039,6 +2039,9 @@ MonoBehaviour:
   - {fileID: 3090783532505855684, guid: 9b306259f2ea06b4e82d3efc1181a4b5, type: 3}
   objectStatText: {fileID: 320912188}
   gameOverUI: {fileID: 1768957934}
+  buildingLayer:
+    serializedVersion: 2
+    m_Bits: 1280
 --- !u!4 &2008672073
 Transform:
   m_ObjectHideFlags: 0

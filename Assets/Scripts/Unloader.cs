@@ -6,7 +6,6 @@ public class Unloader : MonoBehaviour
 {
     private string selectedResource;
     [SerializeField] GameObject resourceObject;
-    private float movementspeed;
     [SerializeField] Transform[] conveyorChecks;
     [SerializeField] LayerMask conveyorLayer;
     private GameObject resourceFolder;
