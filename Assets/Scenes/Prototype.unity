@@ -2035,6 +2035,7 @@ MonoBehaviour:
   - {fileID: 2780307407043551660, guid: cd7af1b29c157654cbad807750ddd21a, type: 3}
   - {fileID: 6946665105900138293, guid: 3b883a016a38ac34ca7469a3b439991d, type: 3}
   - {fileID: 3523162529024487953, guid: 51bb737e7aff99c4c9e5af37b66cd55b, type: 3}
+  - {fileID: 2780307407043551660, guid: 33a533c98f992b34e919c1d5c91a922c, type: 3}
   - {fileID: 3090783532505855684, guid: 9b306259f2ea06b4e82d3efc1181a4b5, type: 3}
   objectStatText: {fileID: 320912188}
   gameOverUI: {fileID: 1768957934}
@@ -2233,6 +2234,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1303981554866787471, guid: a723257f378e1574ea4c8b02f1de3ca6, type: 3}
+      propertyPath: isCore
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1810122812157781773, guid: a723257f378e1574ea4c8b02f1de3ca6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 130.5

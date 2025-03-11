@@ -19,6 +19,10 @@ public class MoveProjectile : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        if (!isEnemyBullet)
+        {
+            Destroy(gameObject.GetComponent<Rigidbody2D>());
+        }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

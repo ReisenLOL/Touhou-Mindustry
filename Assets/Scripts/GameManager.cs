@@ -23,8 +23,9 @@ public class GameManager : MonoBehaviour
     private Tilemap terrainTiles;
     Dictionary<string, int> currentResources = new();
     private LayerMask resourceVeinLayer;
-    private float selectionSize;
+    private Vector2 selectionSize;
     [SerializeField] GameObject gameOverUI;
+    [SerializeField] LayerMask buildingLayer;
     public void AddResource(string resource, int value)
     {
         int resourceValue = 0;
@@ -67,6 +68,7 @@ public class GameManager : MonoBehaviour
     {
         buildingFolder = GameObject.Find("BuildingFolder");
         AddResource("Fairy Compound", 100);
+        AddResource("Lunarian Metal", 30);
         player = GameObject.Find("Player");
         playerController = player.GetComponent<PlayerController>();
         buildingGrid = GameObject.Find("BuildingGrid").GetComponent<Grid>();
@@ -86,8 +88,8 @@ public class GameManager : MonoBehaviour
             Vector3 buildingGridCenterCell = buildingGrid.GetCellCenterWorld(buildingGrid.WorldToCell(worldPos));
             if (showPlaceholder)
             {
-                selectionSize = selection.GetComponent<BoxCollider2D>().size.x;
-                if (selectionSize % 2 == 0)
+                selectionSize = selection.GetComponent<BoxCollider2D>().size;
+                if (selectionSize.x % 2 == 0)
                 {
                     placeholderObject = Instantiate(selection, buildingGridEvenCell, selection.transform.rotation);
                 }
@@ -107,7 +109,7 @@ public class GameManager : MonoBehaviour
                 placeholderObject.tag = "Building";
                 showPlaceholder = false;
             }
-            if (selectionSize % 2 == 0)
+            if (selectionSize.x % 2 == 0)
             {
                 placeholderObject.transform.position = buildingGridEvenCell;
             }
@@ -123,7 +125,7 @@ public class GameManager : MonoBehaviour
                 {
                     SubtractResource(resourceToSubtract, cost);
                     GameObject newObject;
-                    if (selectionSize % 2 == 0)
+                    if (selectionSize.x % 2 == 0)
                     {
                         newObject = Instantiate(selection, buildingGridEvenCell, Quaternion.Euler(rotationAmount));
                         newObject.GetComponent<ObjectStats>().gridLocation = new(buildingGridEvenCell.x, buildingGridEvenCell.y);
@@ -211,10 +213,23 @@ public class GameManager : MonoBehaviour
                 return hit.collider.gameObject.name;
             }
         }
-        else
+        if (selectionSize.x > 1f)
         {
-            return "go ahead";
+            Vector2 boxSize = new Vector2(selectionSize.x / 2, selectionSize.y / 2);
+            Collider2D boxColliderHit = Physics2D.OverlapBox(placeholderObject.transform.position, boxSize, 0f, buildingLayer);
+            if (boxColliderHit != null)
+            {
+                if (returnTag)
+                {
+                    return boxColliderHit.gameObject.tag;
+                }
+                else
+                {
+                    return boxColliderHit.gameObject.name;
+                }
+            }
         }
+        return "go ahead";
     }
     public void SetSelection(string selectedObject)
     {
