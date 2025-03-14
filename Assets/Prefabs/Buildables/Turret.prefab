@@ -107,6 +107,7 @@ MonoBehaviour:
   maxHealth: 100
   price: {fileID: 11400000, guid: d947b76acae401843a6b0f7d612ed3b8, type: 2}
   acceptingResources: 1
+  isCore: 0
   gridLocation: {x: 0, y: 0}
 --- !u!61 &7094906701382087823
 BoxCollider2D:
@@ -198,7 +199,7 @@ MonoBehaviour:
   ammoCapacity: 10
   UnitLayer:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 2560
   fireRate: 0.5
   damageDealt: 40
   projectile: {fileID: 5023491507495876721, guid: af692c3c78ae95644b68e0c0477a015a, type: 3}

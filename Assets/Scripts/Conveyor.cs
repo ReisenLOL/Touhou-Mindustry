@@ -19,7 +19,6 @@ public class Conveyor : MonoBehaviour
         conveyorObjectStats = gameObject.GetComponent<ObjectStats>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (FindNextConveyor() is not null and Collider2D c)
@@ -30,6 +29,8 @@ public class Conveyor : MonoBehaviour
         {
             return;
         }
+        // ill just. figure this out later.
+        // WELL THEN NOW WHAT??
         foreach (var item in moveResource)
         {
             if (item == null)
@@ -64,6 +65,11 @@ public class Conveyor : MonoBehaviour
     }
     private Collider2D FindNextConveyor()
     {
-        return Physics2D.OverlapCircle(nextConveyorCheck.position, 0.05f, conveyorLayer);
+        if (nextConveyorCheck != null)
+        {
+            return Physics2D.OverlapCircle(nextConveyorCheck.position, 0.05f, conveyorLayer);
+        }
+        nextConveyorCheck = null;
+        return null;
     }
 }

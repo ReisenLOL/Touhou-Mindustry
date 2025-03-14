@@ -13,16 +13,16 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
   - ResourceVein
   - ResourceObject
   - Conveyor
-  - Unit
+  - GroundUnit
   - Buildable
-  - 
-  - 
+  - AirUnit
+  - Terrain
   - 
   - 
   - 

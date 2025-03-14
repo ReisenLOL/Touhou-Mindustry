@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: ConveyorPrice
   m_EditorClassIdentifier: 
   price:
-    resourceName: Fairy Compound
-    amount: 1
+    resourceName:
+    - Fairy Compound
+    amount: 01000000

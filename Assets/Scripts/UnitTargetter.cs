@@ -48,7 +48,7 @@ public class UnitTargetter : MonoBehaviour
         }
 
         targetList = DetectTargets();
-        if (targetList.Length == 0)
+        if (targetList.Length == 0 || closestTarget == null)
         {
             closestTarget = this.gameObject;
             unitController.closestTarget = closestTarget;

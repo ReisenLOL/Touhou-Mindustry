@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5949507554291975577}
   - component: {fileID: -3733012895622000275}
   m_Layer: 9
-  m_Name: EnemyTest
+  m_Name: RabbitInfantry
   m_TagString: Unit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -212,7 +212,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitLayer:
     serializedVersion: 2
-    m_Bits: 640
+    m_Bits: 2688
   playerLayer:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 2560

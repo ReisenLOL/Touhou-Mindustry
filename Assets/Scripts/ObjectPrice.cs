@@ -7,9 +7,10 @@ public class ObjectPrice : ScriptableObject
     [System.Serializable]
     public struct cost
     {
-        public string resourceName;
-        public int amount;
+        //stupid way time
+        public string[] resourceName;
+        public int[] amount;
     }
-    public string GetResourceName() => price.resourceName;
-    public int GetAmount() => price.amount;
+    public string[] GetResourceName() => price.resourceName;
+    public int[] GetAmount() => price.amount;
 }

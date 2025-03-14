@@ -19,7 +19,14 @@ public class MoveResource : MonoBehaviour
     {
         if (isMoving && !usingConveyorLogic || (usingConveyorLogic && movedLastFrame))
         {
-            rb.VelocityTowards(moveDirection * moveSpeed, 100f);
+            if (moveDirection != null)
+            {
+                rb.VelocityTowards(moveDirection * moveSpeed, 100f);
+            }
+            else
+            {
+                rb.VelocityTowards(Vector2.zero, 100f);
+            }
             if (usingConveyorLogic)
             {
                 movedLastFrame = false;

@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: RouterPrice
   m_EditorClassIdentifier: 
   price:
-    resourceName: Fairy Compound
-    amount: 2
+    resourceName:
+    - Fairy Compound
+    amount: 02000000

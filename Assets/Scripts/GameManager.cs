@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     public GameObject placeholderObject;
     [SerializeField] TextMeshProUGUI resourceText;
     public GameObject[] buildList;
+    [SerializeField] ResourceList listOfResources;
     public GameObject objectStatText;
     private GameObject buildingFolder;
     private Tilemap terrainTiles;
@@ -39,6 +40,16 @@ public class GameManager : MonoBehaviour
             currentResources[resource] = resourceValue;
             Debug.Log("Added Resource: " + value + " " + resource);
         }
+        string newValueToDisplay = "";
+        for (int i = 0; i < listOfResources.resourceType.Length; i++)
+        {
+            int getValue = CheckResourceValue(listOfResources.resourceType[i]);
+            if (getValue > 0)
+            {
+                newValueToDisplay += listOfResources.resourceType[i] + ": " + getValue + "\n";
+            }
+        }
+        resourceText.text = newValueToDisplay;
     }
     public bool SubtractResource(string resource, int value)
     {
@@ -52,10 +63,21 @@ public class GameManager : MonoBehaviour
             resourceValue -= value;
             currentResources[resource] = resourceValue;
             Debug.Log("Subtracted Resource: " + value + " " + resource);
+            string newValueToDisplay = "";
+            for (int i = 0; i < listOfResources.resourceType.Length; i++)
+            {
+                int getValue = CheckResourceValue(listOfResources.resourceType[i]);
+                if (getValue > 0)
+                {
+                    newValueToDisplay += listOfResources.resourceType[i] + ": " + getValue + "\n";
+                }
+            }
+            resourceText.text = newValueToDisplay;
             return true;
         }
         return false;
     }
+    //wow i really think this code is inefficient but whatevs i guess
     public int CheckResourceValue(string resource)
     {
         if (!currentResources.ContainsKey(resource))
@@ -76,11 +98,10 @@ public class GameManager : MonoBehaviour
     }
     void Update()
     {
-        resourceText.text = ("Fairy Compound: " + CheckResourceValue("Fairy Compound") + "\nLunarian Metal: " + CheckResourceValue("Lunarian Metal"));
         if (isBuilding)
         {
-            string resourceToSubtract = selection.gameObject.GetComponent<ObjectStats>().price.GetResourceName();
-            int cost = selection.gameObject.GetComponent<ObjectStats>().price.GetAmount();
+            string[] resourceToSubtract = selection.gameObject.GetComponent<ObjectStats>().price.GetResourceName();
+            int[] cost = selection.gameObject.GetComponent<ObjectStats>().price.GetAmount();
             Vector3 mousePos = Input.mousePosition;
             mousePos.z = Camera.main.nearClipPlane + 10;
             Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
@@ -120,10 +141,17 @@ public class GameManager : MonoBehaviour
             placeholderObject.transform.rotation = Quaternion.Euler(rotationAmount);
             if (Input.GetMouseButtonDown(0) && CanPlaceThere(true) != "Building" && !EventSystem.current.IsPointerOverGameObject() && terrainTiles.GetTile(buildingGrid.WorldToCell(worldPos)).name != "deepwater" && terrainTiles.GetTile(buildingGrid.WorldToCell(worldPos)).name != "wall")
             {
-                bool success = CheckResourceValue(resourceToSubtract) >= cost;
+                bool success = false;
+                for (int i = 0; i < resourceToSubtract.Length; i++)
+                {
+                   success = CheckResourceValue(resourceToSubtract[i]) >= cost[i];
+                }
                 if (success)
                 {
-                    SubtractResource(resourceToSubtract, cost);
+                    for (int i = 0; i < resourceToSubtract.Length; i++)
+                    {
+                        SubtractResource(resourceToSubtract[i], cost[i]);
+                    }
                     GameObject newObject;
                     if (selectionSize.x % 2 == 0)
                     {
@@ -159,9 +187,12 @@ public class GameManager : MonoBehaviour
         if (Input.GetMouseButtonDown(1) && CanPlaceThere(true) == "Building" && CanPlaceThere(false) != "Core" && !EventSystem.current.IsPointerOverGameObject())
         {
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-            string resourceToRefund = hit.collider.gameObject.GetComponent<ObjectStats>().price.GetResourceName();
-            int refundAmount = hit.collider.gameObject.GetComponent<ObjectStats>().price.GetAmount();
-            AddResource(resourceToRefund, refundAmount);
+            string[] resourceToRefund = hit.collider.gameObject.GetComponent<ObjectStats>().price.GetResourceName();
+            int[] refundAmount = hit.collider.gameObject.GetComponent<ObjectStats>().price.GetAmount();
+            for (int i = 0; i < resourceToRefund.Length; i++)
+            {
+                AddResource(resourceToRefund[i], refundAmount[i]);
+            }
             Destroy(hit.collider.gameObject);
         }
         else if (Input.GetMouseButtonDown(1) && isBuilding)
@@ -228,8 +259,7 @@ public class GameManager : MonoBehaviour
         }
         if (selectionSize.x > 1f)
         {
-            Vector2 boxSize = new Vector2(selectionSize.x / 2, selectionSize.y / 2);
-            Collider2D boxColliderHit = Physics2D.OverlapBox(placeholderObject.transform.position, boxSize, 0f, buildingLayer);
+            Collider2D boxColliderHit = Physics2D.OverlapBox(placeholderObject.transform.position, selectionSize * 0.5f, 0f, buildingLayer);
             if (boxColliderHit != null)
             {
                 if (returnTag)
@@ -256,8 +286,16 @@ public class GameManager : MonoBehaviour
                 break;
             }
         }
+        ObjectStats selectionStats = selection.gameObject.GetComponent<ObjectStats>();
+        string[] resourceToDisplay = selectionStats.price.GetResourceName();
+        int[] amountToDisplay = selectionStats.price.GetAmount();
         objectStatText.SetActive(true);
-        objectStatText.GetComponentInChildren<TextMeshProUGUI>().text = (selection.name +"\n" + selection.gameObject.GetComponent<ObjectStats>().price.GetResourceName() + ": " + selection.gameObject.GetComponent<ObjectStats>().price.GetAmount());
+        string costDisplay = selection.name + "\n";
+        for (int i = 0; i < resourceToDisplay.Length; i++)
+        {
+            costDisplay += resourceToDisplay[i] + ": " + amountToDisplay[i] + "\n";
+        }
+        objectStatText.GetComponentInChildren<TextMeshProUGUI>().text = (costDisplay);
     }
     public GameObject GetObjectFromName(string objectName)
     {

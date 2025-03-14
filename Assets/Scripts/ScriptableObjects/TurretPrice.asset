@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: TurretPrice
   m_EditorClassIdentifier: 
   price:
-    resourceName: Lunarian Metal
-    amount: 10
+    resourceName:
+    - Fairy Compound
+    - Lunarian Metal
+    amount: 0a00000005000000

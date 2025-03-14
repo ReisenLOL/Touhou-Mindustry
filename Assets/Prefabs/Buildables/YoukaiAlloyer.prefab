@@ -43,8 +43,9 @@ GameObject:
   - component: {fileID: 8856143608452811646}
   - component: {fileID: -7406726600156066926}
   - component: {fileID: 4942890777097733748}
+  - component: {fileID: 3203007226496644615}
   m_Layer: 0
-  m_Name: Refinery
+  m_Name: YoukaiAlloyer
   m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -59,7 +60,7 @@ Transform:
   m_GameObject: {fileID: 3090783532505855684}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.4100227, y: 5.0080614, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -188,10 +189,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   maxHealth: 100
-  price: {fileID: 11400000, guid: f00990a80dc7974449b724ce13895d19, type: 2}
+  price: {fileID: 11400000, guid: 825fad11b926c744b9ff60d772c6a65e, type: 2}
   acceptingResources: 0
   isCore: 0
   gridLocation: {x: 0, y: 0}
+--- !u!114 &3203007226496644615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3090783532505855684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85d9ed209a8743b41abcf2e65f9c0a73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resourcesToRefine:
+  - Ether Dust
+  - Youkai Essence
+  outputResource: Youkai Alloy
+  resourceObject: {fileID: 4334449564300741373, guid: 24272f182db28fb419b6a3ad1a6732a7, type: 3}
+  conveyorChecks:
+  - {fileID: 3068546871142132783}
+  - {fileID: 4912684224809008832}
+  - {fileID: 4182652993777875683}
+  - {fileID: 3954579037376721595}
+  - {fileID: 8389191284034538411}
+  - {fileID: 4058120686258122801}
+  - {fileID: 3727191599455205616}
+  - {fileID: 774330939834314382}
+  conveyorLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  capacity: 0
+  tickSpeed: 0.5
 --- !u!1 &3402251984812671527
 GameObject:
   m_ObjectHideFlags: 0

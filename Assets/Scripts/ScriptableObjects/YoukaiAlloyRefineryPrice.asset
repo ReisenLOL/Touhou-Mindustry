@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7bbf8aa54294dd64c82b3efffb710c0d, type: 3}
-  m_Name: MinePrice
+  m_Name: YoukaiAlloyRefineryPrice
   m_EditorClassIdentifier: 
   price:
     resourceName:
     - Fairy Compound
-    amount: 04000000
+    - Lunarian Metal
+    amount: 2300000032000000

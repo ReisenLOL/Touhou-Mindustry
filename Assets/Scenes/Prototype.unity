@@ -426,7 +426,7 @@ GameObject:
   - component: {fileID: 329545285}
   - component: {fileID: 329545284}
   - component: {fileID: 329545283}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: TerrainTilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2036,7 +2036,10 @@ MonoBehaviour:
   - {fileID: 6946665105900138293, guid: 3b883a016a38ac34ca7469a3b439991d, type: 3}
   - {fileID: 3523162529024487953, guid: 51bb737e7aff99c4c9e5af37b66cd55b, type: 3}
   - {fileID: 2780307407043551660, guid: 33a533c98f992b34e919c1d5c91a922c, type: 3}
+  - {fileID: 3090783532505855684, guid: ec70aaccefce46c49a5ea93aa346a6af, type: 3}
+  - {fileID: 6946665105900138293, guid: 9dec048c9a358024ab4e788ba88ebaf7, type: 3}
   - {fileID: 3090783532505855684, guid: 9b306259f2ea06b4e82d3efc1181a4b5, type: 3}
+  listOfResources: {fileID: 11400000, guid: ecee9d4edbfc6924caa743785bf10551, type: 2}
   objectStatText: {fileID: 320912188}
   gameOverUI: {fileID: 1768957934}
   buildingLayer:
@@ -2071,7 +2074,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyTypes:
   - {fileID: 9095487249878984731, guid: f7dca22535cf0d0478bc7172a3f62044, type: 3}
-  - {fileID: 9095487249878984731, guid: f7dca22535cf0d0478bc7172a3f62044, type: 3}
+  - {fileID: 9095487249878984731, guid: 0f3a28f1df05488438407d3e04d2b666, type: 3}
   spawnPoint: {fileID: 122860242}
   waveText: {fileID: 1079464282}
 --- !u!114 &2008672075
@@ -2300,13 +2303,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2144253136778553077, guid: 733ee6c2d9c648440bcacaa5691008b5, type: 3}
-      propertyPath: m_Name
-      value: Camera
-      objectReference: {fileID: 0}
     - target: {fileID: 5821555672903897639, guid: 733ee6c2d9c648440bcacaa5691008b5, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5821555672903897639, guid: 733ee6c2d9c648440bcacaa5691008b5, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7979852576250930141, guid: 733ee6c2d9c648440bcacaa5691008b5, type: 3}
       propertyPath: m_LocalPosition.x
