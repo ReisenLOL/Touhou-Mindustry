@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class UnitStats : MonoBehaviour
 {
+    public UnitPrice price;
     public float health;
     public float maxHealth;
     public bool isEnemy = false;
