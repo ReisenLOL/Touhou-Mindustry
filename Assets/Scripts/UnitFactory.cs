@@ -22,6 +22,7 @@ public class UnitFactory : MonoBehaviour
     private bool isProducing = false;
     [SerializeField] float requiredManufacturingTime;
     [SerializeField] Transform progressBar;
+    //this is the worst code i have ever written.
     public void AddResource(string resource, int value)
     {
         int resourceValue = 0;
@@ -125,7 +126,6 @@ public class UnitFactory : MonoBehaviour
         }
         Destroy(collision.gameObject);
     }
-    //this is the worst code i've ever written.
     private void OnMouseDown()
     {
         selectionBox.SetActive(!selectionBox.activeSelf);
