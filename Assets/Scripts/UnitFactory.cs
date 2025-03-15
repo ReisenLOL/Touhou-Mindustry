@@ -77,7 +77,7 @@ public class UnitFactory : MonoBehaviour
             newButton.SetActive(true);
             newButton.transform.SetParent(selectionUI.transform);
             newButton.GetComponentInChildren<TextMeshProUGUI>().text = unitList[i].name;
-            newButton.GetComponent<Button>().onClick.AddListener(() => SelectUnit(i)); //i think this works?
+            newButton.GetComponent<Button>().onClick.AddListener(() => SelectUnit(i - 2)); //i think this works? ok it doesnt but ill go with this for now
         }
     }
     void Update()
@@ -103,7 +103,7 @@ public class UnitFactory : MonoBehaviour
             }
             else
             {
-                isProducing = true;
+                isProducing = false; 
                 break;
             }
         }
@@ -114,7 +114,7 @@ public class UnitFactory : MonoBehaviour
         {
             for (int i = 0; i < requiredResources.Length; i++)
             {
-                if (r.type == requiredResources[i] && storedResources[requiredResources[i]] < capacity)
+                if (r.type == requiredResources[i] && CheckResourceValue(requiredResources[i]) < capacity) //ok cool thats enough for today goodnight
                 {
                     AddResource(requiredResources[i], 1);
                     if (storedResources[requiredResources[i]] >= capacity)

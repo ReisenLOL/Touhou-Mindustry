@@ -401,9 +401,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 892e0e9651c92a041b70e4e940ce11be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitToSpawn: {fileID: 9095487249878984731, guid: f7dca22535cf0d0478bc7172a3f62044, type: 3}
-  requiredResource: Lunarian Metal
-  requiredAmount: 10
+  unitList:
+  - {fileID: 9095487249878984731, guid: f7dca22535cf0d0478bc7172a3f62044, type: 3}
+  - {fileID: 9095487249878984731, guid: 0f3a28f1df05488438407d3e04d2b666, type: 3}
+  selectionBox: {fileID: 6561851893192117442}
+  templateButton: {fileID: 7864704736967143846}
+  selectionUI: {fileID: 2354193141948580118}
+  selectionUIContainer: {fileID: 6484340224356746716}
+  requiredResources: []
+  requiredAmount: 
   capacity: 20
   SpawnLocation: {fileID: 4460483117085115118}
   requiredManufacturingTime: 20
@@ -1255,5 +1261,10 @@ PrefabInstance:
 --- !u!224 &4111301596930417430 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4759711341464666767, guid: 336e3cde3b8834b419484ac296d9e1fc, type: 3}
+  m_PrefabInstance: {fileID: 8864107961852551577}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7864704736967143846 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1596148317520973887, guid: 336e3cde3b8834b419484ac296d9e1fc, type: 3}
   m_PrefabInstance: {fileID: 8864107961852551577}
   m_PrefabAsset: {fileID: 0}

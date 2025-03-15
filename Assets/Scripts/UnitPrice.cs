@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Resource List", menuName = "Scripts/ResourceList")]
+[CreateAssetMenu(fileName = "New Resource List", menuName = "Scripts/UnitPrice")]
 public class UnitPrice : ScriptableObject
 {
     public string[] resourceName;

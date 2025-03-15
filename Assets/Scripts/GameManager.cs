@@ -90,7 +90,8 @@ public class GameManager : MonoBehaviour
     {
         buildingFolder = GameObject.Find("BuildingFolder");
         AddResource("Fairy Compound", 100);
-        AddResource("Lunarian Metal", 30);
+        AddResource("Lunarian Metal", 100);
+        AddResource("Youkai Alloy", 1000);
         player = GameObject.Find("Player");
         playerController = player.GetComponent<PlayerController>();
         buildingGrid = GameObject.Find("BuildingGrid").GetComponent<Grid>();
