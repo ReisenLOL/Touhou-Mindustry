@@ -5,7 +5,8 @@ using UnityEngine;
 public class Conveyor : MonoBehaviour
 {
     [SerializeField] float movementSpeed;
-    [SerializeField] Transform nextConveyorCheck;
+    [SerializeField] Transform nextConveyorCheck; //YOU ARE A FUCKING DUMBASS SYLVIA
+    private Transform nextConveyor;
     [SerializeField] Transform resourceCheck;
     [SerializeField] LayerMask resourceObjectLayer;
     [SerializeField] LayerMask conveyorLayer;
@@ -23,9 +24,9 @@ public class Conveyor : MonoBehaviour
     {
         if (FindNextConveyor() is not null and Collider2D c)
         {
-            nextConveyorCheck = FindNextConveyor().transform;
+            nextConveyor = FindNextConveyor().transform;
         }
-        if (nextConveyorCheck == null || nextConveyorCheck.transform.TryGetComponent(out ObjectStats objectStats) && objectStats.acceptingResources == false)
+        if (nextConveyor == null || nextConveyor.transform.TryGetComponent(out ObjectStats objectStats) && objectStats.acceptingResources == false)
         {
             return;
         }
@@ -39,7 +40,7 @@ public class Conveyor : MonoBehaviour
             }
             item.previousConveyor = gameObject.transform;
             item.usingConveyorLogic = true;
-            item.MoveToNextConveyor(nextConveyorCheck, movementSpeed);
+            item.MoveToNextConveyor(nextConveyor, movementSpeed);
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -65,11 +66,6 @@ public class Conveyor : MonoBehaviour
     }
     private Collider2D FindNextConveyor()
     {
-        if (nextConveyorCheck != null)
-        {
-            return Physics2D.OverlapCircle(nextConveyorCheck.position, 0.05f, conveyorLayer);
-        }
-        nextConveyorCheck = null;
-        return null;
+        return Physics2D.OverlapCircle(nextConveyorCheck.position, 0.05f, conveyorLayer);
     }
 }

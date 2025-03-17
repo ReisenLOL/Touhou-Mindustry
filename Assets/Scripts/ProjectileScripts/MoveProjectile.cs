@@ -1,13 +1,9 @@
 using UnityEngine;
 using Core.Extensions;
 
-public class MoveProjectile : MonoBehaviour
+public class MoveProjectile : Projectile
 {
-    [SerializeField] float speed;
-    public float damage;
-    public GameObject firedFrom;
     private float distanceToTurret;
-    public bool isEnemyBullet = false;
     void Update()
     {
         transform.Translate(Vector2.right * Time.deltaTime * speed);
@@ -15,7 +11,7 @@ public class MoveProjectile : MonoBehaviour
         {
             distanceToTurret = Vector3.Distance(transform.position, firedFrom.transform.position);
         }
-        if (distanceToTurret > 100)
+        if (distanceToTurret > maxRange)
         {
             Destroy(gameObject);
         }
@@ -44,9 +40,5 @@ public class MoveProjectile : MonoBehaviour
             collision.gameObject.GetComponent<UnitStats>().TakeDamage(damage);
             Destroy(gameObject);
         }
-    }
-    public void RotateToTarget(Vector2 direction)
-    {
-        transform.Lookat2D(direction);
     }
 }

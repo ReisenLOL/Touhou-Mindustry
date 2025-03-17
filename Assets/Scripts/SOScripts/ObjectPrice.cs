@@ -10,7 +10,9 @@ public class ObjectPrice : ScriptableObject
         //stupid way time
         public string[] resourceName;
         public int[] amount;
+        public string objectDescription;
     }
     public string[] GetResourceName() => price.resourceName;
     public int[] GetAmount() => price.amount;
+    public string GetDescription => price.objectDescription;
 }

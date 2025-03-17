@@ -16,3 +16,4 @@ MonoBehaviour:
     resourceName:
     - Fairy Compound
     amount: 01000000
+    objectDescription: Moves resources to another object that can take in those resources.

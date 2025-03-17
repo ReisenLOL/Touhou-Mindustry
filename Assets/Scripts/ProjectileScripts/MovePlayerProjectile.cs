@@ -10,10 +10,6 @@ public class MovePlayerProjectile : MonoBehaviour
     private void Start()
     {
         player = GameObject.Find("Player");
-        Vector3 mousePos = Input.mousePosition;
-        mousePos.z = Camera.main.nearClipPlane + 10;
-        Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
-        transform.Lookat2D(worldPos);
     }
     void Update()
     {

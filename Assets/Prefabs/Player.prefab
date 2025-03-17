@@ -151,7 +151,7 @@ GameObject:
   - component: {fileID: 8069297750607732897}
   - component: {fileID: 1497576368431787662}
   - component: {fileID: 8652047656516896779}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -317,7 +317,9 @@ MonoBehaviour:
   speed: 10
   fireRate: 0.4
   health: 100
-  projectile: {fileID: 7171157463493194127, guid: 1cf94e2bb0d193e46983658b53926f51, type: 3}
+  projectile: {fileID: 7171157463493194127, guid: afaa007ef9eb1304892ef7fe9efe5b4e, type: 3}
+  damageDealt: 25
+  range: 50
   coreType: Core
   canShoot: 1
 --- !u!114 &8652047656516896779
@@ -332,6 +334,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81f536aec67d37344a086eb0aec55bed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  price: {fileID: 0}
+  upgradesTo: {fileID: 0}
+  unitTier: 0
   health: 100
   maxHealth: 100
   isEnemy: 0

@@ -3,6 +3,8 @@ using UnityEngine;
 public class UnitStats : MonoBehaviour
 {
     public UnitPrice price;
+    public GameObject upgradesTo;
+    public int unitTier;
     public float health;
     public float maxHealth;
     public bool isEnemy = false;

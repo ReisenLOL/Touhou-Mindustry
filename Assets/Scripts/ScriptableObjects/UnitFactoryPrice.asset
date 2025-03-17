@@ -18,3 +18,5 @@ MonoBehaviour:
     - Lunarian Metal
     - Youkai Alloy
     amount: 320000006400000050000000
+    objectDescription: Produces Units that will fight for you. Input Youkai Alloy
+      and Lunarian Metal/Fairy Compound depending on the unit for to produce units.

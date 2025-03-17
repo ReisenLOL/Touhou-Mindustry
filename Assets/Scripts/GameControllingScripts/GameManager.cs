@@ -90,8 +90,8 @@ public class GameManager : MonoBehaviour
     {
         buildingFolder = GameObject.Find("BuildingFolder");
         AddResource("Fairy Compound", 100);
-        AddResource("Lunarian Metal", 100);
-        AddResource("Youkai Alloy", 1000);
+        AddResource("Lunarian Metal", 30);
+        //AddResource("Youkai Alloy", 1000);
         player = GameObject.Find("Player");
         playerController = player.GetComponent<PlayerController>();
         buildingGrid = GameObject.Find("BuildingGrid").GetComponent<Grid>();
@@ -296,6 +296,7 @@ public class GameManager : MonoBehaviour
         {
             costDisplay += resourceToDisplay[i] + ": " + amountToDisplay[i] + "\n";
         }
+        costDisplay += selectionStats.price.GetDescription;
         objectStatText.GetComponentInChildren<TextMeshProUGUI>().text = (costDisplay);
     }
     public GameObject GetObjectFromName(string objectName)

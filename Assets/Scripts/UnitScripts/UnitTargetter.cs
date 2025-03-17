@@ -10,6 +10,7 @@ public class UnitTargetter : MonoBehaviour
     private GameObject closestTarget;
     private UnitController unitController;
     private UnitStats unitStats;
+    public float range;
     [SerializeField] LayerMask unitLayer;
     [SerializeField] LayerMask playerLayer;
     private bool isEnemy;
@@ -75,8 +76,8 @@ public class UnitTargetter : MonoBehaviour
     {
         if (isEnemy)
         {
-            return Physics2D.OverlapCircleAll(transform.position, 50f, ~unitLayer);
+            return Physics2D.OverlapCircleAll(transform.position, range, ~unitLayer);
         }
-        return Physics2D.OverlapCircleAll(transform.position, 100f, playerLayer);
+        return Physics2D.OverlapCircleAll(transform.position, range, playerLayer);
     }
 }

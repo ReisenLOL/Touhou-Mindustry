@@ -11,6 +11,7 @@ public class UnitFactory : MonoBehaviour
     [SerializeField] GameObject templateButton;
     [SerializeField] GameObject selectionUI;
     [SerializeField] GameObject selectionUIContainer;
+    [SerializeField] Transform[] upgraderChecks;
     [SerializeField] string[] requiredResources;
     [SerializeField] int[] requiredAmount;
     [SerializeField] int capacity;
@@ -20,8 +21,10 @@ public class UnitFactory : MonoBehaviour
     private GameObject unitFolder;
     private float productionTimer;
     private bool isProducing = false;
+    private Collider2D UpgraderObject;
     [SerializeField] float requiredManufacturingTime;
     [SerializeField] Transform progressBar;
+    [SerializeField] LayerMask conveyorLayer;
     //this is the worst code i have ever written.
     public void AddResource(string resource, int value)
     {
@@ -85,28 +88,55 @@ public class UnitFactory : MonoBehaviour
         if (isProducing && unitToSpawn != null)
         {
             productionTimer += Time.deltaTime;
-            progressBar.localScale = new Vector3(productionTimer/requiredManufacturingTime, progressBar.localScale.y, progressBar.localScale.z);
+            progressBar.localScale = new Vector3(productionTimer / requiredManufacturingTime, progressBar.localScale.y, progressBar.localScale.z);
+            bool unitIsUpgrading = false;
+            for (int i = 0; i < upgraderChecks.Length; i++)
+            {
+                UpgraderObject = DetectUpgraders(upgraderChecks[i]);
+                if (UpgraderObject != null && UpgraderObject.gameObject.TryGetComponent(out UnitUpgrader upgrader) && upgrader != null && upgrader.upgraderTier == 1)
+                {
+                    unitIsUpgrading = true;
+                    break;
+                }
+            }
             if (productionTimer >= requiredManufacturingTime)
             {
                 isProducing = false;
                 productionTimer = 0;
-                GameObject newUnit = Instantiate(unitToSpawn, SpawnLocation.position, unitToSpawn.transform.rotation);
-                newUnit.transform.SetParent(unitFolder.transform);
+                if (unitIsUpgrading)
+                {
+                    UpgraderObject.GetComponent<UnitUpgrader>().unitToUpgrade = unitToSpawn;
+                }
+                else
+                {
+                    GameObject newUnit = Instantiate(unitToSpawn, SpawnLocation.position, unitToSpawn.transform.rotation);
+                    newUnit.transform.SetParent(unitFolder.transform);
+                }
             }
         }
-        for (int i = 0; i < requiredResources.Length; i++)
+        if (!isProducing && unitToSpawn != null)
         {
-            if (CheckResourceValue(requiredResources[i]) >= requiredAmount[i] && !isProducing)
+            bool canProduce = true;
+            for (int i = 0; i < requiredResources.Length; i++)
+            {
+                if (CheckResourceValue(requiredResources[i]) < requiredAmount[i])
+                {
+                    Debug.Log("stopped producing");
+                    canProduce = false;
+                    break;
+                }
+            }
+            if (canProduce)
             {
                 isProducing = true;
-                SubtractResource(requiredResources[i], requiredAmount[i]);
-            }
-            else
-            {
-                isProducing = false; 
-                break;
+                Debug.Log("started producing");
+                for (int i = 0; i < requiredResources.Length; i++)
+                {
+                    SubtractResource(requiredResources[i], requiredAmount[i]);
+                }
             }
         }
+
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -114,7 +144,7 @@ public class UnitFactory : MonoBehaviour
         {
             for (int i = 0; i < requiredResources.Length; i++)
             {
-                if (r.type == requiredResources[i] && CheckResourceValue(requiredResources[i]) < capacity) //ok cool thats enough for today goodnight
+                if (r.type == requiredResources[i] && CheckResourceValue(requiredResources[i]) < capacity)
                 {
                     AddResource(requiredResources[i], 1);
                     if (storedResources[requiredResources[i]] >= capacity)
@@ -130,5 +160,9 @@ public class UnitFactory : MonoBehaviour
     {
         selectionBox.SetActive(!selectionBox.activeSelf);
         selectionUIContainer.SetActive(!selectionUIContainer.activeSelf);
+    }
+    private Collider2D DetectUpgraders(Transform upgraderCheck)
+    {
+        return Physics2D.OverlapCircle(upgraderCheck.position, 0.05f, conveyorLayer);
     }
 }

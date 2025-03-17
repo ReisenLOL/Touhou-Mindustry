@@ -2038,6 +2038,7 @@ MonoBehaviour:
   - {fileID: 2780307407043551660, guid: 33a533c98f992b34e919c1d5c91a922c, type: 3}
   - {fileID: 3090783532505855684, guid: ec70aaccefce46c49a5ea93aa346a6af, type: 3}
   - {fileID: 6946665105900138293, guid: 9dec048c9a358024ab4e788ba88ebaf7, type: 3}
+  - {fileID: 1027676862815906200, guid: 27cb1d640ea953d4bba5349d23d4002c, type: 3}
   - {fileID: 3090783532505855684, guid: 9b306259f2ea06b4e82d3efc1181a4b5, type: 3}
   listOfResources: {fileID: 11400000, guid: ecee9d4edbfc6924caa743785bf10551, type: 2}
   objectStatText: {fileID: 320912188}
@@ -2303,6 +2304,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1497576368431787662, guid: 733ee6c2d9c648440bcacaa5691008b5, type: 3}
+      propertyPath: range
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 1497576368431787662, guid: 733ee6c2d9c648440bcacaa5691008b5, type: 3}
+      propertyPath: projectile
+      value: 
+      objectReference: {fileID: -5126101970838524623, guid: afaa007ef9eb1304892ef7fe9efe5b4e, type: 3}
+    - target: {fileID: 1497576368431787662, guid: 733ee6c2d9c648440bcacaa5691008b5, type: 3}
+      propertyPath: damageDealt
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 5821555672903897639, guid: 733ee6c2d9c648440bcacaa5691008b5, type: 3}
       propertyPath: m_Name
       value: Player

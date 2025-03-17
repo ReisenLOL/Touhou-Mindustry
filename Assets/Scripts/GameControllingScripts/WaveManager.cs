@@ -8,7 +8,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI waveText;
     private int waveNumber = 0;
     private GameObject enemyFolder;
-    private float waveDuration = 60;
+    [SerializeField] float waveDuration = 60;
     private float _time;
     void Start()
     {

@@ -10,11 +10,13 @@ public class UnitController : MonoBehaviour
     public float fireRate;
     public float damageDealt;
     private UnitStats unitStats;
-    [SerializeField] MoveProjectile projectile;
+    private float range;
+    [SerializeField] GameObject projectile;
     private SpriteRenderer unitSpriteRenderer;
     private bool isFacingRight = true;
     void Start()
     {
+        range = GetComponent<UnitTargetter>().range;
         unitSpriteRenderer = base.GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         unitStats = GetComponent<UnitStats>();
@@ -26,11 +28,15 @@ public class UnitController : MonoBehaviour
         if (fireRateTime >= fireRate && closestTarget != null)
         {
             fireRateTime -= fireRateTime;
-            MoveProjectile newProjectile = Instantiate(projectile, transform.position, projectile.transform.rotation);
-            newProjectile.firedFrom = gameObject;
-            newProjectile.damage = damageDealt;
-            newProjectile.RotateToTarget(closestTarget.transform.position);
-            newProjectile.isEnemyBullet = unitStats.isEnemy;
+            //wow i need to figure this out, how do i do multiple projectile types that have a different... I GUESS IT WORKS FOR BOTH PROJECTILES RN?? wait no it doesnt, i need it to raycast the length then- could i just do it from the start of the lightning projectile?
+            GameObject newProjectile = Instantiate(projectile, transform.position, projectile.transform.rotation);
+            newProjectile.transform.parent = transform;
+            Projectile projectileStats = newProjectile.GetComponent<Projectile>();
+            projectileStats.firedFrom = gameObject;
+            projectileStats.damage = damageDealt;
+            projectileStats.RotateToTarget(closestTarget.transform.position);
+            projectileStats.isEnemyBullet = unitStats.isEnemy;
+            projectileStats.maxRange = range;
         }
         if (lookDirection.x > 0f && this.isFacingRight)
         {

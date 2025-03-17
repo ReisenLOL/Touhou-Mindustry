@@ -17,3 +17,4 @@ MonoBehaviour:
     - Fairy Compound
     - Lunarian Metal
     amount: 0a00000005000000
+    objectDescription: A basic turret that uses Fairy Compound for ammo.

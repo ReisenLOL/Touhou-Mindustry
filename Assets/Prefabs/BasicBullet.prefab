@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5023491507495876721}
   - component: {fileID: -2074120459134170451}
   m_Layer: 0
-  m_Name: Projectile
+  m_Name: BasicBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7171157463493194127}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.16842955, w: 0.9857137}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.8, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
@@ -148,10 +148,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32815efd4dc6f1c4b9b284757ae6391b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isEnemyBullet: 1
   speed: 10
-  damage: 25
+  damage: 10
+  maxRange: 50
   firedFrom: {fileID: 0}
-  isEnemyBullet: 0
+  directionOfTarget: {x: 153.50159, y: 54.035492}
 --- !u!50 &-2074120459134170451
 Rigidbody2D:
   serializedVersion: 5
