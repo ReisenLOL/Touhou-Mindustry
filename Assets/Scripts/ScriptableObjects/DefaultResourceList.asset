@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7e8d438414a42c4e89b49128be1b55f, type: 3}
+  m_Name: DefaultResourceList
+  m_EditorClassIdentifier: 
+  resourceType:
+  - Fairy Compound
+  - Lunarian Metal
+  - Ether Dust
+  - Youkai Essence
+  - Phantom Ash
+  - Ether Crystal
+  - Youkai Alloy
+  - Glass
+  - Lunarite Alloy
+  - Spectral Steel
+  - Starsteel
+  resourceColors:
+  - {r: 1, g: 0.2558718, b: 0.14779866, a: 1}
+  - {r: 0.10782794, g: 0.72955966, b: 0.5565188, a: 1}
+  - {r: 0.59975874, g: 0.3111031, b: 0.69182384, a: 1}
+  - {r: 0.5113528, g: 0.8867924, b: 0.2983861, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
