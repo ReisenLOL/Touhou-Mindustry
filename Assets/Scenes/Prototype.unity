@@ -2009,6 +2009,7 @@ GameObject:
   - component: {fileID: 2008672075}
   - component: {fileID: 2008672077}
   - component: {fileID: 2008672076}
+  - component: {fileID: 2008672078}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2030,7 +2031,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selection: {fileID: 3090783532505855684, guid: f68ebd24612a805429486cdf496b48ee, type: 3}
   placeholderObject: {fileID: 0}
-  resourceText: {fileID: 1152934487}
   buildList:
   - {fileID: 3090783532505855684, guid: f68ebd24612a805429486cdf496b48ee, type: 3}
   - {fileID: 2780307407043551660, guid: e87a4c7465a72914bba48a7f67ddd6a9, type: 3}
@@ -2042,7 +2042,6 @@ MonoBehaviour:
   - {fileID: 6946665105900138293, guid: 9dec048c9a358024ab4e788ba88ebaf7, type: 3}
   - {fileID: 1027676862815906200, guid: 27cb1d640ea953d4bba5349d23d4002c, type: 3}
   - {fileID: 3090783532505855684, guid: 9b306259f2ea06b4e82d3efc1181a4b5, type: 3}
-  listOfResources: {fileID: 11400000, guid: ecee9d4edbfc6924caa743785bf10551, type: 2}
   objectStatText: {fileID: 320912188}
   gameOverUI: {fileID: 1768957934}
   buildingLayer:
@@ -2077,6 +2076,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyTypes:
   - {fileID: 9095487249878984731, guid: f7dca22535cf0d0478bc7172a3f62044, type: 3}
+  - {fileID: 9095487249878984731, guid: db72ce5e9929ce745aafb1fb4b357709, type: 3}
   - {fileID: 9095487249878984731, guid: 0f3a28f1df05488438407d3e04d2b666, type: 3}
   spawnPoint: {fileID: 122860242}
   waveText: {fileID: 1079464282}
@@ -2134,6 +2134,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4649493b27fc69e4688ec96a606cb19d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2008672078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2008672071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26a81196e8095724a9da55fb4cbd6c35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  listOfResources: {fileID: 11400000, guid: ecee9d4edbfc6924caa743785bf10551, type: 2}
+  resourceText: {fileID: 1152934487}
+  debugResources: 0
 --- !u!1 &2038252614
 GameObject:
   m_ObjectHideFlags: 0
@@ -2371,7 +2386,7 @@ PrefabInstance:
     - target: {fileID: 1497576368431787662, guid: 733ee6c2d9c648440bcacaa5691008b5, type: 3}
       propertyPath: projectile
       value: 
-      objectReference: {fileID: 7171157463493194127, guid: af692c3c78ae95644b68e0c0477a015a, type: 3}
+      objectReference: {fileID: 7171157463493194127, guid: 6ecabd8ac4acc0149bdde9359685bbe6, type: 3}
     - target: {fileID: 1497576368431787662, guid: 733ee6c2d9c648440bcacaa5691008b5, type: 3}
       propertyPath: damageDealt
       value: 25

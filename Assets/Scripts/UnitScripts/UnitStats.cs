@@ -14,22 +14,16 @@ public class UnitStats : MonoBehaviour
         health -= damage;
         if (health <= 0)
         {
-            if (gameObject.TryGetComponent(out PlayerController isPlayer) && isPlayer)
+            if (isPlayer)
             {
+                Debug.Log("here");
                 gameObject.transform.position = GameObject.Find("Core").transform.position;
                 health = maxHealth;
             }
             else
             {
-                if (!isPlayer)
-                {
-                    Destroy(gameObject);
-                }
-                else
-                {
-                    transform.position = GameObject.Find("Core").transform.position;
-                    health = maxHealth;
-                }
+                Debug.Log("here2");
+                Destroy(gameObject);
             }
         }
     }

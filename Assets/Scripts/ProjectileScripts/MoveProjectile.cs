@@ -39,6 +39,7 @@ public class MoveProjectile : Projectile
         {
             collision.gameObject.GetComponent<UnitStats>().TakeDamage(damage);
             Destroy(gameObject);
+            //?????? WHY IS IT MAKING THE PLAYER TAKE DAMAGE
         }
     }
 }

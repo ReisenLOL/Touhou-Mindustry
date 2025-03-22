@@ -12,86 +12,24 @@ public class GameManager : MonoBehaviour
     private bool isBuilding = false;
     private GameObject player;
     private PlayerController playerController;
+    private ResourceManager resourceManager;
     private Grid buildingGrid;
     public GameObject selection;
     private bool showPlaceholder;
     public GameObject placeholderObject;
-    [SerializeField] TextMeshProUGUI resourceText;
     public GameObject[] buildList;
-    [SerializeField] ResourceList listOfResources;
     public GameObject objectStatText;
     private GameObject buildingFolder;
     private Tilemap terrainTiles;
-    Dictionary<string, int> currentResources = new();
     private LayerMask resourceVeinLayer;
     private Vector2 selectionSize;
     [SerializeField] GameObject gameOverUI;
     [SerializeField] LayerMask buildingLayer;
-    public void AddResource(string resource, int value)
-    {
-        int resourceValue = 0;
-        if (!currentResources.ContainsKey(resource))
-        {
-            currentResources[resource] = 0;
-        }
-        if (currentResources.TryGetValue(resource, out resourceValue))
-        {
-            resourceValue += value;
-            currentResources[resource] = resourceValue;
-            Debug.Log("Added Resource: " + value + " " + resource);
-        }
-        string newValueToDisplay = "";
-        for (int i = 0; i < listOfResources.resourceType.Length; i++)
-        {
-            int getValue = CheckResourceValue(listOfResources.resourceType[i]);
-            if (getValue > 0)
-            {
-                newValueToDisplay += listOfResources.resourceType[i] + ": " + getValue + "\n";
-            }
-        }
-        resourceText.text = newValueToDisplay;
-    }
-    public bool SubtractResource(string resource, int value)
-    {
-        int resourceValue = 0;
-        if (!currentResources.ContainsKey(resource))
-        {
-            currentResources[resource] = 0;
-        }
-        if (currentResources.TryGetValue(resource, out resourceValue))
-        {
-            resourceValue -= value;
-            currentResources[resource] = resourceValue;
-            Debug.Log("Subtracted Resource: " + value + " " + resource);
-            string newValueToDisplay = "";
-            for (int i = 0; i < listOfResources.resourceType.Length; i++)
-            {
-                int getValue = CheckResourceValue(listOfResources.resourceType[i]);
-                if (getValue > 0)
-                {
-                    newValueToDisplay += listOfResources.resourceType[i] + ": " + getValue + "\n";
-                }
-            }
-            resourceText.text = newValueToDisplay;
-            return true;
-        }
-        return false;
-    }
     //wow i really think this code is inefficient but whatevs i guess
-    public int CheckResourceValue(string resource)
-    {
-        if (!currentResources.ContainsKey(resource))
-        {
-            return 0;
-        }
-        return currentResources[resource];
-    }
     void Start()
     {
         buildingFolder = GameObject.Find("BuildingFolder");
-        AddResource("Fairy Compound", 100);
-        //AddResource("Lunarian Metal", 30);
-        //AddResource("Youkai Alloy", 1000);
+        resourceManager = GetComponent<ResourceManager>();
         player = GameObject.Find("Player");
         playerController = player.GetComponent<PlayerController>();
         buildingGrid = GameObject.Find("BuildingGrid").GetComponent<Grid>();
@@ -99,6 +37,8 @@ public class GameManager : MonoBehaviour
     }
     void Update()
     {
+        // i bet i can split the building functions out from the game controller
+        // or rather probably better to just split the resource functions.
         if (isBuilding)
         {
             string[] resourceToSubtract = selection.gameObject.GetComponent<ObjectStats>().price.GetResourceName();
@@ -145,13 +85,13 @@ public class GameManager : MonoBehaviour
                 bool success = false;
                 for (int i = 0; i < resourceToSubtract.Length; i++)
                 {
-                   success = CheckResourceValue(resourceToSubtract[i]) >= cost[i];
+                   success = resourceManager.CheckResourceValue(resourceToSubtract[i]) >= cost[i];
                 }
                 if (success)
                 {
                     for (int i = 0; i < resourceToSubtract.Length; i++)
                     {
-                        SubtractResource(resourceToSubtract[i], cost[i]);
+                        resourceManager.SubtractResource(resourceToSubtract[i], cost[i]);
                     }
                     GameObject newObject;
                     if (selectionSize.x % 2 == 0)
@@ -192,7 +132,7 @@ public class GameManager : MonoBehaviour
             int[] refundAmount = hit.collider.gameObject.GetComponent<ObjectStats>().price.GetAmount();
             for (int i = 0; i < resourceToRefund.Length; i++)
             {
-                AddResource(resourceToRefund[i], refundAmount[i]);
+                resourceManager.AddResource(resourceToRefund[i], refundAmount[i]);
             }
             Destroy(hit.collider.gameObject);
         }

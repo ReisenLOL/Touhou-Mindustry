@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6946665105900138293
+--- !u!1 &9095487249878984731
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,41 +8,42 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7099086278450634652}
-  - component: {fileID: 5531943991414229418}
-  - component: {fileID: 4173158237739351258}
-  - component: {fileID: 7094906701382087823}
-  - component: {fileID: 4799012606761987385}
-  - component: {fileID: -893749390697825561}
-  m_Layer: 8
-  m_Name: Turret
-  m_TagString: Building
+  - component: {fileID: 842001738697431422}
+  - component: {fileID: 8364076191652717842}
+  - component: {fileID: 998033607910942043}
+  - component: {fileID: 375861866899256854}
+  - component: {fileID: 2128254805779394202}
+  - component: {fileID: 5949507554291975577}
+  - component: {fileID: -3733012895622000275}
+  m_Layer: 9
+  m_Name: KappaHeavyGunner
+  m_TagString: Unit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7099086278450634652
+--- !u!4 &842001738697431422
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6946665105900138293}
+  m_GameObject: {fileID: 9095487249878984731}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.29977384, y: 7.517924, z: 0}
+  m_LocalPosition: {x: 2.04, y: 5.24, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &5531943991414229418
+--- !u!212 &8364076191652717842
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6946665105900138293}
+  m_GameObject: {fileID: 9095487249878984731}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -79,8 +80,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 2323917800338813707, guid: a5c2a15cb46279645bf45eb7c4a23c1d, type: 3}
+  m_SortingOrder: 2
+  m_Sprite: {fileID: -3572592971998205411, guid: ddb816d066bc4854f8cbe7223a21fd66, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -91,31 +92,13 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4173158237739351258
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6946665105900138293}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76908d71dcba18243a6075750b1fe113, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 100
-  maxHealth: 100
-  price: {fileID: 11400000, guid: d947b76acae401843a6b0f7d612ed3b8, type: 2}
-  acceptingResources: 1
-  isCore: 0
-  gridLocation: {x: 0, y: 0}
---- !u!61 &7094906701382087823
+--- !u!61 &998033607910942043
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6946665105900138293}
+  m_GameObject: {fileID: 9095487249878984731}
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
@@ -147,7 +130,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.554, y: 0.987}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -155,15 +138,15 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!50 &4799012606761987385
+--- !u!50 &375861866899256854
 Rigidbody2D:
   serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6946665105900138293}
-  m_BodyType: 2
+  m_GameObject: {fileID: 9095487249878984731}
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -181,26 +164,60 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!114 &-893749390697825561
+  m_Constraints: 4
+--- !u!114 &2128254805779394202
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6946665105900138293}
+  m_GameObject: {fileID: 9095487249878984731}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1523090349d0f6e47822a8e67503f728, type: 3}
+  m_Script: {fileID: 11500000, guid: 81f536aec67d37344a086eb0aec55bed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ammoType: Fairy Compound
-  ammoAmount: 0
-  ammoCapacity: 10
-  UnitLayer:
+  price: {fileID: 11400000, guid: b3ce90980da8efb45a33d8326772b27a, type: 2}
+  upgradesTo: {fileID: 9095487249878984731, guid: 452b7fd81cd986a4bb340fc0508bfe30, type: 3}
+  unitTier: 1
+  health: 100
+  maxHealth: 100
+  isEnemy: 0
+  isPlayer: 0
+--- !u!114 &5949507554291975577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9095487249878984731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db3a6b263db0a58408d7a98067056624, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 4
+  lookDirection: {x: 0, y: 0, z: 0}
+  closestTarget: {fileID: 0}
+  fireRate: 8
+  damageDealt: 20
+  projectile: {fileID: 7171157463493194127, guid: 6ecabd8ac4acc0149bdde9359685bbe6, type: 3}
+--- !u!114 &-3733012895622000275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9095487249878984731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 087a8998434dd9746b76a8b01a54bce3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  range: 50
+  unitLayer:
+    serializedVersion: 2
+    m_Bits: 2688
+  playerLayer:
     serializedVersion: 2
     m_Bits: 2560
-  fireRate: 0.5
-  damageDealt: 40
-  projectile: {fileID: 7171157463493194127, guid: af692c3c78ae95644b68e0c0477a015a, type: 3}
-  range: 25

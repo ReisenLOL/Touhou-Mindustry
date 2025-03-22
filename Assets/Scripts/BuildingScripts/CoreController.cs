@@ -4,11 +4,11 @@ public class CoreController : MonoBehaviour
 {
     [SerializeField] LayerMask resourceLayer;
     [SerializeField] Transform resourceCheck;
-    [SerializeField] GameManager gameManager;
+    [SerializeField] ResourceManager resourceManager;
 
     void Start()
     {
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        resourceManager = GameObject.Find("GameManager").GetComponent<ResourceManager>();
     }
     void Update()
     {
@@ -18,7 +18,7 @@ public class CoreController : MonoBehaviour
     {
         if (collision.transform.TryGetComponent(out MinedResourceType r))
         {
-            gameManager.AddResource(r.type, 1);
+            resourceManager.AddResource(r.type, 1);
             Destroy(collision.gameObject);
         }
     }

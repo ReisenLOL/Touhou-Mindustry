@@ -14,7 +14,7 @@ public class Unloader : MonoBehaviour
     [SerializeField] GameObject templateButton;
     [SerializeField] GameObject selectionUI;
     [SerializeField] GameObject selectionUIContainer;
-    private GameManager gameManager;
+    private ResourceManager resourceManager;
     private bool outputFromCore;
     private Transform nextConveyorCheck = null;
     private int conveyorIndex = 0;
@@ -26,7 +26,7 @@ public class Unloader : MonoBehaviour
     }
     void Start()
     {
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        resourceManager = GameObject.Find("GameManager").GetComponent<ResourceManager>();
         for (int i = 0; i < conveyorChecks.Length; i++)
         {
             Collider2D conveyor = DetectConveyors(i);
@@ -67,11 +67,11 @@ public class Unloader : MonoBehaviour
             _time += Time.deltaTime;
             if (_time >= tickSpeed)
             {
-                bool success = gameManager.CheckResourceValue(selectedResource) >= 1;
+                bool success = resourceManager.CheckResourceValue(selectedResource) >= 1;
                 if (success)
                 {
                     _time = 0;
-                    gameManager.SubtractResource(selectedResource, 1);
+                    resourceManager.SubtractResource(selectedResource, 1);
                     GameObject UnloadResource = Instantiate(resourceObject, nextConveyorCheck.position, resourceObject.transform.rotation);
                     UnloadResource.GetComponent<MinedResourceType>().type = selectedResource;
                     UnloadResource.transform.SetParent(resourceFolder.transform);
