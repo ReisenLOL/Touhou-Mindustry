@@ -223,6 +223,9 @@ MonoBehaviour:
   acceptingResources: 0
   isCore: 0
   gridLocation: {x: 0, y: 0}
+  resourceTypeInput: []
+  inputAmount: 
+  category: Mine
 --- !u!1 &3324610262788126772
 GameObject:
   m_ObjectHideFlags: 0

@@ -109,6 +109,10 @@ MonoBehaviour:
   acceptingResources: 1
   isCore: 0
   gridLocation: {x: 0, y: 0}
+  resourceTypeInput:
+  - Fairy Compound
+  inputAmount: 01000000
+  category: Turret
 --- !u!61 &7094906701382087823
 BoxCollider2D:
   m_ObjectHideFlags: 0

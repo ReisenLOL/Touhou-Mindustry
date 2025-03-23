@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7bbf8aa54294dd64c82b3efffb710c0d, type: 3}
-  m_Name: RouterPrice
+  m_Name: TalismanLauncherPrice
   m_EditorClassIdentifier: 
   price:
     resourceName:
     - Fairy Compound
-    amount: 02000000
-    objectDescription: Distributes input items to 3 output directions
+    - Lunarian Metal
+    amount: 0a00000005000000
+    objectDescription: A basic turret that uses Fairy Compound for ammo.

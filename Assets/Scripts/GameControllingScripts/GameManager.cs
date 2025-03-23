@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     private Vector2 selectionSize;
     [SerializeField] GameObject gameOverUI;
     [SerializeField] LayerMask buildingLayer;
+    [SerializeField] GameObject showInfoButton;
     //wow i really think this code is inefficient but whatevs i guess
     void Start()
     {
@@ -39,6 +40,7 @@ public class GameManager : MonoBehaviour
     {
         // i bet i can split the building functions out from the game controller
         // or rather probably better to just split the resource functions.
+        // i need to figure out what's causing the horrific lag from the building, when i was testing the game out, it REALLY became laggier every time i entered build mode.
         if (isBuilding)
         {
             string[] resourceToSubtract = selection.gameObject.GetComponent<ObjectStats>().price.GetResourceName();
@@ -236,8 +238,8 @@ public class GameManager : MonoBehaviour
         {
             costDisplay += resourceToDisplay[i] + ": " + amountToDisplay[i] + "\n";
         }
-        costDisplay += selectionStats.price.GetDescription;
-        objectStatText.GetComponentInChildren<TextMeshProUGUI>().text = (costDisplay);
+        objectStatText.GetComponentInChildren<TextMeshProUGUI>().text = costDisplay;
+        showInfoButton.SetActive(true);
     }
     public GameObject GetObjectFromName(string objectName)
     {

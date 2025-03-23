@@ -178,11 +178,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   price: {fileID: 11400000, guid: b3ce90980da8efb45a33d8326772b27a, type: 2}
-  upgradesTo: {fileID: 9095487249878984731, guid: 452b7fd81cd986a4bb340fc0508bfe30, type: 3}
-  unitTier: 1
+  upgradesTo: {fileID: 9095487249878984731, guid: 0eb8fa6f562d62a44935a8e8df79cb61, type: 3}
+  unitTier: 3
   health: 100
   maxHealth: 100
   isEnemy: 0
+  isPlayer: 0
 --- !u!114 &5949507554291975577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,7 +201,7 @@ MonoBehaviour:
   closestTarget: {fileID: 0}
   fireRate: 2
   damageDealt: 10
-  projectile: {fileID: 7171157463493194127, guid: afaa007ef9eb1304892ef7fe9efe5b4e, type: 3}
+  projectile: {fileID: 7171157463493194127, guid: 0993d6338e3f5bf4d8c584c0997c787a, type: 3}
 --- !u!114 &-3733012895622000275
 MonoBehaviour:
   m_ObjectHideFlags: 0

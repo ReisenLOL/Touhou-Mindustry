@@ -162,7 +162,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3, y: 3}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -207,7 +207,11 @@ MonoBehaviour:
   maxHealth: 100
   price: {fileID: 11400000, guid: 653b3fb97501a9447a47412fb01e9b54, type: 2}
   acceptingResources: 1
+  isCore: 0
   gridLocation: {x: 0, y: 0}
+  resourceTypeInput: []
+  inputAmount: 
+  category: Conveyor
 --- !u!1 &6278683108104759808
 GameObject:
   m_ObjectHideFlags: 0

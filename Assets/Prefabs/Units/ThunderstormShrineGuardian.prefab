@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5949507554291975577}
   - component: {fileID: -3733012895622000275}
   m_Layer: 9
-  m_Name: FairyShockTrooper
+  m_Name: ThunderstormShrineGuardian
   m_TagString: Unit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -178,8 +178,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   price: {fileID: 11400000, guid: b3ce90980da8efb45a33d8326772b27a, type: 2}
-  upgradesTo: {fileID: 9095487249878984731, guid: d2d0bd5cbddddff4a95a963133092026, type: 3}
-  unitTier: 1
+  upgradesTo: {fileID: 9095487249878984731, guid: ae0111e8abad7524682e83afb764cc42, type: 3}
+  unitTier: 2
   health: 100
   maxHealth: 100
   isEnemy: 0

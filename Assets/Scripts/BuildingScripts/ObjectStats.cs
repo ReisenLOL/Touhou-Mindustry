@@ -8,6 +8,9 @@ public class ObjectStats : MonoBehaviour
     public bool acceptingResources = true;
     public bool isCore = false;
     public Vector2 gridLocation;
+    public string[] resourceTypeInput;
+    public int[] inputAmount;
+    public string category;
     public void TakeDamage(float damage)
     {
         health -= damage;

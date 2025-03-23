@@ -153,3 +153,6 @@ MonoBehaviour:
   acceptingResources: 0
   isCore: 0
   gridLocation: {x: 0, y: 0}
+  resourceTypeInput: []
+  inputAmount: 
+  category: Wall

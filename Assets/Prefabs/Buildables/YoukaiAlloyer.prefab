@@ -193,6 +193,11 @@ MonoBehaviour:
   acceptingResources: 1
   isCore: 0
   gridLocation: {x: 0, y: 0}
+  resourceTypeInput:
+  - Youkai Essence
+  - Ether Dust
+  inputAmount: 0100000001000000
+  category: Factory
 --- !u!114 &3203007226496644615
 MonoBehaviour:
   m_ObjectHideFlags: 0

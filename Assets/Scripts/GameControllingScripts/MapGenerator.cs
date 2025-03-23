@@ -20,6 +20,7 @@ public class MapGenerator : MonoBehaviour
     private bool[,] visited; // Keeps track of visited tiles
     private bool[,] walkableGrid;
     public PathfindingGrid pathfindingGrid;
+    public bool randomSeed = true;
 
     void Start()
     {
@@ -33,12 +34,17 @@ public class MapGenerator : MonoBehaviour
         oreMap = new bool[width, height];
         visited = new bool[width, height];
         walkableGrid = new bool[width, height];
+        int newNoise = 0;
+        if (randomSeed)
+        {
+            newNoise = Random.Range(0, 10000);
+        }
         // land or water
         for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < height; y++)
             {
-                float terrainValue = Mathf.PerlinNoise(x / terrainScale, y / terrainScale);
+                float terrainValue = Mathf.PerlinNoise((x + newNoise) / terrainScale, (y + newNoise) / terrainScale);
                 Vector3Int tilePosition = new Vector3Int(x, y, 0);
                 if (terrainValue > 0.2f)
                 {
@@ -65,7 +71,7 @@ public class MapGenerator : MonoBehaviour
                 Vector3Int tilePosition = new Vector3Int(x, y, 0);
                 if (tileMap.GetTile(tilePosition) == groundTile)
                 {
-                    float oreValue = Mathf.PerlinNoise(x / oreScale, y / oreScale);
+                    float oreValue = Mathf.PerlinNoise((x + newNoise)/ oreScale, (y + newNoise) / oreScale);
                     if (oreValue > 0.75f)
                     {
                         oreMap[x, y] = true;
@@ -92,7 +98,7 @@ public class MapGenerator : MonoBehaviour
                 Vector3Int tilePosition = new Vector3Int(x, y, 0);
                 if (tileMap.GetTile(tilePosition) == groundTile)
                 {
-                    float wallValue = Mathf.PerlinNoise(x / wallScale, y / wallScale);
+                    float wallValue = Mathf.PerlinNoise((x + newNoise) / wallScale, (y + newNoise) / wallScale);
                     if (wallValue > 0.7f)
                     {
                         tileMap.SetTile(tilePosition, walltile);

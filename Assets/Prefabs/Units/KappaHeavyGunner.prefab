@@ -178,7 +178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   price: {fileID: 11400000, guid: b3ce90980da8efb45a33d8326772b27a, type: 2}
-  upgradesTo: {fileID: 9095487249878984731, guid: 452b7fd81cd986a4bb340fc0508bfe30, type: 3}
+  upgradesTo: {fileID: 9095487249878984731, guid: 7b9870ad515a4e441bcc698a32b7d38f, type: 3}
   unitTier: 1
   health: 100
   maxHealth: 100

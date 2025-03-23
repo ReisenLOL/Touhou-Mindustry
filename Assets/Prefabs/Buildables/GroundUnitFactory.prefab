@@ -314,7 +314,7 @@ GameObject:
   - component: {fileID: 7469002549742721357}
   - component: {fileID: 7665130927648974664}
   m_Layer: 8
-  m_Name: UnitFactory
+  m_Name: GroundUnitFactory
   m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -413,6 +413,11 @@ MonoBehaviour:
   acceptingResources: 1
   isCore: 0
   gridLocation: {x: 0, y: 0}
+  resourceTypeInput:
+  - Youkai Alloy
+  - Lunarian Metal
+  inputAmount: 1e0000000f000000
+  category: Unit
 --- !u!61 &3834759252301589395
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -501,6 +506,7 @@ MonoBehaviour:
   unitList:
   - {fileID: 9095487249878984731, guid: f7dca22535cf0d0478bc7172a3f62044, type: 3}
   - {fileID: 9095487249878984731, guid: f60138526d01044489200886147f14c3, type: 3}
+  - {fileID: 9095487249878984731, guid: db72ce5e9929ce745aafb1fb4b357709, type: 3}
   selectionBox: {fileID: 6561851893192117442}
   templateButton: {fileID: 7864704736967143846}
   selectionUI: {fileID: 2354193141948580118}
