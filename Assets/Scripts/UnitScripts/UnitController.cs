@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class UnitController : MonoBehaviour
 {
-    [SerializeField] float speed;
+    public float speed;
     private Rigidbody2D rb;
     public Vector3 lookDirection;
     public GameObject closestTarget;
@@ -11,8 +11,8 @@ public class UnitController : MonoBehaviour
     public float fireRate;
     public float damageDealt;
     private UnitStats unitStats;
-    private float range;
-    [SerializeField] GameObject projectile;
+    public float range;
+    public GameObject projectile;
     private SpriteRenderer unitSpriteRenderer;
     private bool isFacingRight = true;
     void Start()

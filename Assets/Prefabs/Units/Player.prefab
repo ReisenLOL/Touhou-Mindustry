@@ -316,12 +316,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   fireRate: 0.4
-  health: 100
   projectile: {fileID: 7171157463493194127, guid: afaa007ef9eb1304892ef7fe9efe5b4e, type: 3}
   damageDealt: 25
   range: 50
   coreType: Core
   canShoot: 1
+  newPlayer: {fileID: 5821555672903897639}
 --- !u!114 &8652047656516896779
 MonoBehaviour:
   m_ObjectHideFlags: 0

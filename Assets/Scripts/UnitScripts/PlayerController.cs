@@ -5,15 +5,13 @@ using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] float speed;
-    [SerializeField] float fireRate;
-    public float health = 100;
+    public float speed;
+    public float fireRate;
     private Rigidbody2D rb;
     private Vector2 moveInput;
-    [SerializeField] GameObject projectile;
-    private Vector3 mousePos;
-    [SerializeField] float damageDealt;
-    [SerializeField] float range;
+    public GameObject projectile;
+    public float damageDealt;
+    public float range;
     // i gotta find a better name, something fitting for the core
     // i have an idea - what if there were multiple types of cores with different stuff
     // if i use that idea, then i guess ill use the word core
@@ -26,8 +24,12 @@ public class PlayerController : MonoBehaviour
     private Camera playerCam;
     private bool isFacingRight = true;
     private SpriteRenderer playerSpriteRenderer;
+    private GameObject playerCamera;
+    public GameObject newPlayer;
+    public bool hasFired = false;
     void Start()
     {
+        playerCamera = GameObject.Find("Camera");
         playerSpriteRenderer = base.GetComponent<SpriteRenderer>();
         playerCam = GameObject.Find("Camera").GetComponent<Camera>();
         core = GameObject.Find(coreType);
@@ -35,12 +37,16 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
-        mousePos = Input.mousePosition;
         moveInput.x = Input.GetAxisRaw("Horizontal");
         moveInput.y = Input.GetAxisRaw("Vertical");
         moveInput.Normalize();
-        fireRateTime += Time.deltaTime;
-        if ((Input.GetMouseButtonDown(0) || Input.GetMouseButton(0)) && canShoot && !EventSystem.current.IsPointerOverGameObject())
+        if (hasFired)
+        {
+            fireRateTime += Time.deltaTime;
+            //this should not be this confusing....
+            //guess we'll just pause for now!
+        }
+        if (Input.GetMouseButton(0) && canShoot && !EventSystem.current.IsPointerOverGameObject())
         {
             if (fireRateTime >= fireRate)
             {
@@ -56,8 +62,43 @@ public class PlayerController : MonoBehaviour
                 projectileStats.RotateToTarget(worldPos);
                 projectileStats.isEnemyBullet = false;
                 projectileStats.maxRange = range;
+                hasFired = true;
             }
         }
+        if (Input.GetKey(KeyCode.LeftControl) && Input.GetMouseButtonDown(0))
+        {
+            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+            if (hit && hit.transform.gameObject.CompareTag("Unit"))
+            {
+                GameObject unitToSwitchTo = hit.transform.gameObject;
+                UnitStats unitStats = unitToSwitchTo.GetComponent<UnitStats>();
+                UnitController unitController = unitToSwitchTo.GetComponent<UnitController>();
+                if (!unitStats.isEnemy && !unitStats.isPlayer)
+                {
+                    unitStats.isPlayer = true;
+                    unitToSwitchTo.AddComponent<PlayerController>();
+                    playerCamera.transform.parent = unitToSwitchTo.transform;
+                    playerCamera.transform.position = unitToSwitchTo.transform.position + new Vector3(0, 0, -10);
+                    PlayerController newPlayerController = unitToSwitchTo.GetComponent<PlayerController>();
+                    newPlayerController.speed = unitController.speed;
+                    newPlayerController.projectile = unitController.projectile;
+                    newPlayerController.range = unitController.range;
+                    newPlayerController.damageDealt = unitController.damageDealt;
+                    newPlayerController.fireRate = unitController.fireRate;
+                    newPlayerController.coreType = coreType;
+                    newPlayerController.newPlayer = newPlayer;
+                    Destroy(unitController);
+                    Destroy(unitToSwitchTo.GetComponent<UnitTargetter>());
+                    Destroy(gameObject);
+                }
+            }
+        }
+        /*if (Input.GetKeyDown(KeyCode.V))
+        {
+            GameObject RespawnPlayer = Instantiate(newPlayer);
+            RespawnPlayer.transform.position = core.transform.position;
+            Destroy(gameObject);
+        }*/
         if (playerCam.orthographicSize > 1f || playerCam.orthographicSize > 0f && Input.mouseScrollDelta.y < 0)
         {
             playerCam.orthographicSize -= Input.mouseScrollDelta.y / 2;
@@ -77,8 +118,6 @@ public class PlayerController : MonoBehaviour
             this.isFacingRight = !this.isFacingRight;
         }
     }
-
-    // Update is called once per frame
     void FixedUpdate()
     {
         rb.linearVelocity = moveInput * speed;

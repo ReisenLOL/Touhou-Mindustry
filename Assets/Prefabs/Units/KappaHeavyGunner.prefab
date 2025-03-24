@@ -199,8 +199,9 @@ MonoBehaviour:
   speed: 4
   lookDirection: {x: 0, y: 0, z: 0}
   closestTarget: {fileID: 0}
-  fireRate: 8
+  fireRate: 4
   damageDealt: 20
+  range: 0
   projectile: {fileID: 7171157463493194127, guid: 6ecabd8ac4acc0149bdde9359685bbe6, type: 3}
 --- !u!114 &-3733012895622000275
 MonoBehaviour:
