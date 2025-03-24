@@ -347,6 +347,7 @@ MonoBehaviour:
   gridLocation: {x: 0, y: 0}
   resourceTypeInput: []
   inputAmount: 
+  category: Factory
 --- !u!114 &4276254792362970210
 MonoBehaviour:
   m_ObjectHideFlags: 0

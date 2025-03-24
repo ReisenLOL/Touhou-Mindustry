@@ -141,6 +141,7 @@ public class GameManager : MonoBehaviour
         else if (Input.GetMouseButtonDown(1) && isBuilding)
         {
             SetBuildMode(selection.name);
+            showInfoButton.SetActive(false);
         }
         if (!isBuilding)
         {

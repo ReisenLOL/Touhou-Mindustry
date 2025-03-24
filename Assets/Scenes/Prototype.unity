@@ -3292,6 +3292,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 44572f6ca97ec0943a9fd5499c9199a7, type: 2}
   walltile: {fileID: 11400000, guid: 3a68c500f86bc5a4eaff79cf7276cc87, type: 2}
   pathfindingGrid: {fileID: 2008672077}
+  randomSeed: 1
 --- !u!114 &2008672076
 MonoBehaviour:
   m_ObjectHideFlags: 0
