@@ -3399,7 +3399,7 @@ MonoBehaviour:
   - {fileID: 9095487249878984731, guid: 0f3a28f1df05488438407d3e04d2b666, type: 3}
   spawnPoint: {fileID: 122860242}
   waveText: {fileID: 1079464282}
-  waveDuration: 80
+  waveDuration: 5
 --- !u!114 &2008672075
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class UnitTargetter : MonoBehaviour
@@ -29,6 +30,10 @@ public class UnitTargetter : MonoBehaviour
     {
         if (isEnemy)
         {
+            if (player == null)
+            {
+                player = FindFirstObjectByType<PlayerController>().gameObject;
+            }
             float distanceToPlayer = Vector3.SqrMagnitude(player.transform.position - transform.position);
             float distanceToCore = Vector3.SqrMagnitude(core.transform.position - transform.position);
             if (distanceToPlayer < distanceToCore)
