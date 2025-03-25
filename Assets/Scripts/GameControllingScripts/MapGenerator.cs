@@ -9,12 +9,14 @@ public class MapGenerator : MonoBehaviour
     public float terrainScale = 10f; // Scale of Perlin noise
     public float oreScale = 15f;  // Different scale for ore veins
     public float wallScale = 8f;  // Walls should appear in patches
+    public float oreTypeScale = 10f;
 
     public Tilemap tileMap;
     public TileBase groundTile;
     public TileBase waterTile;
     public TileBase deepWaterTile;
     public TileBase[] oreTiles;
+    public int[] oreWeights;
     public TileBase walltile;
     private bool[,] oreMap; // Stores where ore should be placed
     private bool[,] visited; // Keeps track of visited tiles
@@ -85,7 +87,7 @@ public class MapGenerator : MonoBehaviour
             {
                 if (oreMap[x, y] && !visited[x, y])
                 {
-                    TileBase oreType = oreTiles[Random.Range(0, oreTiles.Length)];
+                    TileBase oreType = GetWeightedRandomOre();
                     FloodFillOrePatch(x, y, oreType);
                 }
             }
@@ -140,5 +142,26 @@ public class MapGenerator : MonoBehaviour
     {
         return walkableGrid;
     }
+    TileBase GetWeightedRandomOre()
+    {
+        int totalWeight = 0;
+        foreach (int weight in oreWeights)
+        {
+            totalWeight += weight;
+        }
 
+        int randomValue = Random.Range(0, totalWeight);
+        int sum = 0;
+
+        for (int i = 0; i < oreTiles.Length; i++)
+        {
+            sum += oreWeights[i];
+            if (randomValue < sum)
+            {
+                return oreTiles[i];
+            }
+        }
+
+        return oreTiles[0]; // Fallback (should never reach)
+    }
 }

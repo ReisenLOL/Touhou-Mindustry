@@ -10,8 +10,8 @@ public class GameManager : MonoBehaviour
 {
     private Vector3 rotationAmount = new Vector3 (0, 0, 0);
     private bool isBuilding = false;
-    private GameObject player;
-    private PlayerController playerController;
+    public GameObject player;
+    public PlayerController playerController;
     private ResourceManager resourceManager;
     private Grid buildingGrid;
     public GameObject selection;
@@ -26,6 +26,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject gameOverUI;
     [SerializeField] LayerMask buildingLayer;
     [SerializeField] GameObject showInfoButton;
+    public GameObject newPlayer;
+    private bool isConstructingObject;
+    private float constructionTime;
+    // oh man this is gonna take awhile....
+    //Queue<GameObject> buildingQueue = new Queue<GameObject>();
+    
     //wow i really think this code is inefficient but whatevs i guess
     void Start()
     {
@@ -91,6 +97,8 @@ public class GameManager : MonoBehaviour
                 }
                 if (success)
                 {
+                    //buildingQueue.Enqueue(selection);
+                    //isConstructingObject = true;
                     for (int i = 0; i < resourceToSubtract.Length; i++)
                     {
                         resourceManager.SubtractResource(resourceToSubtract[i], cost[i]);

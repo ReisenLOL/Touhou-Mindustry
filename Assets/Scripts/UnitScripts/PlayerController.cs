@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     public GameObject projectile;
     public float damageDealt;
     public float range;
+    [SerializeField] GameManager gameManager;
     // i gotta find a better name, something fitting for the core
     // i have an idea - what if there were multiple types of cores with different stuff
     // if i use that idea, then i guess ill use the word core
@@ -25,10 +26,12 @@ public class PlayerController : MonoBehaviour
     private bool isFacingRight = true;
     private SpriteRenderer playerSpriteRenderer;
     private GameObject playerCamera;
-    public GameObject newPlayer;
+    private GameObject newPlayer;
     public bool hasFired = false;
     void Start()
     {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        newPlayer = gameManager.newPlayer;
         playerCamera = GameObject.Find("Camera");
         playerSpriteRenderer = base.GetComponent<SpriteRenderer>();
         playerCam = GameObject.Find("Camera").GetComponent<Camera>();
@@ -43,8 +46,11 @@ public class PlayerController : MonoBehaviour
         if (hasFired)
         {
             fireRateTime += Time.deltaTime;
-            //this should not be this confusing....
-            //guess we'll just pause for now!
+            //wait i think this already works? because if the player has already fired then theres no need to set it back to false as it will always be under? I DONT KNOW????
+        }
+        else
+        {
+            fireRateTime += fireRate;
         }
         if (Input.GetMouseButton(0) && canShoot && !EventSystem.current.IsPointerOverGameObject())
         {
@@ -86,19 +92,27 @@ public class PlayerController : MonoBehaviour
                     newPlayerController.damageDealt = unitController.damageDealt;
                     newPlayerController.fireRate = unitController.fireRate;
                     newPlayerController.coreType = coreType;
-                    newPlayerController.newPlayer = newPlayer;
+                    unitToSwitchTo.tag = "Player";
+                    unitToSwitchTo.layer = (LayerMask.NameToLayer("Player")); //player layer can walk on walls, if ground unit then this shouldnt be possible
+                    gameManager.player = unitToSwitchTo;
+                    gameManager.playerController = newPlayerController;
                     Destroy(unitController);
                     Destroy(unitToSwitchTo.GetComponent<UnitTargetter>());
                     Destroy(gameObject);
                 }
             }
         }
-        /*if (Input.GetKeyDown(KeyCode.V))
+        if (Input.GetKeyDown(KeyCode.V))
         {
             GameObject RespawnPlayer = Instantiate(newPlayer);
+            gameManager.player = RespawnPlayer;
+            gameManager.playerController = RespawnPlayer.GetComponent<PlayerController>();
             RespawnPlayer.transform.position = core.transform.position;
+            Destroy(RespawnPlayer.transform.Find("Camera").gameObject);
+            playerCamera.transform.parent = RespawnPlayer.transform;
+            playerCamera.transform.position = RespawnPlayer.transform.position + new Vector3(0, 0, -10);
             Destroy(gameObject);
-        }*/
+        }
         if (playerCam.orthographicSize > 1f || playerCam.orthographicSize > 0f && Input.mouseScrollDelta.y < 0)
         {
             playerCam.orthographicSize -= Input.mouseScrollDelta.y / 2;

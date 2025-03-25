@@ -9,6 +9,8 @@ public class UnitStats : MonoBehaviour
     public float maxHealth;
     public bool isEnemy = false;
     public bool isPlayer = false;
+    public float buildSpeed;
+    public bool capableOfBuilding;
     public void TakeDamage(float damage)
     {
         health -= damage;

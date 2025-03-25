@@ -473,67 +473,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 309353613}
   m_CullTransparentMesh: 1
---- !u!1001 &316259252
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 842001738697431422, guid: db72ce5e9929ce745aafb1fb4b357709, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 136.3679
-      objectReference: {fileID: 0}
-    - target: {fileID: 842001738697431422, guid: db72ce5e9929ce745aafb1fb4b357709, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 107.09394
-      objectReference: {fileID: 0}
-    - target: {fileID: 842001738697431422, guid: db72ce5e9929ce745aafb1fb4b357709, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 842001738697431422, guid: db72ce5e9929ce745aafb1fb4b357709, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 842001738697431422, guid: db72ce5e9929ce745aafb1fb4b357709, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 842001738697431422, guid: db72ce5e9929ce745aafb1fb4b357709, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 842001738697431422, guid: db72ce5e9929ce745aafb1fb4b357709, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 842001738697431422, guid: db72ce5e9929ce745aafb1fb4b357709, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 842001738697431422, guid: db72ce5e9929ce745aafb1fb4b357709, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 842001738697431422, guid: db72ce5e9929ce745aafb1fb4b357709, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5949507554291975577, guid: db72ce5e9929ce745aafb1fb4b357709, type: 3}
-      propertyPath: range
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 9095487249878984731, guid: db72ce5e9929ce745aafb1fb4b357709, type: 3}
-      propertyPath: m_Name
-      value: KappaHeavyGunner
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: db72ce5e9929ce745aafb1fb4b357709, type: 3}
 --- !u!1 &320912188
 GameObject:
   m_ObjectHideFlags: 0
@@ -3405,6 +3344,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96b029c39e4df9b4b84b3634675f6095, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  playerController: {fileID: 0}
   selection: {fileID: 3090783532505855684, guid: f68ebd24612a805429486cdf496b48ee, type: 3}
   placeholderObject: {fileID: 0}
   buildList:
@@ -3424,6 +3365,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1280
   showInfoButton: {fileID: 844136506}
+  newPlayer: {fileID: 5821555672903897639, guid: 733ee6c2d9c648440bcacaa5691008b5, type: 3}
 --- !u!4 &2008672073
 Transform:
   m_ObjectHideFlags: 0
@@ -3475,6 +3417,7 @@ MonoBehaviour:
   terrainScale: 10
   oreScale: 15
   wallScale: 8
+  oreTypeScale: 10
   tileMap: {fileID: 329545280}
   groundTile: {fileID: 11400000, guid: 88a629cc38537c944b4586fcc212e6ee, type: 2}
   waterTile: {fileID: 11400000, guid: 3a4b5a31c5470be4e90c4226925a0c28, type: 2}
@@ -3484,6 +3427,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fa1ded61284546341a38262109a98468, type: 2}
   - {fileID: 11400000, guid: 01999645ffc0dfb46b52a2369a07afdd, type: 2}
   - {fileID: 11400000, guid: 44572f6ca97ec0943a9fd5499c9199a7, type: 2}
+  oreWeights: 2d000000190000000f0000000f000000
   walltile: {fileID: 11400000, guid: 3a68c500f86bc5a4eaff79cf7276cc87, type: 2}
   pathfindingGrid: {fileID: 2008672077}
   randomSeed: 1
@@ -3848,4 +3792,3 @@ SceneRoots:
   - {fileID: 1254498811}
   - {fileID: 752283492}
   - {fileID: 2051939966}
-  - {fileID: 316259252}
