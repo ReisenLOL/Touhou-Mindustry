@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2128254805779394202}
   - component: {fileID: 5949507554291975577}
   - component: {fileID: -3733012895622000275}
+  - component: {fileID: -3364954618737951981}
   m_Layer: 9
   m_Name: CelestialRaycaster
   m_TagString: Unit
@@ -179,11 +180,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   price: {fileID: 11400000, guid: b3ce90980da8efb45a33d8326772b27a, type: 2}
   upgradesTo: {fileID: 9095487249878984731, guid: a908d68af09e3924a89649866fa78801, type: 3}
+  unitType: {fileID: 11400000, guid: aa8d56147620e584c85c23b3048bcb3f, type: 2}
   unitTier: 4
   health: 100
   maxHealth: 100
   isEnemy: 0
   isPlayer: 0
+  buildSpeed: 0
+  capableOfBuilding: 0
 --- !u!114 &5949507554291975577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,12 +200,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db3a6b263db0a58408d7a98067056624, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 4
   lookDirection: {x: 0, y: 0, z: 0}
   closestTarget: {fileID: 0}
-  fireRate: 2
-  damageDealt: 10
-  projectile: {fileID: 7171157463493194127, guid: 0993d6338e3f5bf4d8c584c0997c787a, type: 3}
 --- !u!114 &-3733012895622000275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,3 +221,25 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 2560
+--- !u!195 &-3364954618737951981
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9095487249878984731}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.2857143
+  m_Speed: 4
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1.1961905
+  m_BaseOffset: 0.59809524
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4

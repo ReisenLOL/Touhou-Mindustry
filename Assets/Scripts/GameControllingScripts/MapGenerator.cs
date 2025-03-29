@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using NavMeshPlus.Components;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -23,12 +24,13 @@ public class MapGenerator : MonoBehaviour
     private bool[,] walkableGrid;
     public PathfindingGrid pathfindingGrid;
     public bool randomSeed = true;
+    public NavMeshSurface navMeshSurface;
 
     void Start()
     {
         pathfindingGrid = GetComponent<PathfindingGrid>();
         GenerateMap();
-        pathfindingGrid.InitializeGrid(walkableGrid);
+        navMeshSurface.BuildNavMesh();
     }
 
     void GenerateMap()

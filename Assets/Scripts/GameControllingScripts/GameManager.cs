@@ -1,6 +1,7 @@
 using Core.Extensions;
 using System.Collections.Generic;
 using TMPro;
+using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;

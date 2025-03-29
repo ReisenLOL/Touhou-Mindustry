@@ -4,6 +4,7 @@ public class UnitStats : MonoBehaviour
 {
     public UnitPrice price;
     public GameObject upgradesTo;
+    public UnitType unitType;
     public int unitTier;
     public float health;
     public float maxHealth;
@@ -18,13 +19,11 @@ public class UnitStats : MonoBehaviour
         {
             if (isPlayer)
             {
-                Debug.Log("here");
                 gameObject.transform.position = GameObject.Find("Core").transform.position;
                 health = maxHealth;
             }
             else
             {
-                Debug.Log("here2");
                 Destroy(gameObject);
             }
         }

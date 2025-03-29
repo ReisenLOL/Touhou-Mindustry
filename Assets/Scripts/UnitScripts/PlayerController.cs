@@ -5,13 +5,13 @@ using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed;
-    public float fireRate;
+    private float speed;
+    private float fireRate;
     private Rigidbody2D rb;
     private Vector2 moveInput;
-    public GameObject projectile;
-    public float damageDealt;
-    public float range;
+    private GameObject projectile;
+    private float damageDealt;
+    private float range;
     [SerializeField] GameManager gameManager;
     // i gotta find a better name, something fitting for the core
     // i have an idea - what if there were multiple types of cores with different stuff
@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
     private GameObject playerCamera;
     private GameObject newPlayer;
     public bool hasFired = false;
+    private UnitType unitType;
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -37,6 +38,12 @@ public class PlayerController : MonoBehaviour
         playerCam = GameObject.Find("Camera").GetComponent<Camera>();
         core = GameObject.Find(coreType);
         rb = GetComponent<Rigidbody2D>();
+        unitType = GetComponent<UnitStats>().unitType;
+        damageDealt = unitType.damageDealt;
+        projectile = unitType.projectile;
+        range = unitType.range;
+        fireRate = unitType.fireRate;
+        speed = unitType.speed;
     }
     private void Update()
     {
@@ -86,11 +93,6 @@ public class PlayerController : MonoBehaviour
                     playerCamera.transform.parent = unitToSwitchTo.transform;
                     playerCamera.transform.position = unitToSwitchTo.transform.position + new Vector3(0, 0, -10);
                     PlayerController newPlayerController = unitToSwitchTo.GetComponent<PlayerController>();
-                    newPlayerController.speed = unitController.speed;
-                    newPlayerController.projectile = unitController.projectile;
-                    newPlayerController.range = unitController.range;
-                    newPlayerController.damageDealt = unitController.damageDealt;
-                    newPlayerController.fireRate = unitController.fireRate;
                     newPlayerController.coreType = coreType;
                     unitToSwitchTo.tag = "Player";
                     unitToSwitchTo.layer = (LayerMask.NameToLayer("Player")); //player layer can walk on walls, if ground unit then this shouldnt be possible

@@ -314,14 +314,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 592c6d5d2a4338046836065f897cca44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  fireRate: 0.4
-  projectile: {fileID: 7171157463493194127, guid: afaa007ef9eb1304892ef7fe9efe5b4e, type: 3}
-  damageDealt: 25
-  range: 50
+  gameManager: {fileID: 0}
   coreType: Core
   canShoot: 1
-  newPlayer: {fileID: 5821555672903897639}
+  hasFired: 0
 --- !u!114 &8652047656516896779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -336,8 +332,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   price: {fileID: 0}
   upgradesTo: {fileID: 0}
+  unitType: {fileID: 11400000, guid: 6ae7d5c83e35c8b48a795371e30a5203, type: 2}
   unitTier: 0
   health: 100
   maxHealth: 100
   isEnemy: 0
   isPlayer: 1
+  buildSpeed: 0
+  capableOfBuilding: 0

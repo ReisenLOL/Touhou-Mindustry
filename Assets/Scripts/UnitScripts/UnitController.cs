@@ -3,16 +3,17 @@ using UnityEngine;
 
 public class UnitController : MonoBehaviour
 {
-    public float speed;
+    private float speed;
     private Rigidbody2D rb;
     public Vector3 lookDirection;
     public GameObject closestTarget;
     private float fireRateTime;
-    public float fireRate;
-    public float damageDealt;
+    private float fireRate;
+    private float damageDealt;
     private UnitStats unitStats;
-    public float range;
-    public GameObject projectile;
+    private UnitType unitType;
+    private float range;
+    private GameObject projectile;
     private SpriteRenderer unitSpriteRenderer;
     private bool isFacingRight = true;
     void Start()
@@ -21,6 +22,12 @@ public class UnitController : MonoBehaviour
         unitSpriteRenderer = base.GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         unitStats = GetComponent<UnitStats>();
+        unitType = unitStats.unitType;
+        damageDealt = unitType.damageDealt;
+        projectile = unitType.projectile;
+        range = unitType.range;
+        fireRate = unitType.fireRate;
+        speed = unitType.speed;
     }
 
     void Update()

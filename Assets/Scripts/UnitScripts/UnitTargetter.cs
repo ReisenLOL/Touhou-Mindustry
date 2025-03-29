@@ -1,5 +1,5 @@
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class UnitTargetter : MonoBehaviour
 {
@@ -15,6 +15,7 @@ public class UnitTargetter : MonoBehaviour
     [SerializeField] LayerMask unitLayer;
     [SerializeField] LayerMask playerLayer;
     private bool isEnemy;
+    NavMeshAgent agent;
     void Start()
     {
         core = GameObject.Find("Core");
@@ -24,13 +25,17 @@ public class UnitTargetter : MonoBehaviour
         unitStats = GetComponent<UnitStats>();
         isEnemy = unitStats.isEnemy;
         closestTarget = this.gameObject;
+        agent = GetComponent<NavMeshAgent>();
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
     }
 
     void Update()
     {
         if (isEnemy)
         {
-            if (player == null)
+            agent.SetDestination(core.transform.position);
+            /*if (player == null)
             {
                 player = FindFirstObjectByType<PlayerController>().gameObject;
             }
@@ -45,14 +50,17 @@ public class UnitTargetter : MonoBehaviour
             {
                 lookDirection = (core.transform.position - transform.position).normalized;
                 unitController.lookDirection = lookDirection;
-            }
+            }*/
         }
-        else
+        else if (closestTarget != null)
         {
             lookDirection = (closestTarget.transform.position - transform.position).normalized;
             unitController.lookDirection = lookDirection;
         }
-
+        else
+        {
+            Debug.LogWarning("HOW"); //uh i think thats fixed
+        }
         targetList = DetectTargets();
         if (targetList.Length == 0 || closestTarget == null)
         {

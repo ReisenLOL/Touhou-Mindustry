@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2128254805779394202}
   - component: {fileID: 5949507554291975577}
   - component: {fileID: -3733012895622000275}
+  - component: {fileID: 1288324355558544976}
   m_Layer: 11
   m_Name: AirUnit
   m_TagString: Unit
@@ -179,10 +180,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   price: {fileID: 11400000, guid: d0f4b284a5b0b134e88017cfb826e7c8, type: 2}
   upgradesTo: {fileID: 0}
+  unitType: {fileID: 11400000, guid: ffa949bf5f7982446a75204845a61aac, type: 2}
   unitTier: 1
   health: 100
   maxHealth: 100
   isEnemy: 0
+  isPlayer: 0
+  buildSpeed: 0
+  capableOfBuilding: 0
 --- !u!114 &5949507554291975577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,12 +200,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db3a6b263db0a58408d7a98067056624, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 4
   lookDirection: {x: 0, y: 0, z: 0}
   closestTarget: {fileID: 0}
-  fireRate: 4
-  damageDealt: 10
-  projectile: {fileID: 7171157463493194127, guid: af692c3c78ae95644b68e0c0477a015a, type: 3}
 --- !u!114 &-3733012895622000275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,3 +221,25 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 2560
+--- !u!195 &1288324355558544976
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9095487249878984731}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 4
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1
+  m_BaseOffset: 0.5
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
