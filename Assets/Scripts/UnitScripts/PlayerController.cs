@@ -65,7 +65,6 @@ public class PlayerController : MonoBehaviour
             {
                 fireRateTime = 0;
                 GameObject newProjectile = Instantiate(projectile, transform.position, projectile.transform.rotation); // this is stupid WOW THAT WORKED?!
-                newProjectile.transform.parent = transform;
                 Projectile projectileStats = newProjectile.GetComponent<Projectile>();
                 projectileStats.firedFrom = gameObject;
                 projectileStats.damage = damageDealt;

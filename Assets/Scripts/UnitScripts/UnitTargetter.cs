@@ -11,7 +11,6 @@ public class UnitTargetter : MonoBehaviour
     private GameObject closestTarget;
     private UnitController unitController;
     private UnitStats unitStats;
-    public float range;
     [SerializeField] LayerMask unitLayer;
     [SerializeField] LayerMask playerLayer;
     private bool isEnemy;
@@ -26,6 +25,7 @@ public class UnitTargetter : MonoBehaviour
         isEnemy = unitStats.isEnemy;
         closestTarget = this.gameObject;
         agent = GetComponent<NavMeshAgent>();
+        agent.speed = unitStats.unitType.speed;
         agent.updateRotation = false;
         agent.updateUpAxis = false;
     }
@@ -89,8 +89,8 @@ public class UnitTargetter : MonoBehaviour
     {
         if (isEnemy)
         {
-            return Physics2D.OverlapCircleAll(transform.position, range, ~unitLayer);
+            return Physics2D.OverlapCircleAll(transform.position, unitStats.unitType.range, ~unitLayer);
         }
-        return Physics2D.OverlapCircleAll(transform.position, range, playerLayer);
+        return Physics2D.OverlapCircleAll(transform.position, unitStats.unitType.range, playerLayer);
     }
 }

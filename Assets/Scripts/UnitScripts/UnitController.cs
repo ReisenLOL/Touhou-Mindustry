@@ -18,7 +18,6 @@ public class UnitController : MonoBehaviour
     private bool isFacingRight = true;
     void Start()
     {
-        range = GetComponent<UnitTargetter>().range;
         unitSpriteRenderer = base.GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         unitStats = GetComponent<UnitStats>();
@@ -38,7 +37,6 @@ public class UnitController : MonoBehaviour
             fireRateTime -= fireRateTime;
             //wow i need to figure this out, how do i do multiple projectile types that have a different... I GUESS IT WORKS FOR BOTH PROJECTILES RN?? wait no it doesnt, i need it to raycast the length then- could i just do it from the start of the lightning projectile?
             GameObject newProjectile = Instantiate(projectile, transform.position, projectile.transform.rotation);
-            newProjectile.transform.parent = transform;
             Projectile projectileStats = newProjectile.GetComponent<Projectile>();
             projectileStats.firedFrom = gameObject;
             projectileStats.damage = damageDealt;

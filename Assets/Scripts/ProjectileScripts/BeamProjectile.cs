@@ -9,6 +9,7 @@ public class BeamProjectile : Projectile
     [SerializeField] float beamTime;
     private void Start()
     {
+        transform.parent = firedFrom.transform;
         transform.localScale = new Vector2(BeamLength, transform.localScale.y);
         transform.Translate(Vector2.right * BeamLength / 2);
     }

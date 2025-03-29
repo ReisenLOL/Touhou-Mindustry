@@ -10,6 +10,7 @@ public class LightningProjectile : Projectile
     private void Start()
     {
         RaycastHit2D[] hit = Physics2D.RaycastAll(transform.position, directionOfTarget, lightningLength, AttackLayers);
+        transform.parent = firedFrom.transform;
         transform.localScale = new Vector2(lightningLength, transform.localScale.y);
         transform.Translate(Vector2.right * lightningLength/2); //...how the hell do i make the lightning effect ...i guess ill just do sprites that look like lightning for now
         if (hit != null)
