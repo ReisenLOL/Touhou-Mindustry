@@ -3327,7 +3327,6 @@ GameObject:
   - component: {fileID: 1911079653}
   - component: {fileID: 1911079652}
   - component: {fileID: 1911079651}
-  - component: {fileID: 1911079650}
   m_Layer: 5
   m_Name: BuildContainer
   m_TagString: Untagged
@@ -3354,22 +3353,6 @@ RectTransform:
   m_AnchoredPosition: {x: -375, y: 200}
   m_SizeDelta: {x: 250, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1911079650
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1911079648}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f8c8ae4ca088a941b0cb1adf4671f4f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  templateButton: {fileID: 1596148317520973887, guid: 336e3cde3b8834b419484ac296d9e1fc, type: 3}
-  categoryContainerUI: {fileID: 0}
-  buildingCategories: []
-  categoryImages: []
 --- !u!114 &1911079651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3494,6 +3477,9 @@ MonoBehaviour:
   - {fileID: 3090783532505855684, guid: ec70aaccefce46c49a5ea93aa346a6af, type: 3}
   - {fileID: 6946665105900138293, guid: 9dec048c9a358024ab4e788ba88ebaf7, type: 3}
   - {fileID: 1027676862815906200, guid: 27cb1d640ea953d4bba5349d23d4002c, type: 3}
+  - {fileID: 2780307407043551660, guid: 5c1dcff70cb5837409016f6592973360, type: 3}
+  - {fileID: 3090783532505855684, guid: 8204fddc6a5b9aa4ea9c8adb19c719bb, type: 3}
+  - {fileID: 3090783532505855684, guid: 285700d3b439b7743b4479691a6d00ae, type: 3}
   - {fileID: 3090783532505855684, guid: 9b306259f2ea06b4e82d3efc1181a4b5, type: 3}
   objectStatText: {fileID: 320912188}
   gameOverUI: {fileID: 1768957934}
@@ -3607,7 +3593,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   listOfResources: {fileID: 11400000, guid: ecee9d4edbfc6924caa743785bf10551, type: 2}
   resourceText: {fileID: 1152934487}
-  debugResources: 0
+  debugResources: 1
 --- !u!1 &2038252614
 GameObject:
   m_ObjectHideFlags: 0
@@ -3746,6 +3732,7 @@ MonoBehaviour:
   - Wall
   - Factory
   - Unit
+  - Energy
   categoryImages: []
 --- !u!1 &2051939965
 GameObject:

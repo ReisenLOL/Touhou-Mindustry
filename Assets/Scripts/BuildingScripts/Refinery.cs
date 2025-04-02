@@ -18,7 +18,7 @@ public class Refinery : MonoBehaviour
     [SerializeField] int capacity;
     private int conveyorIndex = 0;
     private float _time;
-    [SerializeField] float tickSpeed;
+    public float tickSpeed;
     public void AddResource(string resource, int value)
     {
         int resourceValue = 0;

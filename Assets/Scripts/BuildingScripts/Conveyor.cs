@@ -6,7 +6,7 @@ public class Conveyor : MonoBehaviour
 {
     [SerializeField] float movementSpeed;
     [SerializeField] Transform nextConveyorCheck; //YOU ARE A FUCKING DUMBASS SYLVIA
-    private Transform nextConveyor;
+    public Transform nextConveyor;
     [SerializeField] Transform resourceCheck;
     [SerializeField] LayerMask resourceObjectLayer;
     [SerializeField] LayerMask conveyorLayer;
@@ -22,14 +22,19 @@ public class Conveyor : MonoBehaviour
 
     void Update()
     {
-        if (FindNextConveyor() is not null and Collider2D c)
+        if (conveyorObjectStats.refreshBuildings)
         {
-            nextConveyor = FindNextConveyor().transform;
+            if (FindNextConveyor() is not null and Collider2D c)
+            {
+                nextConveyor = FindNextConveyor().transform;
+            }
+            if (nextConveyor == null || nextConveyor.transform.TryGetComponent(out ObjectStats objectStats) && objectStats.acceptingResources == false)
+            {
+                return;
+            }
+            conveyorObjectStats.refreshBuildings = false;
         }
-        if (nextConveyor == null || nextConveyor.transform.TryGetComponent(out ObjectStats objectStats) && objectStats.acceptingResources == false)
-        {
-            return;
-        }
+        //well that solves alot of performance issues... or does it?
         // ill just. figure this out later.
         // WELL THEN NOW WHAT??
         foreach (var item in moveResource)

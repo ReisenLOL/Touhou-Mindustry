@@ -14,6 +14,7 @@ public class Unloader : MonoBehaviour
     [SerializeField] GameObject templateButton;
     [SerializeField] GameObject selectionUI;
     [SerializeField] GameObject selectionUIContainer;
+    private ObjectStats objectStats;
     private ResourceManager resourceManager;
     private bool outputFromCore;
     private Transform nextConveyorCheck = null;
@@ -26,6 +27,7 @@ public class Unloader : MonoBehaviour
     }
     void Start()
     {
+        objectStats = GetComponent<ObjectStats>();
         resourceManager = GameObject.Find("GameManager").GetComponent<ResourceManager>();
         for (int i = 0; i < conveyorChecks.Length; i++)
         {
@@ -52,18 +54,22 @@ public class Unloader : MonoBehaviour
     {
         if (outputFromCore && selectedResource != null)
         {
-            Collider2D conveyor = DetectConveyors(conveyorIndex);
-            if (conveyor == null || conveyor.gameObject.TryGetComponent(out CoreController output) && output == true)
+            if (objectStats.refreshBuildings)
             {
-                CycleConveyorIndex();
-                return;
+                Collider2D conveyor = DetectConveyors(conveyorIndex);
+                if (conveyor == null || conveyor.gameObject.TryGetComponent(out CoreController output) && output == true)
+                {
+                    CycleConveyorIndex();
+                    return;
+                }
+                if (GetComponent<ObjectStats>().acceptingResources == false)
+                {
+                    CycleConveyorIndex();
+                    return;
+                }
+                nextConveyorCheck = conveyor.transform;
+                objectStats.refreshBuildings = false;
             }
-            if (GetComponent<ObjectStats>().acceptingResources == false)
-            {
-                CycleConveyorIndex();
-                return;
-            }
-            nextConveyorCheck = conveyor.transform;
             _time += Time.deltaTime;
             if (_time >= tickSpeed)
             {

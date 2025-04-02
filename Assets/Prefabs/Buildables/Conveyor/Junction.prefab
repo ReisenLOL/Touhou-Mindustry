@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 4318730903257860593}
   - component: {fileID: 8225595427974650396}
   - component: {fileID: 3177871031322621166}
-  - component: {fileID: 7389464835557864479}
+  - component: {fileID: 5691927235981584444}
   - component: {fileID: -6937510080034483198}
   m_Layer: 8
   m_Name: Junction
@@ -66,6 +66,8 @@ Transform:
   m_Children:
   - {fileID: 8528670537141161651}
   - {fileID: 2860559516449676654}
+  - {fileID: 366853724129397793}
+  - {fileID: 5706423670589229998}
   - {fileID: 8593487523627816490}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -113,7 +115,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -2
-  m_Sprite: {fileID: 435880693994817966, guid: 5a94ef49188887e468416e137557fc63, type: 3}
+  m_Sprite: {fileID: 1247180749413245848, guid: 5c5734565efca134980c85d328f82554, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -170,7 +172,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &7389464835557864479
+--- !u!114 &5691927235981584444
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -179,11 +181,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 2780307407043551660}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25f750bc588590d47bc0694edc9f9f52, type: 3}
+  m_Script: {fileID: 11500000, guid: 49aba7cb129858e459fa4cafc63d8383, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 4
-  nextConveyorCheck: {fileID: 8528670537141161651}
+  conveyorChecks:
+  - {fileID: 2860559516449676654}
+  - {fileID: 366853724129397793}
+  - {fileID: 8528670537141161651}
+  - {fileID: 5706423670589229998}
   resourceCheck: {fileID: 8593487523627816490}
   resourceObjectLayer:
     serializedVersion: 2
@@ -212,6 +218,68 @@ MonoBehaviour:
   resourceTypeInput: []
   inputAmount: 
   category: Conveyor
+--- !u!1 &3886408384867916960
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5706423670589229998}
+  m_Layer: 0
+  m_Name: ConveyorCheckRight
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5706423670589229998
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3886408384867916960}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4318730903257860593}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4728576127164333501
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 366853724129397793}
+  m_Layer: 0
+  m_Name: ConveyorCheckLeft
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &366853724129397793
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4728576127164333501}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4318730903257860593}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6278683108104759808
 GameObject:
   m_ObjectHideFlags: 0

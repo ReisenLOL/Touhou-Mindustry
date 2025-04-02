@@ -116,6 +116,10 @@ public class GameManager : MonoBehaviour
                         newObject.GetComponent<ObjectStats>().gridLocation = new(buildingGridCenterCell.x, buildingGridCenterCell.y);
                     }
                     newObject.transform.SetParent(buildingFolder.transform);
+                    for (int i = 0; i < buildingFolder.transform.childCount; i++)
+                    {
+                        buildingFolder.transform.GetChild(i).GetComponent<ObjectStats>().refreshBuildings = true;
+                    }
                     Destroy(placeholderObject);
                     showPlaceholder = true;
                 }
