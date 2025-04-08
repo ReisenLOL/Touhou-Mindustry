@@ -191,6 +191,7 @@ MonoBehaviour:
   maxHealth: 100
   price: {fileID: 11400000, guid: 825fad11b926c744b9ff60d772c6a65e, type: 2}
   usesEnergy: 1
+  connectedToEnergyNode: 0
   acceptingResources: 1
   isCore: 0
   gridLocation: {x: 0, y: 0}
@@ -199,6 +200,7 @@ MonoBehaviour:
   - Ether Dust
   inputAmount: 0100000001000000
   category: Energy
+  refreshBuildings: 1
 --- !u!114 &-4156920635769988112
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,6 +231,10 @@ MonoBehaviour:
     m_Bits: 256
   capacity: 20
   tickSpeed: 0.5
+  range: 5
+  BuildingLayer:
+    serializedVersion: 2
+    m_Bits: 1024
   energyStored: 0
   energyToProduce: 10
   energyMaxCapacity: 100

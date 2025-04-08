@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -7406726600156066926}
   - component: {fileID: 4942890777097733748}
   - component: {fileID: -3294353254037611606}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: EnergyNode
   m_TagString: Building
   m_Icon: {fileID: 0}
@@ -177,5 +177,8 @@ MonoBehaviour:
   range: 5
   BuildingLayer:
     serializedVersion: 2
-    m_Bits: 1280
+    m_Bits: 1024
   linkObject: {fileID: 7171157463493194127, guid: c53d65c3843f5a44ba034848363e3a92, type: 3}
+  energyStored: 0
+  energyCapacity: 0
+  generatorObject: {fileID: 0}

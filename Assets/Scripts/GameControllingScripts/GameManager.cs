@@ -266,13 +266,13 @@ public class GameManager : MonoBehaviour
         }
         return null;
     }
-    /*private void OnDrawGizmos()
+    private void OnDrawGizmos()
     {
         if (isBuilding)
         {
-            Gizmos.DrawSphere(placeholderObject.transform.position, 1);
+            Gizmos.DrawWireSphere(placeholderObject.transform.position, 1);
         }
-    }*/
+    }
     public void GameOver()
     {
         gameOverUI.SetActive(true);

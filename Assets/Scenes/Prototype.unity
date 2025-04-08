@@ -3480,6 +3480,7 @@ MonoBehaviour:
   - {fileID: 2780307407043551660, guid: 5c1dcff70cb5837409016f6592973360, type: 3}
   - {fileID: 3090783532505855684, guid: 8204fddc6a5b9aa4ea9c8adb19c719bb, type: 3}
   - {fileID: 3090783532505855684, guid: 285700d3b439b7743b4479691a6d00ae, type: 3}
+  - {fileID: 3090783532505855684, guid: 52493131acadb964e8ac0c5df8603078, type: 3}
   - {fileID: 3090783532505855684, guid: 9b306259f2ea06b4e82d3efc1181a4b5, type: 3}
   objectStatText: {fileID: 320912188}
   gameOverUI: {fileID: 1768957934}

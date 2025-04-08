@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &35871261711782111
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 310641869481211699}
+  m_Layer: 0
+  m_Name: ResourceDetection (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &310641869481211699
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 35871261711782111}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.5, y: 0.5, z: -2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7879073014922721126}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1196099252910061923
 GameObject:
   m_ObjectHideFlags: 0
@@ -65,6 +96,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8725868830820503001}
+  - {fileID: 310641869481211699}
+  - {fileID: 2921714044252183687}
+  - {fileID: 8759235377893938864}
   - {fileID: 3068546871142132783}
   - {fileID: 4912684224809008832}
   - {fileID: 4058120686258122801}
@@ -188,7 +222,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d2b75f42a6d709468d6557e87ccc876, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resourceCheck: {fileID: 8725868830820503001}
+  resourceChecks:
+  - {fileID: 8725868830820503001}
+  - {fileID: 310641869481211699}
+  - {fileID: 2921714044252183687}
+  - {fileID: 8759235377893938864}
   resourceObject: {fileID: 4334449564300741373, guid: 24272f182db28fb419b6a3ad1a6732a7, type: 3}
   conveyorChecks:
   - {fileID: 3068546871142132783}
@@ -220,12 +258,16 @@ MonoBehaviour:
   health: 100
   maxHealth: 100
   price: {fileID: 11400000, guid: f00990a80dc7974449b724ce13895d19, type: 2}
+  usesEnergy: 0
+  connectedToEnergyNode: 0
+  connectedEnergyNode: {fileID: 0}
   acceptingResources: 0
   isCore: 0
   gridLocation: {x: 0, y: 0}
   resourceTypeInput: []
   inputAmount: 
   category: Mine
+  refreshBuildings: 1
 --- !u!1 &3324610262788126772
 GameObject:
   m_ObjectHideFlags: 0
@@ -251,7 +293,7 @@ Transform:
   m_GameObject: {fileID: 3324610262788126772}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -2}
+  m_LocalPosition: {x: -0.5, y: 0.5, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -412,6 +454,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7879073014922721126}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6387775344015343909
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8759235377893938864}
+  m_Layer: 0
+  m_Name: ResourceDetection (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8759235377893938864
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6387775344015343909}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.5, y: -0.5, z: -2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7879073014922721126}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6952124178869833272
 GameObject:
   m_ObjectHideFlags: 0
@@ -469,6 +542,37 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.5, y: 0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7879073014922721126}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8798198946224097322
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2921714044252183687}
+  m_Layer: 0
+  m_Name: ResourceDetection (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2921714044252183687
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8798198946224097322}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.5, y: -0.5, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

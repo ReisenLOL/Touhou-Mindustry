@@ -3,10 +3,10 @@ using UnityEngine.Tilemaps;
 
 public class MineResource : MonoBehaviour
 {
-    [SerializeField] Transform resourceCheck;
+    [SerializeField] Transform[] resourceChecks;
     [SerializeField] GameObject resourceObject;
     [SerializeField] Transform[] conveyorChecks;
-    public string minedResource;
+    public string minedResource = null;
     [SerializeField] LayerMask conveyorLayer;
     [SerializeField] ResourceList resourceList;
     private GameObject resourceFolder;
@@ -21,15 +21,21 @@ public class MineResource : MonoBehaviour
         terrainTiles = GameObject.Find("TerrainTilemap").GetComponent<Tilemap>();
         resourceFolder = GameObject.Find("ResourceFolder");
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        string tileName = terrainTiles.GetTile(buildingGrid.WorldToCell(transform.position)).name;
-        for (int i = 0; i < resourceList.resourceType.Length; i++)
+        for (int i = 0; i < resourceChecks.Length; i++)
         {
-            if (tileName == resourceList.GetResourceType(i))
+            string tileName = terrainTiles.GetTile(buildingGrid.WorldToCell(resourceChecks[i].transform.position)).name;
+            for (int j = 0; j < resourceList.resourceType.Length; j++)
             {
-                minedResource = resourceList.GetResourceType(i);
-                break;
+                if (tileName == resourceList.GetResourceType(j))
+                {
+                    if (miningSpeed > 1)
+                    {
+                        miningSpeed -= 1;
+                    }
+                    minedResource = resourceList.GetResourceType(j);
+                    continue;
+                }
             }
-            minedResource = null;
         }
     }
 

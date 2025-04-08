@@ -1,13 +1,16 @@
+using Core.Extensions;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EnergyGenerator : Refinery
 {
-    public int energyStored;
+    [SerializeField] float range;
+    [SerializeField] LayerMask BuildingLayer;
     public int energyToProduce;
-    public int energyMaxCapacity;
+    private ObjectStats objectStats;
     Dictionary<string, int> storedEnergyResources = new();
     private float _ticktime;
+    private List<GameObject> connectedBatteries = new();
     public void AddResourceForEnergy(string resource, int value)
     {
         int resourceValue = 0;
@@ -36,9 +39,19 @@ public class EnergyGenerator : Refinery
         }
         return false;
     }
+    private void Start()
+    {
+        objectStats = GetComponent<ObjectStats>();
+    }
     void Update()
     {
         _ticktime += Time.deltaTime;
+        if (objectStats.refreshBuildings)
+        {
+            connectedBatteries.Clear();
+            ConnectToBattery();
+            objectStats.refreshBuildings = false;
+        }
         if (_ticktime >= tickSpeed)
         {
             bool success = false;
@@ -49,7 +62,7 @@ public class EnergyGenerator : Refinery
                     success = false;
                     break;
                 }
-                if (storedEnergyResources[resourcesToRefine[i]] >= 1 && energyStored < energyMaxCapacity)
+                if (storedEnergyResources[resourcesToRefine[i]] >= 1)
                 {
                     success = true;
                 }
@@ -59,15 +72,17 @@ public class EnergyGenerator : Refinery
                     break;
                 }
             }
-            if (success)
+            if (success && connectedBatteries.Count > 0)
             {
                 _ticktime = 0;
                 for (int i = 0; i < resourcesToRefine.Length; i++)
                 {
                     SubtractResourceForEnergy(resourcesToRefine[i], 1);
                 }
-                Debug.Log("here5");
-                energyStored += energyToProduce;
+                for (int i = 0; i < connectedBatteries.Count; i++)
+                {
+                    connectedBatteries[i].GetComponent<Battery>().AddEnergy(energyToProduce);
+                }
             }
         }
     }
@@ -84,6 +99,21 @@ public class EnergyGenerator : Refinery
                 }
             }
             Destroy(collision.gameObject);
+        }
+    }
+    private Collider2D[] DetectBuildings()
+    {
+        return Physics2D.OverlapCircleAll(transform.position, range, BuildingLayer);
+    }
+    private void ConnectToBattery()
+    {
+        Collider2D[] detectedBuildings = DetectBuildings();
+        for (int i = 0; i < detectedBuildings.Length; i++)
+        {
+            if (detectedBuildings[i].gameObject.TryGetComponent(out Battery battery))
+            {
+                connectedBatteries.Add(detectedBuildings[i].gameObject);
+            }
         }
     }
 }

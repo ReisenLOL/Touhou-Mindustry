@@ -7,6 +7,7 @@ public class ObjectStats : MonoBehaviour
     public ObjectPrice price;
     public bool usesEnergy = false;
     public bool connectedToEnergyNode = false;
+    public EnergyNode connectedEnergyNode; 
     public bool acceptingResources = true;
     public bool isCore = false;
     public Vector2 gridLocation;

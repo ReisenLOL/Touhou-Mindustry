@@ -32,33 +32,50 @@ public class Junction : MonoBehaviour
             }
             for (int i = 0; i < conveyorChecks.Length; i++)
             {
-                Debug.Log("here1");
-                if (FindNextConveyor(i) is not null and Collider2D c)
+                if (item.previousConveyor == FindNextConveyor(i).gameObject.transform)
                 {
-                    Debug.Log("here2");
-                    if (item.previousConveyor.transform == FindNextConveyor(i).transform)
+                    switch (i)
                     {
-                        Debug.Log("here3");
-                        int nextIndex = i + 2;
-                        if (nextIndex < conveyorChecks.Length)
-                        {
-                            nextIndex = 3 - i;
-                        }
-                        Debug.Log(nextIndex);
-                        if (FindNextConveyor(nextIndex) is not null and Collider2D c2)
-                        {
-                            item.MoveToNextConveyor(FindNextConveyor(nextIndex).gameObject.transform, movementSpeed);
-                            item.previousConveyor = gameObject.transform;
-                            item.usingConveyorLogic = false;
-                        }
-                        //warcrime time
-                        //its half hardcoded so it is a warcrime!
-                        //...ill figure this out tomorrow
+                        case 0:
+                            if (FindNextConveyor(2) is not null and Collider2D c2)
+                            {
+                                item.MoveToNextConveyor(FindNextConveyor(2).gameObject.transform, movementSpeed);
+                                item.previousConveyor = gameObject.transform;
+                                item.usingConveyorLogic = false;
+                            }
+                            break;
+                        case 1:
+                            if (FindNextConveyor(3) is not null and Collider2D c3)
+                            {
+                                item.MoveToNextConveyor(FindNextConveyor(3).gameObject.transform, movementSpeed);
+                                item.previousConveyor = gameObject.transform;
+                                item.usingConveyorLogic = false;
+                            }
+                            break;
+                        case 2:
+                            if (FindNextConveyor(0) is not null and Collider2D c4)
+                            {
+                                item.MoveToNextConveyor(FindNextConveyor(0).gameObject.transform, movementSpeed);
+                                item.previousConveyor = gameObject.transform;
+                                item.usingConveyorLogic = false;
+                            }
+                            break;
+                        case 3:
+                            if (FindNextConveyor(1) is not null and Collider2D c5)
+                            {
+                                item.MoveToNextConveyor(FindNextConveyor(1).gameObject.transform, movementSpeed);
+                                item.previousConveyor = gameObject.transform;
+                                item.usingConveyorLogic = false;
+                            }
+                            break;
+                            //i'm cooked i might aswell just start a new project lol
+                            //or am i?
+                            //today i will give up, tomorrow i will get ALOT done the first thing i do when i wake up, trust me.
+                            //you should have never trusted me.
                     }
                 }
                 if (nextConveyor == null || nextConveyor.transform.TryGetComponent(out ObjectStats objectStats) && objectStats.acceptingResources == false)
                 {
-                    Debug.Log("here4");
                     return;
                 }
             }

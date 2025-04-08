@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class TurretController : MonoBehaviour
 {
-    [SerializeField] string ammoType;
+    [SerializeField] string[] ammoTypes;
     [SerializeField] int ammoAmount;
     [SerializeField] int ammoCapacity;
     [SerializeField] LayerMask UnitLayer;
@@ -67,12 +67,20 @@ public class TurretController : MonoBehaviour
     {
         if (collision.transform.TryGetComponent(out MinedResourceType r))
         {
-            if (r.type == ammoType && ammoAmount < ammoCapacity)
+            if (ammoAmount < ammoCapacity)
             {
-                ammoAmount++;
-                if (ammoAmount == ammoCapacity)
+                for (int i = 0; i < ammoTypes.Length; i++)
                 {
-                    buildingStats.acceptingResources = false;
+                    if (r.type == ammoTypes[i])
+                    {
+                        ammoAmount++;
+                        if (ammoAmount == ammoCapacity)
+                        {
+                            buildingStats.acceptingResources = false;
+                        }
+                        //add scriptable object for bullet pattern, bullet effects
+                        //ok thats enough for today i have an OC to design for an upcoming gamejam
+                    }
                 }
             }
         }

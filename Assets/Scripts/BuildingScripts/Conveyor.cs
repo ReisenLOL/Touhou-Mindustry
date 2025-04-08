@@ -28,7 +28,7 @@ public class Conveyor : MonoBehaviour
             {
                 nextConveyor = FindNextConveyor().transform;
             }
-            if (nextConveyor == null || nextConveyor.transform.TryGetComponent(out ObjectStats objectStats) && objectStats.acceptingResources == false)
+            if (nextConveyor == null)
             {
                 return;
             }
@@ -37,6 +37,10 @@ public class Conveyor : MonoBehaviour
         //well that solves alot of performance issues... or does it?
         // ill just. figure this out later.
         // WELL THEN NOW WHAT??
+        if (nextConveyor == null || nextConveyor.transform.TryGetComponent(out ObjectStats objectStats) && objectStats.acceptingResources == false)
+        {
+            return;
+        }
         foreach (var item in moveResource)
         {
             if (item == null)

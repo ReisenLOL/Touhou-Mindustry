@@ -25,6 +25,9 @@ public class UnitFactory : MonoBehaviour
     [SerializeField] float requiredManufacturingTime;
     [SerializeField] Transform progressBar;
     [SerializeField] LayerMask conveyorLayer;
+    private int energyCapacity;
+    [SerializeField] int energyConsumed;
+    public int energyStored;
     //this is the worst code i have ever written.
     public void AddResource(string resource, int value)
     {
@@ -85,6 +88,12 @@ public class UnitFactory : MonoBehaviour
     }
     void Update()
     {
+        if (buildingStats.connectedToEnergyNode && energyStored > energyCapacity)
+        {
+            energyStored += energyConsumed;
+            buildingStats.connectedEnergyNode.batteryObject.GetComponent<Battery>().RemoveEnergy(energyConsumed);
+            //GUESS WE ARENT DOING THIS???
+        }
         if (isProducing && unitToSpawn != null)
         {
             productionTimer += Time.deltaTime;
