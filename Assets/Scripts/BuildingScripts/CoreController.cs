@@ -5,10 +5,12 @@ public class CoreController : MonoBehaviour
     [SerializeField] LayerMask resourceLayer;
     [SerializeField] Transform resourceCheck;
     [SerializeField] ResourceManager resourceManager;
+    public ObjectStats objectStats;
 
     void Start()
     {
         resourceManager = GameObject.Find("GameManager").GetComponent<ResourceManager>();
+        objectStats = GetComponent<ObjectStats>();
     }
     void Update()
     {

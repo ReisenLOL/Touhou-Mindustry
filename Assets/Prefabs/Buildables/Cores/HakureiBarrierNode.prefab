@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 1157938816860314430}
   - component: {fileID: 1303981554866787471}
   m_Layer: 8
-  m_Name: Core
+  m_Name: HakureiBarrierNode
   m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

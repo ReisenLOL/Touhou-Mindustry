@@ -30,18 +30,26 @@ public class GameManager : MonoBehaviour
     public GameObject newPlayer;
     private bool isConstructingObject;
     private float constructionTime;
+    public string[] buildingCategories;
+    public CoreController core;
     // oh man this is gonna take awhile....
     //Queue<GameObject> buildingQueue = new Queue<GameObject>();
     
     //wow i really think this code is inefficient but whatevs i guess
     void Start()
     {
+        core = FindFirstObjectByType<CoreController>();
         buildingFolder = GameObject.Find("BuildingFolder");
         resourceManager = GetComponent<ResourceManager>();
         player = GameObject.Find("Player");
         playerController = player.GetComponent<PlayerController>();
         buildingGrid = GameObject.Find("BuildingGrid").GetComponent<Grid>();
         terrainTiles = GameObject.Find("TerrainTilemap").GetComponent<Tilemap>();
+        for (int i = 0; i < buildingCategories.Length; i++)
+        {
+            GameObject categoryObject = new GameObject(buildingCategories[i]);
+            categoryObject.transform.parent = buildingFolder.transform;
+        }
     }
     void Update()
     {
@@ -115,11 +123,13 @@ public class GameManager : MonoBehaviour
                         newObject = Instantiate(selection, buildingGridCenterCell, Quaternion.Euler(rotationAmount));
                         newObject.GetComponent<ObjectStats>().gridLocation = new(buildingGridCenterCell.x, buildingGridCenterCell.y);
                     }
-                    newObject.transform.SetParent(buildingFolder.transform);
+                    newObject.transform.SetParent(GameObject.Find(newObject.GetComponent<ObjectStats>().category).transform);
+                    core.GetComponent<ObjectStats>().refreshBuildings = true;
                     for (int i = 0; i < buildingFolder.transform.childCount; i++)
                     {
-                        buildingFolder.transform.GetChild(i).GetComponent<ObjectStats>().refreshBuildings = true;
-                    }
+                        for (int j = 0; j < buildingFolder.transform.GetChild(i).childCount; i++)
+                        buildingFolder.transform.GetChild(i).GetChild(j).GetComponent<ObjectStats>().refreshBuildings = true;
+                    } //WHAT THE FUCK
                     Destroy(placeholderObject);
                     showPlaceholder = true;
                 }
