@@ -1,13 +1,21 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ResourceManager : MonoBehaviour
 {
+    public class ResourceUIDisplayValues
+    {
+        public GameObject resourceUI;
+        public string resourceType;
+    }
     Dictionary<string, int> currentResources = new();
     [SerializeField] ResourceList listOfResources;
-    [SerializeField] TextMeshProUGUI resourceText;
     [SerializeField] bool debugResources;
+    public List<ResourceUIDisplayValues> ResourceUIs = new();
+    public GameObject ResourceUITemplate;
+    public Transform ResourceUIPanel;
     public void AddResource(string resource, int value)
     {
         int resourceValue = 0;
@@ -21,16 +29,25 @@ public class ResourceManager : MonoBehaviour
             currentResources[resource] = resourceValue;
             Debug.Log("Added Resource: " + value + " " + resource);
         }
-        string newValueToDisplay = "";
         for (int i = 0; i < listOfResources.resourceType.Length; i++)
         {
             int getValue = CheckResourceValue(listOfResources.resourceType[i]);
             if (getValue > 0)
             {
-                newValueToDisplay += listOfResources.resourceType[i] + ": " + getValue + "\n";
+                if (ResourceUIPanel.Find(listOfResources.resourceType[i]))
+                {
+                    ResourceUIPanel.Find(listOfResources.resourceType[i]).GetComponentInChildren<TextMeshProUGUI>().text = listOfResources.resourceType[i] + ": " + getValue; //bad code
+                }
+                else
+                {
+                    GameObject newResourceUI = Instantiate(ResourceUITemplate, ResourceUIPanel);
+                    newResourceUI.SetActive(true);
+                    newResourceUI.name = listOfResources.resourceType[i];
+                    newResourceUI.GetComponentInChildren<TextMeshProUGUI>().text = listOfResources.resourceType[i] + ": " + getValue;
+                    newResourceUI.GetComponentInChildren<Image>().color = listOfResources.resourceColors[i];
+                }
             }
         }
-        resourceText.text = newValueToDisplay;
     }
     public bool SubtractResource(string resource, int value)
     {
@@ -44,16 +61,14 @@ public class ResourceManager : MonoBehaviour
             resourceValue -= value;
             currentResources[resource] = resourceValue;
             Debug.Log("Subtracted Resource: " + value + " " + resource);
-            string newValueToDisplay = "";
             for (int i = 0; i < listOfResources.resourceType.Length; i++)
             {
                 int getValue = CheckResourceValue(listOfResources.resourceType[i]);
                 if (getValue > 0)
                 {
-                    newValueToDisplay += listOfResources.resourceType[i] + ": " + getValue + "\n";
+                    ResourceUIPanel.Find(listOfResources.resourceType[i]).GetComponentInChildren<TextMeshProUGUI>().text = listOfResources.resourceType[i] + ": " + getValue; //bad code
                 }
             }
-            resourceText.text = newValueToDisplay;
             return true;
         }
         return false;

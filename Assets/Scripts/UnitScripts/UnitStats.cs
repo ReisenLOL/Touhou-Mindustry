@@ -14,6 +14,7 @@ public class UnitStats : MonoBehaviour
     public bool capableOfBuilding;
     public void TakeDamage(float damage)
     {
+        Debug.Log(damage);
         health -= damage;
         if (health <= 0)
         {

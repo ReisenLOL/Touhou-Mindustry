@@ -28,7 +28,7 @@ public class TurretController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        enemyList = DetectEnemies();
+        enemyList = DetectEnemies(); //convert this to an ontriggerenter
         if (enemyList.Length == 0)
         {
             closestEnemy = this.gameObject;
@@ -115,7 +115,10 @@ public class TurretController : MonoBehaviour
                 }
             }
         }
-        Destroy(collision.gameObject);
+        if (collision.transform.TryGetComponent(out MinedResourceType isResource))
+        {
+            Destroy(collision.gameObject);
+        }
     }
     private void ShootProjectile()
     {

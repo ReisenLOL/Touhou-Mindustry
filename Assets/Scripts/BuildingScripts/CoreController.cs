@@ -9,7 +9,7 @@ public class CoreController : MonoBehaviour
 
     void Start()
     {
-        resourceManager = GameObject.Find("GameManager").GetComponent<ResourceManager>();
+        resourceManager = FindFirstObjectByType<ResourceManager>();
         objectStats = GetComponent<ObjectStats>();
     }
     void Update()

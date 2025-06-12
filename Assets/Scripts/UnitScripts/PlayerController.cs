@@ -1,3 +1,4 @@
+using System;
 using Core.Extensions;
 using UnityEditor;
 using UnityEngine;
@@ -133,6 +134,7 @@ public class PlayerController : MonoBehaviour
             this.isFacingRight = !this.isFacingRight;
         }
     }
+
     void FixedUpdate()
     {
         rb.linearVelocity = moveInput * speed;

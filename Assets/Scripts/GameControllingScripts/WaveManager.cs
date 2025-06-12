@@ -38,4 +38,9 @@ public class WaveManager : MonoBehaviour
             newEnemy.GetComponent<UnitStats>().isEnemy = true;
         }
     }
+
+    public void SkipToNextWave()
+    {
+        _time = 0;
+    }
 }

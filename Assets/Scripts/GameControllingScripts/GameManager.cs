@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     private bool showPlaceholder;
     public GameObject placeholderObject;
     public GameObject[] buildList;
-    public GameObject objectStatText;
+    public TextMeshProUGUI objectStatText;
     private GameObject buildingFolder;
     private Tilemap terrainTiles;
     private LayerMask resourceVeinLayer;
@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
         core = FindFirstObjectByType<CoreController>();
         buildingFolder = GameObject.Find("BuildingFolder");
         resourceManager = GetComponent<ResourceManager>();
-        player = GameObject.Find("Player");
+        player = FindFirstObjectByType<PlayerController>().gameObject;
         playerController = player.GetComponent<PlayerController>();
         buildingGrid = GameObject.Find("BuildingGrid").GetComponent<Grid>();
         terrainTiles = GameObject.Find("TerrainTilemap").GetComponent<Tilemap>();
@@ -169,15 +169,8 @@ public class GameManager : MonoBehaviour
         if (!isBuilding)
         {
             string selectedTile = terrainTiles.GetTile(buildingGrid.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition))).name;
-            if (selectedTile != null)
-            {
-                objectStatText.SetActive(true);
-                objectStatText.GetComponentInChildren<TextMeshProUGUI>().text = (selectedTile);
-            }
-            else
-            {
-                objectStatText.SetActive(false);
-            }
+            objectStatText.transform.parent.gameObject.SetActive(true);
+            objectStatText.text = selectedTile;
         }
     }
     public void SetBuildMode(string selectedObject)
@@ -201,7 +194,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            objectStatText.SetActive(false);
+            objectStatText.transform.parent.gameObject.SetActive(true);
             showPlaceholder = false;
             if (placeholderObject)
             {
@@ -256,13 +249,13 @@ public class GameManager : MonoBehaviour
         ObjectStats selectionStats = selection.gameObject.GetComponent<ObjectStats>();
         string[] resourceToDisplay = selectionStats.price.GetResourceName();
         int[] amountToDisplay = selectionStats.price.GetAmount();
-        objectStatText.SetActive(true);
+        objectStatText.transform.parent.gameObject.SetActive(true);
         string costDisplay = selection.name + "\n";
         for (int i = 0; i < resourceToDisplay.Length; i++)
         {
             costDisplay += resourceToDisplay[i] + ": " + amountToDisplay[i] + "\n";
         }
-        objectStatText.GetComponentInChildren<TextMeshProUGUI>().text = costDisplay;
+        objectStatText.text = costDisplay;
         showInfoButton.SetActive(true);
     }
     public GameObject GetObjectFromName(string objectName)

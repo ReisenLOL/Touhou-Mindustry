@@ -1,9 +1,11 @@
+using System;
 using UnityEngine;
 using Core.Extensions;
 
 public class MoveProjectile : Projectile
 {
     private float distanceToTurret;
+
     void Update()
     {
         transform.Translate(Vector2.right * Time.deltaTime * speed);
@@ -14,10 +16,7 @@ public class MoveProjectile : Projectile
         if (distanceToTurret > maxRange)
         {
             Destroy(gameObject);
-        }
-        if (!isEnemyBullet)
-        {
-            Destroy(gameObject.GetComponent<Rigidbody2D>());
+            Debug.Log("out of range");
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -28,18 +27,22 @@ public class MoveProjectile : Projectile
             {
                 collision.gameObject.GetComponent<UnitStats>().TakeDamage(damage);
                 Destroy(gameObject);
+                Debug.Log("playerorplayerunithit");
             }
             else if (collision.gameObject.CompareTag("Building"))
             {
                 collision.gameObject.GetComponent<ObjectStats>().TakeDamage(damage);
                 Destroy(gameObject);
+                Debug.Log("buildinghit");
             }
         }
         else if (collision.gameObject.CompareTag("Unit") && collision.gameObject.GetComponent<UnitStats>().isEnemy)
         {
             collision.gameObject.GetComponent<UnitStats>().TakeDamage(damage);
             Destroy(gameObject);
-            //?????? WHY IS IT MAKING THE PLAYER TAKE DAMAGE
+            Debug.Log(collision.gameObject.GetComponent<UnitStats>().isEnemy);
+            Debug.Log(collision.gameObject.name);
+            Debug.Log("enemyhit");
         }
     }
 }

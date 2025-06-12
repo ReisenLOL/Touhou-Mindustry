@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -17,7 +18,7 @@ public class UnitTargetter : MonoBehaviour
     NavMeshAgent agent;
     void Start()
     {
-        core = GameObject.Find("Core");
+        core = FindFirstObjectByType<CoreController>().GameObject();
         player = GameObject.Find("Player");
         rb = GetComponent<Rigidbody2D>();
         unitController = GetComponent<UnitController>();
