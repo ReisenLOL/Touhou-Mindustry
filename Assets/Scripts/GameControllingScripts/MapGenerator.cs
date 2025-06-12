@@ -30,10 +30,9 @@ public class MapGenerator : MonoBehaviour
     {
         pathfindingGrid = GetComponent<PathfindingGrid>();
         GenerateMap();
-        navMeshSurface.BuildNavMesh();
     }
 
-    void GenerateMap()
+    public void GenerateMap()
     {
         oreMap = new bool[width, height];
         visited = new bool[width, height];
@@ -111,6 +110,7 @@ public class MapGenerator : MonoBehaviour
                 }
             }
         }
+        navMeshSurface.BuildNavMesh();
     }
     void FloodFillOrePatch(int startX, int startY, TileBase oreType)
     {

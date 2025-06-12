@@ -128,7 +128,10 @@ public class GameManager : MonoBehaviour
                     for (int i = 0; i < buildingFolder.transform.childCount; i++)
                     {
                         for (int j = 0; j < buildingFolder.transform.GetChild(i).childCount; i++)
-                        buildingFolder.transform.GetChild(i).GetChild(j).GetComponent<ObjectStats>().refreshBuildings = true;
+                        {
+                            buildingFolder.transform.GetChild(i).GetChild(j).GetComponent<ObjectStats>().refreshBuildings = true;
+                        }
+
                     } //WHAT THE FUCK
                     Destroy(placeholderObject);
                     showPlaceholder = true;

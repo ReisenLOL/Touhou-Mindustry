@@ -14,15 +14,16 @@ public class BuildUIManager : MonoBehaviour
     private string currentCategory;
     void Start()
     {
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        gameManager = FindFirstObjectByType<GameManager>();
         buildableObjects = gameManager.GetComponent<GameManager>().buildList;
         for (int i = 0; i < buildingCategories.Length; i++)
         {
-            GameObject newButton = Instantiate(templateButton);
+            GameObject newButton = Instantiate(templateButton, transform);
             newButton.SetActive(true);
-            newButton.transform.SetParent(this.gameObject.transform);
-            newButton.GetComponentInChildren<TextMeshProUGUI>().text = buildingCategories[i];
-            newButton.GetComponent<Button>().onClick.AddListener(() => SelectCategory(newButton.GetComponentInChildren<TextMeshProUGUI>().text));
+            TextMeshProUGUI newButtonText = newButton.GetComponentInChildren<TextMeshProUGUI>();
+            newButtonText.text = buildingCategories[i];
+            newButtonText.autoSizeTextContainer = true;
+            newButton.GetComponent<Button>().onClick.AddListener(() => SelectCategory(newButtonText.text));
         }
     }
     public void SelectCategory(string category)
@@ -46,12 +47,15 @@ public class BuildUIManager : MonoBehaviour
                 {
                     continue;
                 }
-                GameObject newButton = Instantiate(templateButton);
+                GameObject newButton = Instantiate(templateButton, categoryContainerUI.gameObject.transform);
                 newButton.SetActive(true);
-                newButton.transform.SetParent(categoryContainerUI.gameObject.transform);
-                newButton.GetComponentInChildren<TextMeshProUGUI>().text = buildableObjects[i].name;
-                newButton.GetComponent<Button>().onClick.AddListener(() => gameManager.SetBuildMode(newButton.GetComponentInChildren<TextMeshProUGUI>().text));
-                newButton.GetComponent<Button>().onClick.AddListener(() => gameManager.SetSelection(newButton.GetComponentInChildren<TextMeshProUGUI>().text));
+                TextMeshProUGUI newButtonText = newButton.GetComponentInChildren<TextMeshProUGUI>();
+                newButtonText.text = buildableObjects[i].name;
+                newButtonText.autoSizeTextContainer = true;
+                newButton.GetComponent<Button>().onClick.AddListener(() => gameManager.SetBuildMode(newButtonText.text));
+                newButton.GetComponent<Button>().onClick.AddListener(() => gameManager.SetSelection(newButtonText.text));
+                newButton.GetComponent<Image>().sprite = buildableObjects[i].GetComponent<SpriteRenderer>().sprite;
+                newButtonText.gameObject.SetActive(false);
             }
         }
         currentCategory = category;
