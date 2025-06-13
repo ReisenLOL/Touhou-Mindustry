@@ -20,11 +20,7 @@ public class ObjectStats : MonoBehaviour
         health -= damage;
         if (health <= 0)
         {
-            if (isCore)
-            {
-                GameObject.Find("GameManager").GetComponent<GameManager>().GameOver();
-            }
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }

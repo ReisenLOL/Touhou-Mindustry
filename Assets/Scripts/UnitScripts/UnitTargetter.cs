@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
@@ -8,13 +9,11 @@ public class UnitTargetter : MonoBehaviour
     private GameObject player;
     private Rigidbody2D rb;
     private Vector3 lookDirection;
-    private Collider2D[] targetList;
+    public List<Collider2D> targetList = new();
     private GameObject closestTarget;
     private UnitController unitController;
     private UnitStats unitStats;
-    [SerializeField] LayerMask unitLayer;
-    [SerializeField] LayerMask playerLayer;
-    private bool isEnemy;
+    public bool isEnemy;
     NavMeshAgent agent;
     void Start()
     {
@@ -29,6 +28,14 @@ public class UnitTargetter : MonoBehaviour
         agent.speed = unitStats.unitType.speed;
         agent.updateRotation = false;
         agent.updateUpAxis = false;
+        GameObject detectTargetsOnTriggerEnter = new GameObject("DetectTargetsOnTriggerEnter");
+        detectTargetsOnTriggerEnter.transform.parent = transform;
+        detectTargetsOnTriggerEnter.transform.localPosition = Vector3.zero;
+        detectTargetsOnTriggerEnter.layer = LayerMask.NameToLayer("DetectTargets");
+        CircleCollider2D detectTargetsCC2D = detectTargetsOnTriggerEnter.AddComponent<CircleCollider2D>();
+        detectTargetsCC2D.isTrigger = true;
+        detectTargetsCC2D.radius = unitStats.unitType.range;
+        detectTargetsOnTriggerEnter.AddComponent<UnitOnTriggerTarget>();
     }
 
     void Update()
@@ -62,36 +69,26 @@ public class UnitTargetter : MonoBehaviour
         {
             Debug.LogWarning("HOW"); //uh i think thats fixed
         }
-        targetList = DetectTargets();
-        if (targetList.Length == 0 || closestTarget == null)
+        if (targetList.Count == 0 || closestTarget == null)
         {
-            closestTarget = this.gameObject;
+            closestTarget = null;
             unitController.closestTarget = closestTarget;
         }
         float distanceToClosestTarget = 1000000f;
-        Collider2D iteration = null;
-        for (int i = 0; i < targetList.Length; i++)
+        foreach (Collider2D target in targetList)
         {
-            iteration = targetList[i];
-            if (iteration == null || iteration.gameObject.TryGetComponent(out UnitStats stats) && isEnemy == stats.isEnemy)
+            if (target == null || target.gameObject.TryGetComponent(out UnitStats stats) && isEnemy == stats.isEnemy)
             {
+                targetList.Remove(target);
                 continue;
             }
-            float sqrDistance = Vector3.SqrMagnitude(transform.position - iteration.transform.position);
-            if (sqrDistance < distanceToClosestTarget && iteration.gameObject != gameObject)
+            float sqrDistance = Vector3.SqrMagnitude(transform.position - target.transform.position);
+            if (sqrDistance < distanceToClosestTarget && target.gameObject != gameObject)
             {
-                closestTarget = iteration.gameObject;
+                closestTarget = target.gameObject;
                 unitController.closestTarget = closestTarget;
                 distanceToClosestTarget = sqrDistance;
             }
         }
-    }
-    private Collider2D[] DetectTargets()
-    {
-        if (isEnemy)
-        {
-            return Physics2D.OverlapCircleAll(transform.position, unitStats.unitType.range, ~unitLayer);
-        }
-        return Physics2D.OverlapCircleAll(transform.position, unitStats.unitType.range, playerLayer);
     }
 }

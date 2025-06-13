@@ -25,7 +25,7 @@ public class UnitStats : MonoBehaviour
             }
             else
             {
-                Destroy(gameObject);
+                gameObject.SetActive(false);
             }
         }
     }

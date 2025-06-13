@@ -1,0 +1,213 @@
+wait how the hell am I supposed to do the placement system lol
+I think that's the hardest part
+maybe I shoulda picked a different game to make but too late now!
+
+easy stuff
+x core
+x respawn
+x shooting
+     X rotate projectile on instantiation to mouse cursor 
+
+ermmmmm
+I dont know what im reading here
+oh well guess ill use circles for now cuz im lazy
+…but maybe that's TOO lazy
+is that an if statement inside a variable how does that work....
+nvm I  get it now
+hold on im reading
+so if I misunderstood correctly....
+wait why am I doing all of that shouldn't I just rotate it towards the look direction and then just use vector3.forward
+that was WAY too much effort just to do that lol
+incredible!!
+luckily I have really old code for this
+ok what now
+guess its building time
+yeah I figured snapping to grid would use the tilemap system
+I definitely overscoped for this but whatever
+I did not overscope.
+ok what now
+resources!
+what was it that people use to make a list of objects and their stats
+I forgot.
+its like those module scripts from roblox if you developed on there before (i hope you haven't)
+Too much effort. I'm using an empty script for this because im so epic
+i kinda remember raycasts from godot and roblox. they confused me a little back then.
+the mouse or grid is off-center from eachother, that's causing problems.
+ok that must be why, i need to get the center of the grid
+done with that, i forgot what i was gonna do now
+right, mines.
+so if placed on a resource, (for now) resourcecount goes up
+but how do i make it so that it detects what resource it is on and generate resources if its so
+2 ways im thinking is to set the resource during placement if mouse detects object resource with script that has variable that says the resource, or for the mine to check what it's touching
+ill try option 2 first then
+really old forum post says i cant so sure i get to be lazy
+guess we arent doing option 2
+i hate the code i just wrote
+fine ill hardcode it because this doesnt make any sense
+oh my god i hate this code
+rich... but too rich....
+ok maybe i can half do option 2
+guess its just the same as the ground detection
+damn even my computer wont let me copy my code
+all it has to do is just open a folder idk why thats so hard for it
+fine, ill do it the other way because my computer refuses to work
+after writing the worlds worst code, it works
+wow that's a thing?!
+great job unity, thanks for breaking on me.
+theres an orin yapping in my dms rn
+absolute spaghetti code but it works
+thank you ancient code
+damn this code is like a month old did i really get that much better in just a month
+cool that works i guess
+this is more harder than i thought
+this is the most stupid text document i've ever written i love it
+i dont know what the fuck is going on anymore
+well i got that working now, now i gotta figure out how to get them in the core and also to figure out why the mines arent detecting the resource
+i guess for now ill just do cosmetic stuff like sound effects
+...maybe not yet
+ok i see the issue here
+same issue here with the placement bug not happening on resourceveins
+add refresh conveyor function tmrw
+hmmm how would i handle targetting
+do i split the scripts up
+do i make a megatargetter script
+lets go ask the guy who's better at this than me but you arent allowed to see lol
+ok guess im splitting the scripts up
+i get it!! i think.
+but it works atleast. ill read it while i pause the recording.
+ok ill add more tmrw sorry short video lol
+medium stuff
+as you can see i've drawn some of the building sprites
+ok i guess i'll try out an energy system lol
+or how about actual factories/refineries?
+stupid ass material names but sure
+more materials coming later bye
+ok so i fixed the refinery outputting to the input conveyors offcamera but... i have more stuff to add now.
+like: resource text (actual one), multiple resource costs, actually just those two nvm i also have to make the build menu better and add health ui for player but that ones easy 
+for resource text, it must instantiate more text messages wait that's easy? nvm its not easy uhhh ill just do the multiple resource costs first
+ok ill do this tmrw im being forced to sleep
+okay i think thats those two done...?
+well now i think its time to fix the actual errors lol
+...oh wait unity crashed like it always does lol
+WHAT THE HELL
+man fuck  you unity, forcing me to restart my pc!!!
+ok. fresh boot. lets try this again
+guess i'll just make land and air units separate
+ok sleep good bye
+time to make the unit upgrader?
+well thats working now, time to work on unit types and design them.
+too much effort for now to have them inherit i guess?
+NO not too much effort!
+MY PC CRASHED AGAIN!!!
+ok so earlier today i was trying to figure out why the conveyors would no longer detect a new conveyor whenever the next one was deleted
+i spent on hour on this
+and you know what the reason?
+IT WAS BECAUSE I SET THE NEW CONVEYOR TO THE CHECK!!!
+aaaaaaaa
+its pathfinding time.
+ok i literally just copy pasted a bunch of pathfinding scripts that i quite don't understand but i dont think i ever would've lol
+i give up on pathfinding for now lol, just gonna make the other attack types
+time for explosive bullet?
+sorry for it being so short the past 2 days but tonight im gonna draw the other units
+OH FUCK YEAH!!!
+insanity. 
+uhhh ill test it after i fix the conveyor detection
+FINE. I'LL SLEEP.
+I lied.
+ok im ngl idk what else to add that won't make me go insane...
+but i guess ill keep going insane
+that idea was cooked i have no idea how to rotate the camera around the player
+guess ill just implement other buildings
+or the ammo types
+WHY
+alright, day 100, lets do this.
+It's core time.
+actually, i think it should inherit rather than use a scriptableobject
+i actually havent done what the core types did yet lol
+but i think the barrier node should give extra resources? or would that be one of the others? i dunno
+actually that would be the altar i think
+ok thats enough for today lol
+welcome back, gamelist
+it's time to start uh
+more polishing? like sound effects?
+actually i should probably commit everything
+
+17
+106
+7
+90
+24
+114 WHAT ARE THESE NUMBERS FOR????
+hard stuff
+- unit ai
+- building system 60% done I think
+x resource system
+x conveyors sure yeah thats done - except the stuck bug - except i fixed that
+x conveyor system in general
+
+stuff but i can add more stuff so stuff^2
+- unit ai^2 (more unit types)
+- building system^2 (more buildings)
+- the cores (different core types)
+
+- tilemap
+
+yapping time
+cast ray from object at angle to target but raycast has a max range(i dont know how to do ray cast)
+
+
+to do:
+- add energy system (this one! nvm this ones kinda hard)
+x fix build menu (50%, need to add categories..DONE!)
+- fix placement of 2x2 (and presumably 4x4 and other even numbered) buildings (this one's impossible)
+x make units controllable, also allow player to "pilot" other units (lets try this one?)
+- make units controllable, in the sense that i can change their path
+- build speed (this one?)
+x add pathfinding uhh ill try navmesh again
+- improve wave spawning system
+- fix lightning bullets
+x mining speed
+- ammo types
+- randomized enemy spawns, randomized core spawn?
+- conveyor junctions (THIS ONE IS COOKED
+- FIGURE OUT WHY TURRETS INSTAKILL THE PLAYER
+oh god i have to draw 43 more units
+
+concepts:
+-----------
+core types
+hakurei barrier node
+great spirit altar
+mana nexus
+youkai beacon
+-----------
+conveyor types
+leyline paths
+fairy couriers
+gap portals
+spirit lanterns
+-----------
+turret/defense types
+ofuda launcher
+hakkero cannon
+spell ring array
+time stop beacon
+scarlet mist generator
+-----------
+different playable character types
+you already KNOW the characters
+-----------
+units
+land normal - T1 Lunar Rabbit Infantry, T2 Lunar Rabbit Heavy Infantry, T3 Lunar Rabbit Storm Trooper, T4 Lunar Rabbit Elite, T5 Lunarian War Automaton
+land support - T1 Fairy Shock Trooper, T2 Thunderstorm Shrine Maiden, T3 Radiant Shrine Guardian, T4 Celestial Raycaster, T5 Hakurei Divine Guardian
+land artillery T1 Kappa Heavy Gunner, T2 Kappa Siege Unit, T3 Kappa Obliterator, T4 Kappa Eradicator, T5 Kappa Eclipse Cannon
+air normal - T1 Tengu Scout, T2 Tengu Fighter, T3 Tengu Guardian, T4 Tengu Sky Commander, T5 Tengu Sky Fortress
+air support - T1 Fairy Wind Carrier, T2 Fairy Signaler, T3 Barrier Carrier, T4  Celestial Cloud Manipulator, T5 
+air artillery - T1 Tengu Firebomber, T2 Tengu Blazing Bomber, T3 Tengu Cluster Bomber, T4 
+sea normal - T1 Kappa Patrol Boat, T2 Youkai Gunboat, T3 Kappa Frigate, T4 Kappa Cruiser, T5 Kappa Battleship
+sea support - T1 Moriya Shrine Blessing Vessel, T2 Moriya Shrine Guardian, T3 Moriya Divine Escort, T4 Moriya Oceanic Warden, T5 Moriya Tidal Lord
+sea artillery - T1 Lunar Minelayer, T2 Leviathan Torpedo Cruiser, T3 Kappa Depth Charge Dreadnought, 
+all of these were just random ass ideas i had lol
+although they dont really stick to the same theme.... ill fix that later
+but first im starting with land support because that one's cooler at the moment
+IDEA - have T5 or T6 be touhou characters, and you have to choose the character in the upgrader

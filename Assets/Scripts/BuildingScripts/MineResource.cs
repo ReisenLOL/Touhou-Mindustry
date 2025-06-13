@@ -15,6 +15,7 @@ public class MineResource : MonoBehaviour
     public float miningSpeed;
     private Grid buildingGrid;
     private Tilemap terrainTiles;
+    private bool canMine;
     void Start()
     {
         buildingGrid = GameObject.Find("BuildingGrid").GetComponent<Grid>();
@@ -33,7 +34,7 @@ public class MineResource : MonoBehaviour
                         miningSpeed -= 1;
                     }
                     minedResource = resourceList.GetResourceType(j);
-                    continue;
+                    canMine = true;
                 }
             }
         }
@@ -41,13 +42,13 @@ public class MineResource : MonoBehaviour
 
     void Update()
     {
-        _time += Time.deltaTime;
-        if (_time >= miningSpeed)
+        if (canMine)
         {
-            Collider2D detectedConveyor = DetectConveyors(Random.Range(0, conveyorChecks.Length));
-            if (detectedConveyor != null)
+            _time += Time.deltaTime;
+            if (_time >= miningSpeed)
             {
-                if (detectedConveyor.gameObject.GetComponent<Conveyor>() && detectedConveyor.gameObject.GetComponent<ObjectStats>().acceptingResources == true && minedResource != null)
+                Collider2D detectedConveyor = DetectConveyors(Random.Range(0, conveyorChecks.Length));
+                if (detectedConveyor.TryGetComponent(out Conveyor isConveyor) && detectedConveyor != null && detectedConveyor.gameObject.GetComponent<ObjectStats>().acceptingResources)
                 {
                     _time -= miningSpeed;
                     GameObject ProduceResource = Instantiate(resourceObject, detectedConveyor.transform.position, resourceObject.transform.rotation);

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class CoreController : MonoBehaviour
@@ -12,10 +13,12 @@ public class CoreController : MonoBehaviour
         resourceManager = FindFirstObjectByType<ResourceManager>();
         objectStats = GetComponent<ObjectStats>();
     }
-    void Update()
-    {
 
+    protected void OnDestroy()
+    {
+        FindAnyObjectByType<GameManager>().GameOver();
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.transform.TryGetComponent(out MinedResourceType r))
