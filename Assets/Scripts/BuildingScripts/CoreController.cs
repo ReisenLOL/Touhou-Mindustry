@@ -14,7 +14,7 @@ public class CoreController : MonoBehaviour
         objectStats = GetComponent<ObjectStats>();
     }
 
-    protected void OnDestroy()
+    private void OnDisable()
     {
         FindAnyObjectByType<GameManager>().GameOver();
     }

@@ -27,6 +27,8 @@ public class PlayerController : MonoBehaviour
     private bool isFacingRight = true;
     private SpriteRenderer playerSpriteRenderer;
     private GameObject playerCamera;
+    private AudioSource audioSource;
+    public AudioClip attackSound;
     private GameObject newPlayer;
     public bool hasFired = false;
     private UnitType unitType;
@@ -34,6 +36,7 @@ public class PlayerController : MonoBehaviour
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         newPlayer = gameManager.newPlayer;
+        audioSource = GetComponent<AudioSource>();
         playerCamera = GameObject.Find("Camera");
         playerSpriteRenderer = base.GetComponent<SpriteRenderer>();
         playerCam = GameObject.Find("Camera").GetComponent<Camera>();
@@ -65,6 +68,7 @@ public class PlayerController : MonoBehaviour
             if (fireRateTime >= fireRate)
             {
                 fireRateTime = 0;
+                audioSource.PlayOneShot(attackSound);
                 GameObject newProjectile = Instantiate(projectile, transform.position, projectile.transform.rotation); // this is stupid WOW THAT WORKED?!
                 Projectile projectileStats = newProjectile.GetComponent<Projectile>();
                 projectileStats.firedFrom = gameObject;
@@ -94,9 +98,11 @@ public class PlayerController : MonoBehaviour
                     playerCamera.transform.position = unitToSwitchTo.transform.position + new Vector3(0, 0, -10);
                     PlayerController newPlayerController = unitToSwitchTo.GetComponent<PlayerController>();
                     newPlayerController.coreType = coreType;
+                    newPlayerController.attackSound = unitController.attackSound;
                     unitToSwitchTo.tag = "Player";
                     unitToSwitchTo.layer = (LayerMask.NameToLayer("Player")); //player layer can walk on walls, if ground unit then this shouldnt be possible
                     gameManager.player = unitToSwitchTo;
+                    gameManager.playerAudioSource = unitToSwitchTo.GetComponent<AudioSource>();
                     gameManager.playerController = newPlayerController;
                     Destroy(unitController);
                     Destroy(unitToSwitchTo.GetComponent<UnitTargetter>());

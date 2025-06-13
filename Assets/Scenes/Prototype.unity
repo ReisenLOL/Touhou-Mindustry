@@ -4383,6 +4383,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  playerAudioSource: {fileID: 0}
+  buildSound: {fileID: 8300000, guid: 98fc8bdcfe902ee409586a5bd51a7a5f, type: 3}
   playerController: {fileID: 0}
   selection: {fileID: 3090783532505855684, guid: f68ebd24612a805429486cdf496b48ee, type: 3}
   placeholderObject: {fileID: 0}

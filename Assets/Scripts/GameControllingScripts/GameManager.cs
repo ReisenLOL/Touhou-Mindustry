@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     private Vector3 rotationAmount = new Vector3 (0, 0, 0);
     private bool isBuilding = false;
     public GameObject player;
+    public AudioSource playerAudioSource;
+    public AudioClip buildSound;
     public PlayerController playerController;
     private ResourceManager resourceManager;
     private Grid buildingGrid;
@@ -42,6 +44,7 @@ public class GameManager : MonoBehaviour
         buildingFolder = GameObject.Find("BuildingFolder");
         resourceManager = GetComponent<ResourceManager>();
         player = FindFirstObjectByType<PlayerController>().gameObject;
+        playerAudioSource = player.GetComponent<AudioSource>();
         playerController = player.GetComponent<PlayerController>();
         buildingGrid = GameObject.Find("BuildingGrid").GetComponent<Grid>();
         terrainTiles = GameObject.Find("TerrainTilemap").GetComponent<Tilemap>();
@@ -108,6 +111,7 @@ public class GameManager : MonoBehaviour
                 {
                     //buildingQueue.Enqueue(selection);
                     //isConstructingObject = true;
+                    playerAudioSource.PlayOneShot(buildSound);
                     for (int i = 0; i < resourceToSubtract.Length; i++)
                     {
                         resourceManager.SubtractResource(resourceToSubtract[i], cost[i]);
@@ -162,7 +166,7 @@ public class GameManager : MonoBehaviour
             {
                 resourceManager.AddResource(resourceToRefund[i], refundAmount[i]);
             }
-            Destroy(hit.collider.gameObject);
+            hit.collider.gameObject.SetActive(false);
         }
         else if (Input.GetMouseButtonDown(1) && isBuilding)
         {

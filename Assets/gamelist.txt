@@ -153,11 +153,11 @@ stuff but i can add more stuff so stuff^2
 - tilemap
 
 yapping time
-cast ray from object at angle to target but raycast has a max range(i dont know how to do ray cast)
+cast ray from object at angle to target but raycast has a max range(i dont know how to do ray cast) (i now know how to do ray cast)
 
 
 to do:
-- add energy system (this one! nvm this ones kinda hard)
+- add energy system (this one! nvm this ones kinda hard) (why did i choose to do this??)
 x fix build menu (50%, need to add categories..DONE!)
 - fix placement of 2x2 (and presumably 4x4 and other even numbered) buildings (this one's impossible)
 x make units controllable, also allow player to "pilot" other units (lets try this one?)
@@ -170,7 +170,7 @@ x mining speed
 - ammo types
 - randomized enemy spawns, randomized core spawn?
 - conveyor junctions (THIS ONE IS COOKED
-- FIGURE OUT WHY TURRETS INSTAKILL THE PLAYER
+x FIGURE OUT WHY TURRETS INSTAKILL THE PLAYER
 oh god i have to draw 43 more units
 
 concepts:

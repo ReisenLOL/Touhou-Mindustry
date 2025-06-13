@@ -16,10 +16,13 @@ public class UnitController : MonoBehaviour
     private GameObject projectile;
     private SpriteRenderer unitSpriteRenderer;
     private bool isFacingRight = true;
+    private AudioSource audioSource;
+    public AudioClip attackSound;
     void Start()
     {
         unitSpriteRenderer = base.GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
         unitStats = GetComponent<UnitStats>();
         unitType = unitStats.unitType;
         damageDealt = unitType.damageDealt;
@@ -38,6 +41,7 @@ public class UnitController : MonoBehaviour
             //wow i need to figure this out, how do i do multiple projectile types that have a different... I GUESS IT WORKS FOR BOTH PROJECTILES RN?? wait no it doesnt, i need it to raycast the length then- could i just do it from the start of the lightning projectile?
             GameObject newProjectile = Instantiate(projectile, transform.position, projectile.transform.rotation);
             Projectile projectileStats = newProjectile.GetComponent<Projectile>();
+            audioSource.PlayOneShot(attackSound);
             projectileStats.firedFrom = gameObject;
             projectileStats.damage = damageDealt;
             projectileStats.RotateToTarget(closestTarget.transform.position);
