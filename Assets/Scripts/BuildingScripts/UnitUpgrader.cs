@@ -22,6 +22,8 @@ public class UnitUpgrader : MonoBehaviour
     [SerializeField] float requiredManufacturingTime;
     [SerializeField] Transform progressBar;
     [SerializeField] LayerMask conveyorLayer;
+
+    private CoreController playerCore;
     //i think i could just... copy the unit factory script...
     public void AddResource(string resource, int value)
     {
@@ -63,6 +65,7 @@ public class UnitUpgrader : MonoBehaviour
     {
         unitFolder = GameObject.Find("UnitFolder");
         buildingStats = GetComponent<ObjectStats>();
+        playerCore = FindFirstObjectByType<CoreController>();
     }
     void Update()
     {
@@ -94,6 +97,11 @@ public class UnitUpgrader : MonoBehaviour
                 {
                     GameObject newUnit = Instantiate(unitToSpawn, SpawnLocation.position, unitToSpawn.transform.rotation);
                     newUnit.transform.SetParent(unitFolder.transform);
+                    UnitController newUnitController = newUnit.GetComponent<UnitController>();
+                    newUnitController.damageModifier = playerCore.damageModifier;
+                    newUnitController.rangeModifier = playerCore.rangeModifier;
+                    newUnitController.speedModifier = playerCore.speedModifier;
+                    newUnitController.fireRateModifier = playerCore.fireRateModifier;
                 }
             }
         }

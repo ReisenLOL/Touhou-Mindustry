@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class UnitStats : MonoBehaviour
@@ -12,6 +13,14 @@ public class UnitStats : MonoBehaviour
     public bool isPlayer = false;
     public float buildSpeed;
     public bool capableOfBuilding;
+    public float maxHealthModifier = 1f;
+
+    private void Start()
+    {
+        maxHealth *= maxHealthModifier;
+        health = maxHealth;
+    }
+
     public void TakeDamage(float damage)
     {
         Debug.Log(damage);
@@ -20,7 +29,7 @@ public class UnitStats : MonoBehaviour
         {
             if (isPlayer)
             {
-                gameObject.transform.position = GameObject.Find("Core").transform.position;
+                gameObject.transform.position = FindAnyObjectByType<CoreController>().transform.position;
                 health = maxHealth;
             }
             else

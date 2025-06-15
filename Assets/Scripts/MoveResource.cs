@@ -10,6 +10,7 @@ public class MoveResource : MonoBehaviour
     private float moveSpeed = 0f;
     public bool usingConveyorLogic;
     private bool movedLastFrame;
+    public Vector2 lastDirection;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -44,6 +45,7 @@ public class MoveResource : MonoBehaviour
         {
             return;
         }
+        lastDirection = (nextConveyor.position - transform.position).normalized;
         moveDirection = (nextConveyor.position - transform.position).normalized;
         moveSpeed = speed;
         isMoving = true;

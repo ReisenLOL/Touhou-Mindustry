@@ -5,17 +5,11 @@ using UnityEngine.UI;
 
 public class ResourceManager : MonoBehaviour
 {
-    public class ResourceUIDisplayValues
-    {
-        public GameObject resourceUI;
-        public string resourceType;
-    }
     Dictionary<string, int> currentResources = new();
     [SerializeField] ResourceList listOfResources;
     [SerializeField] bool debugResources;
-    public List<ResourceUIDisplayValues> ResourceUIs = new();
-    public GameObject ResourceUITemplate;
-    public Transform ResourceUIPanel;
+    public GameObject resourceUITemplate;
+    public Transform resourceUIPanel;
     public void AddResource(string resource, int value)
     {
         int resourceValue = 0;
@@ -34,13 +28,16 @@ public class ResourceManager : MonoBehaviour
             int getValue = CheckResourceValue(listOfResources.resourceType[i]);
             if (getValue > 0)
             {
-                if (ResourceUIPanel.Find(listOfResources.resourceType[i]))
+                if (resourceUIPanel.Find(listOfResources.resourceType[i]))
                 {
-                    ResourceUIPanel.Find(listOfResources.resourceType[i]).GetComponentInChildren<TextMeshProUGUI>().text = listOfResources.resourceType[i] + ": " + getValue; //bad code
+                    resourceUIPanel.Find(listOfResources.resourceType[i]).GetComponentInChildren<TextMeshProUGUI>().text = listOfResources.resourceType[i] + ": " + getValue; //bad code
                 }
                 else
                 {
-                    GameObject newResourceUI = Instantiate(ResourceUITemplate, ResourceUIPanel);
+                    GameObject newResourceUI = Instantiate(resourceUITemplate, resourceUIPanel);
+                    RectTransform ResourceUIRect = resourceUIPanel.GetComponent<RectTransform>();
+                    ResourceUIRect.sizeDelta = new Vector2(ResourceUIRect.sizeDelta.x, resourceUIPanel.childCount * 75);
+                    ResourceUIRect.anchoredPosition = new Vector3(ResourceUIRect.position.x, -ResourceUIRect.sizeDelta.y/2);
                     newResourceUI.SetActive(true);
                     newResourceUI.name = listOfResources.resourceType[i];
                     newResourceUI.GetComponentInChildren<TextMeshProUGUI>().text = listOfResources.resourceType[i] + ": " + getValue;
@@ -66,7 +63,7 @@ public class ResourceManager : MonoBehaviour
                 int getValue = CheckResourceValue(listOfResources.resourceType[i]);
                 if (getValue > 0)
                 {
-                    ResourceUIPanel.Find(listOfResources.resourceType[i]).GetComponentInChildren<TextMeshProUGUI>().text = listOfResources.resourceType[i] + ": " + getValue; //bad code
+                    resourceUIPanel.Find(listOfResources.resourceType[i]).GetComponentInChildren<TextMeshProUGUI>().text = listOfResources.resourceType[i] + ": " + getValue; //bad code
                 }
             }
             return true;

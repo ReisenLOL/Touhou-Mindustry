@@ -18,6 +18,10 @@ public class UnitController : MonoBehaviour
     private bool isFacingRight = true;
     private AudioSource audioSource;
     public AudioClip attackSound;
+    public float speedModifier = 1f;
+    public float damageModifier = 1f;
+    public float fireRateModifier = 1f;
+    public float rangeModifier = 1f;
     void Start()
     {
         unitSpriteRenderer = base.GetComponent<SpriteRenderer>();
@@ -25,16 +29,24 @@ public class UnitController : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         unitStats = GetComponent<UnitStats>();
         unitType = unitStats.unitType;
-        damageDealt = unitType.damageDealt;
+        damageDealt = unitType.damageDealt * damageModifier;
         projectile = unitType.projectile;
-        range = unitType.range;
-        fireRate = unitType.fireRate;
-        speed = unitType.speed;
+        range = unitType.range * rangeModifier;
+        fireRate = unitType.fireRate * fireRateModifier;
+        speed = unitType.speed * speedModifier;
     }
 
     void Update()
     {
         fireRateTime += Time.deltaTime;
+        if (fireRateTime >= fireRate * 0.94f && fireRateTime <= fireRate * 0.96f)
+        {
+            unitSpriteRenderer.color = Color.red;
+        }
+        if (fireRateTime >= fireRate * 0.96f)
+        {
+            unitSpriteRenderer.color = Color.white;
+        }
         if (fireRateTime >= fireRate && closestTarget != null)
         {
             fireRateTime -= fireRateTime;

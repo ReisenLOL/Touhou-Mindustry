@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class ObjectStats : MonoBehaviour
@@ -15,6 +16,14 @@ public class ObjectStats : MonoBehaviour
     public int[] inputAmount;
     public string category;
     public bool refreshBuildings = true;
+    public float healthModifier = 1f;
+
+    private void Start()
+    {
+        maxHealth *= healthModifier;
+        health = maxHealth;
+    }
+
     public void TakeDamage(float damage)
     {
         health -= damage;

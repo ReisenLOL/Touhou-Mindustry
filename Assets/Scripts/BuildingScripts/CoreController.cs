@@ -7,6 +7,15 @@ public class CoreController : MonoBehaviour
     [SerializeField] Transform resourceCheck;
     [SerializeField] ResourceManager resourceManager;
     public ObjectStats objectStats;
+    
+    //modifiers
+    public float speedModifier = 1f;
+    public float damageModifier = 1f;
+    public float fireRateModifier = 1f;
+    public float rangeModifier = 1f;
+    public float buildingHealthModifier = 1f;
+    public float unitHealthModifier = 1f;
+    public float miningSpeedModifier = 1f;
 
     void Start()
     {

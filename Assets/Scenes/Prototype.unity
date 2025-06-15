@@ -549,9 +549,37 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 47805794}
     - target: {fileID: 4603563254772661284, guid: 9af75e57fc6f8dd46829e25aae229782, type: 3}
+      propertyPath: rangeModifier
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4603563254772661284, guid: 9af75e57fc6f8dd46829e25aae229782, type: 3}
+      propertyPath: speedModifier
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4603563254772661284, guid: 9af75e57fc6f8dd46829e25aae229782, type: 3}
+      propertyPath: damageModifier
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4603563254772661284, guid: 9af75e57fc6f8dd46829e25aae229782, type: 3}
       propertyPath: resourceManager
       value: 
       objectReference: {fileID: 2008672078}
+    - target: {fileID: 4603563254772661284, guid: 9af75e57fc6f8dd46829e25aae229782, type: 3}
+      propertyPath: fireRateModifier
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4603563254772661284, guid: 9af75e57fc6f8dd46829e25aae229782, type: 3}
+      propertyPath: unitHealthModifier
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4603563254772661284, guid: 9af75e57fc6f8dd46829e25aae229782, type: 3}
+      propertyPath: miningSpeedModifier
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4603563254772661284, guid: 9af75e57fc6f8dd46829e25aae229782, type: 3}
+      propertyPath: buildingHealthModifier
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4523,9 +4551,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   listOfResources: {fileID: 11400000, guid: ecee9d4edbfc6924caa743785bf10551, type: 2}
-  debugResources: 0
-  ResourceUITemplate: {fileID: 70403432}
-  ResourceUIPanel: {fileID: 868206744}
+  debugResources: 1
+  resourceUITemplate: {fileID: 70403432}
+  resourceUIPanel: {fileID: 868206744}
 --- !u!1 &2038252614
 GameObject:
   m_ObjectHideFlags: 0

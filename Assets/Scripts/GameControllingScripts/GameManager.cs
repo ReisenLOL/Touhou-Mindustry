@@ -120,12 +120,16 @@ public class GameManager : MonoBehaviour
                     if (selectionSize.x % 2 == 0)
                     {
                         newObject = Instantiate(selection, buildingGridEvenCell, Quaternion.Euler(rotationAmount));
-                        newObject.GetComponent<ObjectStats>().gridLocation = new(buildingGridEvenCell.x, buildingGridEvenCell.y);
+                        ObjectStats newObjectStats = newObject.GetComponent<ObjectStats>();
+                        newObjectStats.gridLocation = new(buildingGridEvenCell.x, buildingGridEvenCell.y);
+                        newObjectStats.healthModifier = core.buildingHealthModifier;
                     }
                     else
                     {
                         newObject = Instantiate(selection, buildingGridCenterCell, Quaternion.Euler(rotationAmount));
-                        newObject.GetComponent<ObjectStats>().gridLocation = new(buildingGridCenterCell.x, buildingGridCenterCell.y);
+                        ObjectStats newObjectStats = newObject.GetComponent<ObjectStats>();
+                        newObjectStats.gridLocation = new(buildingGridCenterCell.x, buildingGridCenterCell.y);
+                        newObjectStats.healthModifier = core.buildingHealthModifier;
                     }
                     newObject.transform.SetParent(GameObject.Find(newObject.GetComponent<ObjectStats>().category).transform);
                     core.GetComponent<ObjectStats>().refreshBuildings = true;

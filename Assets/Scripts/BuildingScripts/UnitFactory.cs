@@ -17,6 +17,7 @@ public class UnitFactory : MonoBehaviour
     [SerializeField] int capacity;
     [SerializeField] Transform SpawnLocation;
     Dictionary<string, int> storedResources = new();
+    private CoreController playerCore;
     private ObjectStats buildingStats;
     private GameObject unitFolder;
     private float productionTimer;
@@ -28,7 +29,7 @@ public class UnitFactory : MonoBehaviour
     private int energyCapacity;
     [SerializeField] int energyConsumed;
     public int energyStored;
-    //this is the worst code i have ever written.
+    //this is the worst code i have ever written. i'm sorry, past sylvia for writing the code.
     public void AddResource(string resource, int value)
     {
         int resourceValue = 0;
@@ -76,15 +77,16 @@ public class UnitFactory : MonoBehaviour
     void Start()
     {
         unitFolder = GameObject.Find("UnitFolder");
+        playerCore = FindFirstObjectByType<CoreController>();
         buildingStats = GetComponent<ObjectStats>();
         for (int i = 0; i < unitList.Length; i++)
         {
-            GameObject newButton = Instantiate(templateButton);
+            GameObject newButton = Instantiate(templateButton, selectionUI.transform);
             newButton.SetActive(true);
-            newButton.transform.SetParent(selectionUI.transform);
-            newButton.GetComponentInChildren<TextMeshProUGUI>().text = unitList[i].name;
+            newButton.GetComponentInChildren<TextMeshProUGUI>().text = unitList[i].gameObject.name;
             newButton.GetComponent<Button>().onClick.AddListener(() => SelectUnit(i - 2)); //i think this works? ok it doesnt but ill go with this for now
         }
+        
     }
     void Update()
     {
@@ -120,6 +122,11 @@ public class UnitFactory : MonoBehaviour
                 {
                     GameObject newUnit = Instantiate(unitToSpawn, SpawnLocation.position, unitToSpawn.transform.rotation);
                     newUnit.transform.SetParent(unitFolder.transform);
+                    UnitController newUnitController = newUnit.GetComponent<UnitController>();
+                    newUnitController.damageModifier = playerCore.damageModifier;
+                    newUnitController.rangeModifier = playerCore.rangeModifier;
+                    newUnitController.speedModifier = playerCore.speedModifier;
+                    newUnitController.fireRateModifier = playerCore.fireRateModifier;
                 }
             }
         }

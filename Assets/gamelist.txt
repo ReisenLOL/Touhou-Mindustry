@@ -131,6 +131,14 @@ welcome back, gamelist
 it's time to start uh
 more polishing? like sound effects?
 actually i should probably commit everything
+well i did a little bit of things off camera
+like. functionalize junctions, make the resource ui list expand based on amount of discovered resources.
+so what now?
+why not make unit flash 1 second before attack?
+idk. just a random idea.
+tech tree? later.
+forced to sleep. goodnight.
+today i add core modifiers.
 
 17
 106
@@ -144,6 +152,7 @@ hard stuff
 x resource system
 x conveyors sure yeah thats done - except the stuck bug - except i fixed that
 x conveyor system in general
+- tech tree
 
 stuff but i can add more stuff so stuff^2
 - unit ai^2 (more unit types)

@@ -21,7 +21,7 @@ public class MineResource : MonoBehaviour
         buildingGrid = GameObject.Find("BuildingGrid").GetComponent<Grid>();
         terrainTiles = GameObject.Find("TerrainTilemap").GetComponent<Tilemap>();
         resourceFolder = GameObject.Find("ResourceFolder");
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        gameManager = FindFirstObjectByType<GameManager>();
         for (int i = 0; i < resourceChecks.Length; i++)
         {
             string tileName = terrainTiles.GetTile(buildingGrid.WorldToCell(resourceChecks[i].transform.position)).name;
@@ -38,6 +38,7 @@ public class MineResource : MonoBehaviour
                 }
             }
         }
+        miningSpeed *= gameManager.core.miningSpeedModifier;
     }
 
     void Update()
