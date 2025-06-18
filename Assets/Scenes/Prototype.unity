@@ -119,17 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &47805794 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1303981554866787471, guid: 9af75e57fc6f8dd46829e25aae229782, type: 3}
-  m_PrefabInstance: {fileID: 114063173}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76908d71dcba18243a6075750b1fe113, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &66144477
 GameObject:
   m_ObjectHideFlags: 0
@@ -492,99 +481,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 110043476}
   m_CullTransparentMesh: 1
---- !u!1001 &114063173
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1810122812157781773, guid: 9af75e57fc6f8dd46829e25aae229782, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 130.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1810122812157781773, guid: 9af75e57fc6f8dd46829e25aae229782, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 106.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1810122812157781773, guid: 9af75e57fc6f8dd46829e25aae229782, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1810122812157781773, guid: 9af75e57fc6f8dd46829e25aae229782, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1810122812157781773, guid: 9af75e57fc6f8dd46829e25aae229782, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1810122812157781773, guid: 9af75e57fc6f8dd46829e25aae229782, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1810122812157781773, guid: 9af75e57fc6f8dd46829e25aae229782, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1810122812157781773, guid: 9af75e57fc6f8dd46829e25aae229782, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1810122812157781773, guid: 9af75e57fc6f8dd46829e25aae229782, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1810122812157781773, guid: 9af75e57fc6f8dd46829e25aae229782, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3745208454977569036, guid: 9af75e57fc6f8dd46829e25aae229782, type: 3}
-      propertyPath: m_Name
-      value: GreatSpiritAltar
-      objectReference: {fileID: 0}
-    - target: {fileID: 4603563254772661284, guid: 9af75e57fc6f8dd46829e25aae229782, type: 3}
-      propertyPath: objectStats
-      value: 
-      objectReference: {fileID: 47805794}
-    - target: {fileID: 4603563254772661284, guid: 9af75e57fc6f8dd46829e25aae229782, type: 3}
-      propertyPath: rangeModifier
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4603563254772661284, guid: 9af75e57fc6f8dd46829e25aae229782, type: 3}
-      propertyPath: speedModifier
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4603563254772661284, guid: 9af75e57fc6f8dd46829e25aae229782, type: 3}
-      propertyPath: damageModifier
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4603563254772661284, guid: 9af75e57fc6f8dd46829e25aae229782, type: 3}
-      propertyPath: resourceManager
-      value: 
-      objectReference: {fileID: 2008672078}
-    - target: {fileID: 4603563254772661284, guid: 9af75e57fc6f8dd46829e25aae229782, type: 3}
-      propertyPath: fireRateModifier
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4603563254772661284, guid: 9af75e57fc6f8dd46829e25aae229782, type: 3}
-      propertyPath: unitHealthModifier
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4603563254772661284, guid: 9af75e57fc6f8dd46829e25aae229782, type: 3}
-      propertyPath: miningSpeedModifier
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4603563254772661284, guid: 9af75e57fc6f8dd46829e25aae229782, type: 3}
-      propertyPath: buildingHealthModifier
-      value: 2
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 9af75e57fc6f8dd46829e25aae229782, type: 3}
 --- !u!1 &122860241
 GameObject:
   m_ObjectHideFlags: 0
@@ -4446,6 +4342,11 @@ MonoBehaviour:
   - Unit
   - Wall
   - Energy
+  coreList:
+  - {fileID: 1157938816860314430, guid: a723257f378e1574ea4c8b02f1de3ca6, type: 3}
+  - {fileID: 1157938816860314430, guid: 1b92378d4f9aff34badd32d707f56f8f, type: 3}
+  - {fileID: 4603563254772661284, guid: 9af75e57fc6f8dd46829e25aae229782, type: 3}
+  - {fileID: 1157938816860314430, guid: 023f1b1cece3b384d9b21fe67eb3ebc6, type: 3}
   core: {fileID: 0}
 --- !u!4 &2008672073
 Transform:
@@ -4551,7 +4452,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   listOfResources: {fileID: 11400000, guid: ecee9d4edbfc6924caa743785bf10551, type: 2}
-  debugResources: 1
+  debugResources: 0
   resourceUITemplate: {fileID: 70403432}
   resourceUIPanel: {fileID: 868206744}
 --- !u!1 &2038252614
@@ -4815,4 +4716,3 @@ SceneRoots:
   - {fileID: 1254498811}
   - {fileID: 752283492}
   - {fileID: 2051939966}
-  - {fileID: 114063173}

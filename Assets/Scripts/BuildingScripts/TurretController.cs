@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class TurretController : MonoBehaviour
@@ -6,7 +7,7 @@ public class TurretController : MonoBehaviour
     [SerializeField] int ammoAmount;
     [SerializeField] int ammoCapacity;
     [SerializeField] LayerMask UnitLayer;
-    private Collider2D[] enemyList;
+    public List<Collider2D> enemyList = new();
     [SerializeField] AmmoType[] ammoTypes;
     private AmmoType loadedAmmoType;
     private GameObject closestEnemy;
@@ -23,29 +24,34 @@ public class TurretController : MonoBehaviour
     void Start()
     {
         buildingStats = GetComponent<ObjectStats>();
+        GameObject detectTargetsOnTriggerEnter = new GameObject("DetectTargetsOnTriggerEnter");
+        detectTargetsOnTriggerEnter.transform.parent = transform;
+        detectTargetsOnTriggerEnter.transform.localPosition = Vector3.zero;
+        detectTargetsOnTriggerEnter.layer = LayerMask.NameToLayer("DetectTargets");
+        CircleCollider2D detectTargetsCC2D = detectTargetsOnTriggerEnter.AddComponent<CircleCollider2D>();
+        detectTargetsCC2D.isTrigger = true;
+        detectTargetsCC2D.radius = range;
+        detectTargetsOnTriggerEnter.AddComponent<TurretController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        enemyList = DetectEnemies(); //convert this to an ontriggerenter
-        if (enemyList.Length == 0)
+        if (enemyList.Count == 0)
         {
-            closestEnemy = this.gameObject;
+            closestEnemy = null;
         }
         float distanceToClosestEnemy = 1000000f;
-        Collider2D iteration = null;
-        for (int i = 0; i < enemyList.Length; i++)
+        foreach (Collider2D enemy in enemyList)
         {
-            iteration = enemyList[i];
-            if (iteration == null || enemyList[i].gameObject.GetComponent<UnitStats>().isEnemy == false)
+            if (enemy == null)
             {
                 continue;
             }
-            float sqrDistance = Vector3.SqrMagnitude(transform.position - iteration.transform.position);
-            if (sqrDistance < distanceToClosestEnemy && iteration.gameObject != gameObject)
+            float sqrDistance = Vector3.SqrMagnitude(transform.position - enemy.transform.position);
+            if (sqrDistance < distanceToClosestEnemy)
             {
-                closestEnemy = iteration.gameObject;
+                closestEnemy = enemy.gameObject;
                 distanceToClosestEnemy = sqrDistance;
             }
         }

@@ -11,8 +11,9 @@ public class MainMenuUIHandler : MonoBehaviour
     [SerializeField] GameObject templateButton;
     [SerializeField] GameObject coreContainerUI;
     [SerializeField] Image[] coreImages;
-    [SerializeField] GameObject StartQuitUI;
-    [SerializeField] GameObject CoreSelect;
+    [SerializeField] GameObject mainMenuButtons;
+    [SerializeField] private GameObject titleText;
+    [SerializeField] GameObject coreSelect;
     private string currentCategory;
     public void ExitGame()
     {
@@ -24,16 +25,19 @@ public class MainMenuUIHandler : MonoBehaviour
     }
     public void EnterCoreChooser()
     {
-        StartQuitUI.SetActive(false);
-        CoreSelect.SetActive(true);
+        mainMenuButtons.SetActive(false);
+        titleText.SetActive(false);
+        coreSelect.SetActive(true);
     }
     public void BackButton()
     {
-        CoreSelect.SetActive(false);
-        StartQuitUI.SetActive(true);
+        coreSelect.SetActive(false);
+        mainMenuButtons.SetActive(true);
+        titleText.SetActive(true);
     }
     public void StartGame(string selectedCore)
     {
+        FindAnyObjectByType<SetNewCore>().selectedCore = selectedCore;
         SceneManager.LoadScene(1);
     }
     void Start()

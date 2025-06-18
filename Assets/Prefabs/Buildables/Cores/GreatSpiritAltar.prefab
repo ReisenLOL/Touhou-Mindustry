@@ -221,6 +221,7 @@ MonoBehaviour:
   inputAmount: 
   category: 
   refreshBuildings: 1
+  healthModifier: 1
 --- !u!114 &4603563254772661284
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -239,3 +240,10 @@ MonoBehaviour:
   resourceCheck: {fileID: 8089807455656415053}
   resourceManager: {fileID: 0}
   objectStats: {fileID: 0}
+  speedModifier: 1
+  damageModifier: 1
+  fireRateModifier: 1
+  rangeModifier: 1
+  buildingHealthModifier: 2
+  unitHealthModifier: 2
+  miningSpeedModifier: 2

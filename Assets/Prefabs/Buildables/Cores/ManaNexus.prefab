@@ -212,7 +212,15 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   resourceCheck: {fileID: 8089807455656415053}
-  gameManager: {fileID: 0}
+  resourceManager: {fileID: 0}
+  objectStats: {fileID: 0}
+  speedModifier: 1.8
+  damageModifier: 1.5
+  fireRateModifier: 1.5
+  rangeModifier: 1
+  buildingHealthModifier: 1
+  unitHealthModifier: 1
+  miningSpeedModifier: 1
 --- !u!114 &1303981554866787471
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -228,5 +236,14 @@ MonoBehaviour:
   health: 100
   maxHealth: 100
   price: {fileID: 0}
+  usesEnergy: 0
+  connectedToEnergyNode: 0
+  connectedEnergyNode: {fileID: 0}
   acceptingResources: 1
+  isCore: 0
   gridLocation: {x: 0, y: 0}
+  resourceTypeInput: []
+  inputAmount: 
+  category: 
+  refreshBuildings: 1
+  healthModifier: 1

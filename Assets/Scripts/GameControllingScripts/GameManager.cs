@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
     private bool isConstructingObject;
     private float constructionTime;
     public string[] buildingCategories;
+    public List<CoreController> coreList = new();
     public CoreController core;
     // oh man this is gonna take awhile....
     //Queue<GameObject> buildingQueue = new Queue<GameObject>();
@@ -40,6 +41,20 @@ public class GameManager : MonoBehaviour
     //wow i really think this code is inefficient but whatevs i guess
     void Start()
     {
+        foreach (CoreController cores in coreList)
+        {
+            CoreController coreToSpawn = coreList.Find(i => SetNewCore.instance.selectedCore.Trim().ToLower() == cores.gameObject.name.Trim().ToLower());
+            if (coreToSpawn != null)
+            {
+                CoreController newCore = Instantiate(coreToSpawn);
+                newCore.transform.position = new Vector3(130.5f, 106.5f);
+                core = newCore;
+            }
+            else
+            {
+                Debug.LogWarning("lmao: " + SetNewCore.instance.selectedCore);
+            }
+        }
         core = FindFirstObjectByType<CoreController>();
         buildingFolder = GameObject.Find("BuildingFolder");
         resourceManager = GetComponent<ResourceManager>();
